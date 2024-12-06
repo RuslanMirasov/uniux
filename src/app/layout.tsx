@@ -23,6 +23,9 @@ const involveBold = localFont({
 export const metadata: Metadata = {
   title: "Uniux",
   description: "Figma temlate tester",
+  icons: {
+    icon: "/favicon.ico?v=2",
+  },
 };
 
 export default function RootLayout({
@@ -32,13 +35,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-      </head>
       <body
-        className={`${involveBold.variable} ${involveSemiBold.variable} ${involveMedium.variable}`}
+        className={`body ${involveBold.variable} ${involveSemiBold.variable} ${involveMedium.variable}`}
       >
-        <main>{children}</main>
+        <main className="main">{children}</main>
       </body>
     </html>
   );

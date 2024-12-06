@@ -3,7 +3,18 @@
   position: relative;
   width: 100%;
   flex-wrap: wrap;
-  justify-content: flex-start;
   align-items: center;
   gap: 20px;
+}
+
+.align-left {
+  justify-content: flex-start;
+}
+
+.align-center {
+  justify-content: center;
+}
+
+.align-right {
+  justify-content: flex-end;
 }

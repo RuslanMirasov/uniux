@@ -9,3 +9,9 @@ export { default as PlayStop } from "./Buttons/PlayStop/PlayStop";
 
 // Components
 export { default as Icon } from "./Icon/Icon";
+export { default as PageNotFound } from "./PageNotFound/PageNotFound";
+
+// Typography
+export { default as TitleBox } from "./Typography/TitleBox/TitleBox";
+export { default as Title } from "./Typography/Title/Title";
+export { default as Text } from "./Typography/Text/Text";

@@ -44,14 +44,22 @@ img {
   display: block;
   object-fit: cover;
   max-width: 100%;
+  height: auto;
 }
 
 .body {
+  display: flex;
+  width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
   &.locked {
     overflow-y: hidden;
   }
+}
+
+.main {
+  width: 100%;
+  flex: 1;
 }
 
 .link {
