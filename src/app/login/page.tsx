@@ -1,18 +1,18 @@
-import { Button } from "./components";
+import { Button } from "./../components";
 
-const HomePage: React.FC = () => {
+const LoginPage: React.FC = () => {
   return (
     <>
-      <h1>Main page</h1>
+      <h1>Login page</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
         necessitatibus molestias voluptates facere cumque, harum id autem vitae
         ad quasi eius excepturi reprehenderit iste, pariatur cum quod veniam
         quibusdam in.
       </p>
-      <Button href="/login">Login</Button>
+      <Button href="/">Back to main</Button>
     </>
   );
 };
 
-export default HomePage;
+export default LoginPage;

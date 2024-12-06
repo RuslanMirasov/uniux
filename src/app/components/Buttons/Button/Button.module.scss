@@ -1,0 +1,172 @@
+$btn_border_radius: 5px;
+$btn_padding: 0px 24px;
+$btn_height: 50px;
+$btn_color: var(--white);
+$btn_background: var(--color);
+$btn_border: 2px solid var(--color);
+$btn_font_family: var(--font);
+$btn_font_size: 18px;
+
+//white
+$btn_white_color: var(--black);
+$btn_white_border: 2px solid var(--white);
+$btn_white_background: var(--white);
+
+//red
+$btn_red_color: var(--white);
+$btn_red_border: 2px solid var(--red);
+$btn_red_background: var(--red);
+
+//border
+$btn_border_color: var(--white);
+$btn_border_border: 1px solid var(--grey);
+$btn_border_border_hover: 1px solid var(--white);
+$btn_border_background: none;
+
+//small
+$btn_small_height: 32px;
+$btn_small_font_size: 12px;
+$btn_small_border_radius: 5px;
+$btn_small_padding: 0px 10px;
+
+.Button {
+  display: inline-flex;
+  flex-wrap: wrap;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: auto;
+  outline: none;
+  gap: 10px;
+  opacity: 1;
+  cursor: pointer;
+  user-select: none;
+  transition: var(--cubic);
+  font-family: $btn_font_family;
+
+  &.Loading {
+    color: rgba(0, 0, 0, 0) !important;
+    pointer-events: none;
+    &:before {
+      content: '';
+      border-radius: 30px;
+      background: none;
+      position: absolute;
+      border-left: 2px solid rgba(0, 0, 0, 0);
+      border-top: 2px solid rgba(0, 0, 0, 0);
+      animation: rotate 0.5s linear infinite;
+    }
+  }
+
+  &:disabled,
+  &.Disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  //----------------- SIZES ---------------------//
+
+  //normal
+  &.size--normal {
+    min-height: $btn_height;
+    font-size: $btn_font_size;
+    font-weight: 700;
+    border-radius: $btn_border_radius;
+    padding: $btn_padding;
+    &.Loading {
+      &:before {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  //small
+  &.size--small {
+    min-height: $btn_small_height;
+    font-size: $btn_small_font_size;
+    font-weight: 600;
+    border-radius: $btn_small_border_radius;
+    padding: $btn_small_padding;
+    &.Loading {
+      &:before {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+
+  //----------------- VARIANTS ------------------//
+
+  //Default
+  &.button--default {
+    color: $btn_color;
+    background: $btn_background;
+    border: $btn_border;
+    &.Loading {
+      &:before {
+        border-bottom: 2px solid var(--white);
+        border-right: 2px solid var(--white);
+      }
+    }
+  }
+
+  //white
+  &.button--white {
+    color: $btn_white_color;
+    background: $btn_white_background;
+    border: $btn_white_border;
+    &.Loading {
+      &:before {
+        border-bottom: 2px solid var(--black);
+        border-right: 2px solid var(--black);
+      }
+    }
+  }
+
+  //red
+  &.button--red {
+    color: $btn_red_color;
+    background: $btn_red_background;
+    border: $btn_red_border;
+    &.Loading {
+      &:before {
+        border-bottom: 2px solid var(--white);
+        border-right: 2px solid var(--white);
+      }
+    }
+  }
+
+  //border
+  &.button--border {
+    color: $btn_border_color;
+    background: $btn_border_background;
+    border: $btn_border_border;
+    font-weight: 500;
+    font-size: 14px;
+    &.Loading {
+      &:before {
+        border-bottom: 1px solid var(--white);
+        border-right: 1px solid var(--white);
+      }
+    }
+    &:hover {
+      border: $btn_border_border_hover;
+    }
+  }
+}
+
+.Full {
+  width: 100%;
+}
+
+//ANIMATIONS
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

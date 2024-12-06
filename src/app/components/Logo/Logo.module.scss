@@ -1,0 +1,14 @@
+.Logo {
+  display: block;
+  width: 104px;
+  height: 30px;
+  position: fixed;
+  top: 30px;
+  z-index: 4;
+  &.left {
+    left: 40px;
+  }
+  &.right {
+    right: 40px;
+  }
+}

@@ -1,0 +1,30 @@
+.GoBack {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  align-content: center;
+  gap: 10px;
+  font-size: 12px;
+  line-height: 1;
+  svg {
+    width: 16px;
+    height: 16px;
+    color: var(--grey);
+    transition: var(--cubic);
+  }
+
+  &:hover,
+  &:focus {
+    svg {
+      color: var(--white);
+    }
+  }
+}
+
+.GoBackWrapper {
+  display: inline-block;
+  position: absolute;
+  z-index: 5;
+  left: 40px;
+  top: 40px;
+}

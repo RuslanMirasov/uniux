@@ -1,0 +1,25 @@
+.LogoutButton {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  border: none;
+  background: none;
+  color: inherit;
+  gap: 8px;
+  margin-right: auto;
+  margin-top: 20px;
+  cursor: pointer;
+
+  span {
+    font-size: 14px;
+    line-height: 1;
+    transition: var(--cubic);
+  }
+  &:hover {
+    span {
+      color: var(--color);
+    }
+  }
+}
