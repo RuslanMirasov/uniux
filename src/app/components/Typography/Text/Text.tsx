@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import css from "./Text.module.scss";
 
 interface TextProps {
@@ -15,12 +16,13 @@ const Text: React.FC<TextProps> = ({
   upper,
   children,
 }) => {
-  const textClasses = `${css.Text} 
-    ${align ? css[align] : ""} 
-    ${size ? css[size] : ""} 
-    ${color ? css[color] : ""} 
-    ${upper ? css["upper"] : ""}
-  `.trim();
+  const textClasses = clsx(
+    css.Text,
+    css[size],
+    css[align],
+    color && css[color],
+    { [css.upper]: upper }
+  );
 
   return <p className={textClasses}>{children}</p>;
 };

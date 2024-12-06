@@ -1,5 +1,17 @@
-const Logo = ({ size = 104, color }) => (
-  <svg width={size} viewBox="0 0 612 178" fill="none" xmlns="http://www.w3.org/2000/svg">
+interface IconProps {
+  size?: number;
+  color?: string;
+}
+
+type IconName = string;
+
+const Logo: React.FC<IconProps> = ({ size = 104, color }) => (
+  <svg
+    width={size}
+    viewBox="0 0 612 178"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path d="M34 151L150.5 34.5" stroke={color} strokeWidth="28" />
     <path d="M135 150L19 34" stroke={color} strokeWidth="28" />
     <circle cx="85" cy="24" r="24" fill={color} />
@@ -7,12 +19,21 @@ const Logo = ({ size = 104, color }) => (
       d="M293.7 133.4C290.2 137.6 286.6 140.6 282.9 142.4C279.2 144.1 274.6 144.95 269.1 144.95C258.2 144.95 250 141.6 244.5 134.9C239.1 128.1 236.4 118.05 236.4 104.75V60.2H253.35V102.05C253.35 111.55 254.8 118.5 257.7 122.9C260.7 127.2 265.45 129.35 271.95 129.35C279.15 129.35 284.4 127.05 287.7 122.45C291.1 117.85 292.8 110.5 292.8 100.4V60.2H309.75V143H293.7V133.4ZM326.784 60.2H342.834V69.05C346.334 65.25 349.984 62.5 353.784 60.8C357.584 59.1 362.034 58.25 367.134 58.25C378.334 58.25 386.634 61.6 392.034 68.3C397.434 74.9 400.134 85.1 400.134 98.9V143H383.184V101.6C383.184 91.9 381.634 84.85 378.534 80.45C375.534 76.05 370.734 73.85 364.134 73.85C357.234 73.85 352.084 76.15 348.684 80.75C345.384 85.25 343.734 92.3 343.734 101.9V143H326.784V60.2ZM417.019 60.2H433.969V143H417.019V60.2ZM417.019 32.15H433.969V50.9H417.019V32.15ZM508.153 133.4C504.653 137.6 501.053 140.6 497.353 142.4C493.653 144.1 489.053 144.95 483.553 144.95C472.653 144.95 464.453 141.6 458.953 134.9C453.553 128.1 450.853 118.05 450.853 104.75V60.2H467.803V102.05C467.803 111.55 469.253 118.5 472.153 122.9C475.153 127.2 479.903 129.35 486.403 129.35C493.603 129.35 498.853 127.05 502.153 122.45C505.553 117.85 507.253 110.5 507.253 100.4V60.2H524.203V143H508.153V133.4ZM562.538 100.4L535.988 60.2H555.188L572.588 87.5L589.688 60.2H609.038L582.488 100.4L611.738 143H591.488L572.588 113L553.538 143H533.438L562.538 100.4Z"
       fill={color}
     />
-    <path d="M15 24V93.0888C15 131.7 46.3401 163 85 163C123.66 163 155 131.7 155 93.0888V24" stroke={color} strokeWidth="30" />
+    <path
+      d="M15 24V93.0888C15 131.7 46.3401 163 85 163C123.66 163 155 131.7 155 93.0888V24"
+      stroke={color}
+      strokeWidth="30"
+    />
   </svg>
 );
 
-const NotFound = () => (
-  <svg width="61" height="48" viewBox="0 0 61 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+const NotFound: React.FC<IconProps> = ({ size = 61, color }) => (
+  <svg
+    width={size}
+    viewBox="0 0 61 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M54.7186 23.0387H6.28138C3.08841 23.0387 0.5 25.6192 0.5 28.8024C0.5 31.9856 3.08841 34.5661 6.28138 34.5661H54.7186C57.9116 34.5661 60.5 31.9856 60.5 28.8024C60.5 25.6192 57.9116 23.0387 54.7186 23.0387Z"
       fill="#444444"
@@ -55,7 +76,7 @@ const NotFound = () => (
     />
     <path
       d="M48.6095 26.9576C51.0768 24.4978 51.0768 20.5096 48.6095 18.0497C46.1421 15.5899 42.1418 15.5899 39.6745 18.0497C37.2072 20.5096 37.2072 24.4978 39.6745 26.9576C42.1418 29.4175 46.1421 29.4174 48.6095 26.9576Z"
-      fill="#0D99FF"
+      fill={color}
     />
     <path
       d="M44.1513 26.0739C43.6162 26.0739 43.1981 25.9406 42.897 25.6738C42.5959 25.4071 42.3835 25.007 42.2598 24.4735C42.1361 23.94 42.0742 23.2732 42.0742 22.4729C42.0742 21.6727 42.1361 21.004 42.2598 20.4672C42.3835 19.9304 42.5959 19.5288 42.897 19.2617C43.1981 18.9949 43.6158 18.8616 44.1513 18.8616C44.6867 18.8616 45.1026 18.9949 45.4003 19.2617C45.6981 19.5284 45.9086 19.9304 46.0323 20.4672C46.156 21.004 46.2179 21.6727 46.2179 22.4729C46.2179 23.2732 46.156 23.94 46.0323 24.4735C45.9086 25.007 45.6977 25.4071 45.4003 25.6738C45.1026 25.9406 44.6864 26.0739 44.1513 26.0739ZM44.1513 25.0534C44.3987 25.0534 44.5943 24.975 44.7382 24.8182C44.882 24.6615 44.9875 24.3966 45.0542 24.0229C45.1209 23.6495 45.1544 23.1327 45.1544 22.4722C45.1544 21.8117 45.1209 21.2853 45.0542 20.9119C44.9871 20.5385 44.882 20.2733 44.7382 20.1165C44.5943 19.9597 44.3987 19.8813 44.1513 19.8813C43.9038 19.8813 43.7063 19.9597 43.5592 20.1165C43.412 20.2733 43.3065 20.5385 43.2432 20.9119C43.1794 21.2856 43.1478 21.8057 43.1478 22.4722C43.1478 23.1387 43.1794 23.6495 43.2432 24.0229C43.3065 24.3966 43.412 24.6615 43.5592 24.8182C43.7063 24.975 43.9035 25.0534 44.1513 25.0534Z"
@@ -84,8 +105,14 @@ const NotFound = () => (
   </svg>
 );
 
-const Error = ({ size = 50, color }) => (
-  <svg width={size} height={size} viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+const Error: React.FC<IconProps> = ({ size = 50, color }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 50 50"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M28.0424 5.38355L48.0255 40.5197C49.3525 42.853 47.6673 45.75 44.9831 45.75H5.0169C2.33269 45.75 0.647527 42.853 1.97453 40.5197L21.9576 5.38354C23.2996 3.02395 26.7004 3.02395 28.0424 5.38355Z"
       stroke={color}
@@ -98,35 +125,84 @@ const Error = ({ size = 50, color }) => (
   </svg>
 );
 
-const SelectArrow = ({ size = 50, color }) => (
-  <svg width={size} viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+const SelectArrow: React.FC<IconProps> = ({ size = 50, color }) => (
+  <svg
+    width={size}
+    viewBox="0 0 7 5"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path d="M1 1.25L3.5 3.75L6 1.25" stroke={color} />
   </svg>
 );
 
-const Plus = ({ size = 12, color }) => (
-  <svg width={size} height={size} viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M6 0.428467V11.5713" stroke={color} strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M0.427734 5.96558H11.5706" stroke={color} strokeLinecap="round" strokeLinejoin="round" />
+const Plus: React.FC<IconProps> = ({ size = 12, color }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 12 12"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M6 0.428467V11.5713"
+      stroke={color}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M0.427734 5.96558H11.5706"
+      stroke={color}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
-const Confirm = ({ size = 60, color }) => (
-  <svg width={size} height={size} viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M13 26.5L24.5 33.5L36.5 17" stroke={color} strokeWidth="2" strokeLinecap="round" />
+const Confirm: React.FC<IconProps> = ({ size = 60, color }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 50 50"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M13 26.5L24.5 33.5L36.5 17"
+      stroke={color}
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
     <circle cx="25" cy="25" r="23.5" stroke={color} strokeWidth="2" />
   </svg>
 );
 
-const Back = ({ size = 12, color }) => (
-  <svg width={size} height={size} viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M6.42913 7.71436L4.71484 6.00007L6.42913 4.28578" stroke={color} strokeLinecap="round" strokeLinejoin="round" />
+const Back: React.FC<IconProps> = ({ size = 12, color }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 12 12"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M6.42913 7.71436L4.71484 6.00007L6.42913 4.28578"
+      stroke={color}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
     <rect x="0.5" y="0.5" width="11" height="11" rx="2.5" stroke={color} />
   </svg>
 );
 
-const LogOut = ({ size = 12, color }) => (
-  <svg width={size} height={size} viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+const LogOut: React.FC<IconProps> = ({ size = 12, color }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 18 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M6.5 1.5H5.5C4.09987 1.5 3.3998 1.5 2.86502 1.77248C2.39462 2.01217 2.01217 2.39462 1.77248 2.86502C1.5 3.3998 1.5 4.09987 1.5 5.5V12.5C1.5 13.9001 1.5 14.6002 1.77248 15.135C2.01217 15.6054 2.39462 15.9878 2.86502 16.2275C3.3998 16.5 4.09987 16.5 5.5 16.5H6.5"
       stroke={color}
@@ -144,43 +220,92 @@ const LogOut = ({ size = 12, color }) => (
   </svg>
 );
 
-const AvatarPlus = ({ size = 33, color = 'currentColor' }) => (
-  <svg width={size} height={size} viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+const AvatarPlus: React.FC<IconProps> = ({
+  size = 33,
+  color = "currentColor",
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 33 32"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M11.2382 0.427845L15.9284 1.78405C16.2674 1.88208 16.6272 1.88283 16.9666 1.78621L21.7966 0.411303C22.6418 0.170715 23.5409 0.546916 23.963 1.31768L26.4694 5.89504C26.6375 6.20214 26.888 6.45626 27.1927 6.62883L31.1787 8.88671C31.9497 9.32347 32.3117 10.2389 32.0479 11.0849L30.6672 15.513C30.554 15.876 30.5534 16.2648 30.6655 16.6282L32.06 21.1493C32.3177 21.9849 31.9661 22.8879 31.2113 23.3292L26.768 25.9266C26.4649 26.1039 26.2173 26.3624 26.0534 26.673L23.9399 30.6768C23.531 31.4515 22.6418 31.8417 21.7948 31.6181L16.9314 30.3344C16.6141 30.2507 16.2804 30.2513 15.9635 30.3363L11.2488 31.6004C10.3822 31.8328 9.47213 31.4213 9.07421 30.6172L6.96789 26.3608C6.79108 26.0035 6.50542 25.7116 6.15206 25.5271L1.84775 23.2796C1.06147 22.869 0.668508 21.9652 0.904481 21.1102L2.1597 16.562C2.24855 16.24 2.25014 15.9002 2.16431 15.5775L0.876636 10.735C0.655154 9.90215 1.02762 9.02522 1.7808 8.60629L6.20271 6.1468C6.52438 5.96789 6.78654 5.69859 6.95674 5.37222L9.04628 1.36568C9.4606 0.571256 10.3774 0.178965 11.2382 0.427845Z"
       fill={color}
     />
-    <path d="M16.5 10.75V21.25" stroke="var(--grey-dark)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M11.25 16H21.75" stroke="var(--grey-dark)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M16.5 10.75V21.25"
+      stroke="var(--grey-dark)"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M11.25 16H21.75"
+      stroke="var(--grey-dark)"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
-const Time = ({ size = 12, color = 'currentColor' }) => (
-  <svg width={size} height={size} viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+const Time: React.FC<IconProps> = ({ size = 12, color = "currentColor" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 13 12"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M6.74916 11.5713C9.82622 11.5713 12.3206 9.07695 12.3206 5.9999C12.3206 2.92288 9.82622 0.428467 6.74916 0.428467C3.67215 0.428467 1.17773 2.92288 1.17773 5.9999C1.17773 9.07695 3.67215 11.5713 6.74916 11.5713Z"
       stroke={color}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <path d="M6.75 3.85693V5.99979L8.92714 8.53693" stroke={color} strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M6.75 3.85693V5.99979L8.92714 8.53693"
+      stroke={color}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
-const Search = ({ size = 12, color = 'currentColor' }) => (
-  <svg width={size} height={size} viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+const Search: React.FC<IconProps> = ({ size = 12, color = "currentColor" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 13 12"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M5.89202 9.85704C8.49565 9.85704 10.6063 7.74638 10.6063 5.14275C10.6063 2.53912 8.49565 0.428467 5.89202 0.428467C3.28839 0.428467 1.17773 2.53912 1.17773 5.14275C1.17773 7.74638 3.28839 9.85704 5.89202 9.85704Z"
       stroke={color}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <path d="M12.3203 11.5713L9.32031 8.57129" stroke={color} strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M12.3203 11.5713L9.32031 8.57129"
+      stroke={color}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
-const Views = ({ size = 12, color = 'currentColor' }) => (
-  <svg width={size} height={size} viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+const Views: React.FC<IconProps> = ({ size = 12, color = "currentColor" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 16 12"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <circle cx="8" cy="6" r="2.5" stroke={color} />
     <path
       d="M15.3813 5.9929C15.082 6.39574 14.8162 6.7607 14.5688 7.10035C14.2672 7.51443 13.993 7.8909 13.7188 8.25259C13.1855 8.95593 12.725 9.5023 12.2317 9.93758C11.2811 10.7763 10.1539 11.252 7.99736 11.4971C5.62919 11.2519 4.37854 10.5464 3.41605 9.58395C2.91662 9.08451 2.48427 8.50525 2.00778 7.84129C1.94563 7.75468 1.88276 7.66668 1.81897 7.57741C1.46882 7.08729 1.09116 6.55869 0.653579 6.01043C1.14852 5.43802 1.58358 4.91726 1.97462 4.44919C2.17595 4.20821 2.3656 3.98119 2.54576 3.76828C3.14594 3.05898 3.64154 2.50516 4.14331 2.06242C5.10417 1.2146 6.11679 0.746293 8.00343 0.503569C10.1376 0.748791 11.395 1.33951 12.4178 2.2487C13.2949 3.02835 14.0098 4.04462 14.9419 5.36975C15.083 5.57031 15.229 5.77794 15.3813 5.9929Z"
@@ -189,8 +314,14 @@ const Views = ({ size = 12, color = 'currentColor' }) => (
   </svg>
 );
 
-const Copy = ({ size = 14, color = 'currentColor' }) => (
-  <svg width={size} height={size} viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+const Copy: React.FC<IconProps> = ({ size = 14, color = "currentColor" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 14 14"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M10 0.5H1.5C0.947715 0.5 0.5 0.947715 0.5 1.5V10C0.5 10.5523 0.947715 11 1.5 11H10C10.5523 11 11 10.5523 11 10V1.5C11 0.947715 10.5523 0.5 10 0.5Z"
       stroke="white"
@@ -206,47 +337,108 @@ const Copy = ({ size = 14, color = 'currentColor' }) => (
   </svg>
 );
 
-const Accordeon = ({ size = 12, color = 'currentColor' }) => (
-  <svg width={size} height={size} viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+const Accordeon: React.FC<IconProps> = ({
+  size = 12,
+  color = "currentColor",
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 12 11"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M0.856306 2.07138C1.093 2.07138 1.28488 1.8795 1.28488 1.6428C1.28488 1.40611 1.093 1.21423 0.856306 1.21423C0.619613 1.21423 0.427734 1.40611 0.427734 1.6428C0.427734 1.8795 0.619613 2.07138 0.856306 2.07138Z"
       stroke={color}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <path d="M3.85547 1.64282H11.5698" stroke={color} strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M3.85547 1.64282H11.5698"
+      stroke={color}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
     <path
       d="M0.856306 5.92855C1.093 5.92855 1.28488 5.73667 1.28488 5.49998C1.28488 5.26329 1.093 5.07141 0.856306 5.07141C0.619613 5.07141 0.427734 5.26329 0.427734 5.49998C0.427734 5.73667 0.619613 5.92855 0.856306 5.92855Z"
       stroke={color}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <path d="M3.85547 5.5H11.5698" stroke={color} strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M3.85547 5.5H11.5698"
+      stroke={color}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
     <path
       d="M0.856306 9.78561C1.093 9.78561 1.28488 9.5937 1.28488 9.35704C1.28488 9.12038 1.093 8.92847 0.856306 8.92847C0.619613 8.92847 0.427734 9.12038 0.427734 9.35704C0.427734 9.5937 0.619613 9.78561 0.856306 9.78561Z"
       stroke={color}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <path d="M3.85547 9.35706H11.5698" stroke={color} strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M3.85547 9.35706H11.5698"
+      stroke={color}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
-const AccordeonPlay = ({ size = 12, color = 'currentColor' }) => (
-  <svg width={size} height={size} viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M5.57087 4.28571L7.28516 5.99999L5.57087 7.71428" stroke={color} strokeLinecap="round" strokeLinejoin="round" />
-    <rect x="11.5" y="11.5" width="11" height="11" rx="2.5" transform="rotate(180 11.5 11.5)" stroke={color} />
+const AccordeonPlay: React.FC<IconProps> = ({
+  size = 12,
+  color = "currentColor",
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 12 12"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M5.57087 4.28571L7.28516 5.99999L5.57087 7.71428"
+      stroke={color}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <rect
+      x="11.5"
+      y="11.5"
+      width="11"
+      height="11"
+      rx="2.5"
+      transform="rotate(180 11.5 11.5)"
+      stroke={color}
+    />
   </svg>
 );
 
-const AccordeonArrow = ({ size = 12, color = 'currentColor' }) => (
-  <svg width={size} height={size} viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+const AccordeonArrow: React.FC<IconProps> = ({
+  size = 12,
+  color = "currentColor",
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 9 6"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path d="M0 5.25L9 5.25L4.5 0.75L0 5.25Z" fill={color} />
   </svg>
 );
 
-const Pen = ({ size = 12, color = 'currentColor' }) => (
-  <svg width={size} height={size} viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+const Pen: React.FC<IconProps> = ({ size = 12, color = "currentColor" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 12 12"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M4.28488 10.4914L0.427734 11.5714L1.50773 7.71432L8.57059 0.685749C8.65039 0.60411 8.74579 0.539242 8.85096 0.494956C8.95622 0.450669 9.06928 0.427856 9.18345 0.427856C9.29762 0.427856 9.41068 0.450669 9.51593 0.494956C9.62111 0.539242 9.71651 0.60411 9.79631 0.685749L11.3134 2.21146C11.3938 2.29114 11.4575 2.38595 11.5011 2.49039C11.5446 2.59485 11.567 2.70688 11.567 2.82003C11.567 2.93319 11.5446 3.04522 11.5011 3.14967C11.4575 3.25413 11.3938 3.34893 11.3134 3.42861L4.28488 10.4914Z"
       stroke={color}
@@ -256,29 +448,66 @@ const Pen = ({ size = 12, color = 'currentColor' }) => (
   </svg>
 );
 
-const Done = ({ size = 22 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+const Done: React.FC<IconProps> = ({ size = 22, color }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M18.0003 0.856934H6.00028C3.15996 0.856934 0.857422 3.15948 0.857422 5.99979V17.9998C0.857422 20.8402 3.15996 23.1426 6.00028 23.1426H18.0003C20.8407 23.1426 23.1431 20.8402 23.1431 17.9998V5.99979C23.1431 3.15948 20.8407 0.856934 18.0003 0.856934Z"
-      fill="#0D99FF"
+      fill={color}
     />
-    <path d="M17.0006 8.14258L10.1434 16.714L6.71484 14.1426" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M17.0006 8.14258L10.1434 16.714L6.71484 14.1426"
+      stroke="white"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
-const Fail = ({ size = 22 }) => (
-  <svg width={size} height={size} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+const Fail: React.FC<IconProps> = ({ size = 22 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 22 22"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M16.9231 0H5.07692C2.27302 0 0 2.27302 0 5.07692V16.9231C0 19.7271 2.27302 22 5.07692 22H16.9231C19.7271 22 22 19.7271 22 16.9231V5.07692C22 2.27302 19.7271 0 16.9231 0Z"
       fill="#A22626"
     />
-    <path d="M6.00015 6.27793L16.0005 16.277" stroke="white" strokeWidth="2" strokeLinecap="round" />
-    <path d="M15.9945 5.99992L6.34314 16.338" stroke="white" strokeWidth="2" strokeLinecap="round" />
+    <path
+      d="M6.00015 6.27793L16.0005 16.277"
+      stroke="white"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+    <path
+      d="M15.9945 5.99992L6.34314 16.338"
+      stroke="white"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
   </svg>
 );
 
-const AccordeonPlaySession = ({ size = 14, color = 'currentColor' }) => (
-  <svg width={size} height={size} viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+const AccordeonPlaySession: React.FC<IconProps> = ({
+  size = 14,
+  color = "currentColor",
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 14 14"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M5.01367 8.76443V5.23577C5.01367 4.82817 5.4881 4.57053 5.87415 4.76848L9.31508 6.5328C9.7123 6.73648 9.7123 7.26372 9.31508 7.46739L5.87415 9.23172C5.4881 9.42967 5.01367 9.17202 5.01367 8.76443Z"
       stroke={color}
@@ -312,8 +541,14 @@ const AccordeonPlaySession = ({ size = 14, color = 'currentColor' }) => (
   </svg>
 );
 
-const Play = ({ size = 14, color = 'currentColor' }) => (
-  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+const Play: React.FC<IconProps> = ({ size = 14, color = "currentColor" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 16 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M0.5 13.7484H0.499899L0.500101 13.7584C0.506795 14.0916 0.620066 14.4099 0.817624 14.6788C1.01215 14.9435 1.27975 15.1491 1.585 15.2819C1.8867 15.4261 2.22205 15.5 2.56 15.5C2.90186 15.5 3.24107 15.4244 3.54547 15.2768C3.55091 15.2742 3.5563 15.2715 3.56164 15.2686L14.4242 9.50909C14.7287 9.37876 14.9958 9.17484 15.1893 8.91091L15.1895 8.91074C15.3888 8.63871 15.5 8.31541 15.5 7.97841C15.5 7.6414 15.3888 7.31811 15.1895 7.04608L15.1893 7.04591C14.9957 6.78176 14.7282 6.57771 14.4235 6.4474L3.56028 0.730542L3.5454 0.723027C3.24099 0.57557 2.9018 0.5 2.56 0.5C2.22207 0.5 1.8867 0.573872 1.58496 0.718045C1.2798 0.850915 1.01219 1.05649 0.81762 1.32125C0.620082 1.59005 0.506796 1.90838 0.500101 2.24147L0.5 2.24147V2.25152V13.7484Z"
       stroke={color}
@@ -323,39 +558,52 @@ const Play = ({ size = 14, color = 'currentColor' }) => (
   </svg>
 );
 
-const Pause = ({ size = 14, color = 'currentColor' }) => (
-  <svg width={size} height={size} viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+const Pause: React.FC<IconProps> = ({ size = 14, color = "currentColor" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 14 14"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <rect x="2" width="2" height="14" rx="1" fill={color} />
     <rect x="10" width="2" height="14" rx="1" fill={color} />
   </svg>
 );
 
-const Icon = ({ name, color = 'currentColor', ...props }) => {
+const Icon: React.FC<{ name: IconName } & IconProps> = ({
+  name,
+  color = "currentColor",
+  ...props
+}) => {
   return (
     <>
-      {!name && <Logo color={color} {...props} />}
-      {name === 'logo' && <Logo color={color} {...props} />}
-      {name === 'error' && <Error color={color} {...props} />}
-      {name === 'confirm' && <Confirm color={color} {...props} />}
-      {name === 'select-arrow' && <SelectArrow color={color} {...props} />}
-      {name === 'plus' && <Plus color={color} {...props} />}
-      {name === 'play' && <Play color={color} {...props} />}
-      {name === 'pause' && <Pause color={color} {...props} />}
-      {name === 'back' && <Back color={color} {...props} />}
-      {name === 'logout' && <LogOut color={color} {...props} />}
-      {name === 'avatar_plus' && <AvatarPlus color={color} {...props} />}
-      {name === 'time' && <Time color={color} {...props} />}
-      {name === 'search' && <Search color={color} {...props} />}
-      {name === 'notfound' && <NotFound color={color} {...props} />}
-      {name === 'views' && <Views color={color} {...props} />}
-      {name === 'copy' && <Copy color={color} {...props} />}
-      {name === 'accordeon' && <Accordeon color={color} {...props} />}
-      {name === 'accordeon-play-session' && <AccordeonPlaySession color={color} {...props} />}
-      {name === 'accordeon-play' && <AccordeonPlay color={color} {...props} />}
-      {name === 'accordeon-arrow' && <AccordeonArrow color={color} {...props} />}
-      {name === 'pen' && <Pen color={color} {...props} />}
-      {name === 'done' && <Done {...props} />}
-      {name === 'fail' && <Fail {...props} />}
+      {name === "logo" && <Logo color={color} {...props} />}
+      {name === "error" && <Error color={color} {...props} />}
+      {name === "confirm" && <Confirm color={color} {...props} />}
+      {name === "select-arrow" && <SelectArrow color={color} {...props} />}
+      {name === "plus" && <Plus color={color} {...props} />}
+      {name === "play" && <Play color={color} {...props} />}
+      {name === "pause" && <Pause color={color} {...props} />}
+      {name === "back" && <Back color={color} {...props} />}
+      {name === "logout" && <LogOut color={color} {...props} />}
+      {name === "avatar_plus" && <AvatarPlus color={color} {...props} />}
+      {name === "time" && <Time color={color} {...props} />}
+      {name === "search" && <Search color={color} {...props} />}
+      {name === "notfound" && <NotFound color={color} {...props} />}
+      {name === "views" && <Views color={color} {...props} />}
+      {name === "copy" && <Copy color={color} {...props} />}
+      {name === "accordeon" && <Accordeon color={color} {...props} />}
+      {name === "accordeon-play-session" && (
+        <AccordeonPlaySession color={color} {...props} />
+      )}
+      {name === "accordeon-play" && <AccordeonPlay color={color} {...props} />}
+      {name === "accordeon-arrow" && (
+        <AccordeonArrow color={color} {...props} />
+      )}
+      {name === "pen" && <Pen color={color} {...props} />}
+      {name === "done" && <Done {...props} />}
+      {name === "fail" && <Fail {...props} />}
     </>
   );
 };
