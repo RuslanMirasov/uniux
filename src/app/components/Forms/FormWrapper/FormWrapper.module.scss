@@ -1,6 +1,6 @@
-.PageNotFound {
-  display: block;
-  width: 512px;
+.FormWrapper {
+  display: flex;
+  width: 390px;
   max-width: 100%;
   height: auto;
   min-height: 100%;
@@ -13,15 +13,6 @@
   align-content: center;
   text-align: center;
   margin: 0 auto;
+  gap: 20px;
   padding: 60px 20px;
-
-  a {
-    width: 350px;
-    max-width: 100%;
-  }
-
-  img {
-    width: 100%;
-    margin: 30px auto;
-  }
 }

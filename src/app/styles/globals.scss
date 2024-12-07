@@ -2,7 +2,7 @@
   --color: #0d99ff;
   --green: #9de76f;
   --red: #a22626;
-  --error: #ff0d0d;
+  --invalid: #ff0d0d;
   --white: #fff;
   --black: #000;
   --grey: #888888;
@@ -73,7 +73,7 @@ img {
   will-change: transform;
   cursor: pointer;
   &:after {
-    content: "";
+    content: '';
     width: 100%;
     height: 1px;
     position: absolute;

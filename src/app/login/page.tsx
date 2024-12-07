@@ -1,16 +1,28 @@
-import { Button } from "./../components";
+import Link from 'next/link';
+import { Logo, FormWrapper, Button, Text, Title } from './../components';
 
 const LoginPage: React.FC = () => {
   return (
     <>
-      <h1>Login page</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-        necessitatibus molestias voluptates facere cumque, harum id autem vitae
-        ad quasi eius excepturi reprehenderit iste, pariatur cum quod veniam
-        quibusdam in.
-      </p>
-      <Button href="/">Back to main</Button>
+      <Logo position="left" />
+      <FormWrapper>
+        <Title tag="h1" size="h1">
+          Log in to Uniux
+        </Title>
+        <Text align="center" size="big">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus suscipit impedit ab. Tempore laudantium similique accusamus nobis, itaque
+          ipsa dicta asperiores quam, placeat nesciunt incidunt, accusantium esse labore dolores vel.
+        </Text>
+        <Button href="/" full variant="white">
+          Log in
+        </Button>
+        <Text align="center" size="big">
+          No account?{' '}
+          <Link href="/SignUp" className="link">
+            Create one
+          </Link>
+        </Text>
+      </FormWrapper>
     </>
   );
 };
