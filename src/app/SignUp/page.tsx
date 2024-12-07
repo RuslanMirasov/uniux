@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Logo, FormWrapper, Button, Text, Title, RegistrationForm } from '../components';
+import { Logo, FormWrapper, Text, Title, RegistrationForm } from '../components';
 
 const LoginPage: React.FC = () => {
   return (
@@ -11,7 +11,7 @@ const LoginPage: React.FC = () => {
         </Title>
         <RegistrationForm />
         <Text align="center" color="grey">
-          By clicking "Create account" or "Continue with Google", you agree to the{' '}
+          By clicking &quot;Create account&quot; or &quot;Continue with Figma&quot;, you agree to the{' '}
           <Link href="/" className="link">
             UniUX
           </Link>{' '}

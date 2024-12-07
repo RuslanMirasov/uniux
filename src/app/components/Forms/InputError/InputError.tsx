@@ -14,8 +14,8 @@ const InputError: React.FC<ErrorProps> = ({ text = undefined }) => {
   useEffect(() => {
     if (text === undefined) {
       setHeight('0px');
-    } else {
-      errorEl.current && setHeight(`${errorEl.current.scrollHeight}px`);
+    } else if (errorEl.current) {
+      setHeight(`${errorEl.current.scrollHeight}px`);
     }
   }, [text]);
 
