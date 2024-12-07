@@ -196,7 +196,7 @@ const Views: React.FC<IconProps> = ({ size = 12, color = 'currentColor' }) => (
   </svg>
 );
 
-const Copy: React.FC<IconProps> = ({ size = 14, color = 'currentColor' }) => (
+const Copy: React.FC<IconProps> = ({ size = 14 }) => (
   <svg width={size} height={size} viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M10 0.5H1.5C0.947715 0.5 0.5 0.947715 0.5 1.5V10C0.5 10.5523 0.947715 11 1.5 11H10C10.5523 11 11 10.5523 11 10V1.5C11 0.947715 10.5523 0.5 10 0.5Z"
