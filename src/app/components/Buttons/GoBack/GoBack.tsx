@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { Icon } from "../../../components";
-import css from "./GoBack.module.scss";
+import { useRouter } from 'next/navigation';
+import { Icon } from '../../../components';
+import css from './GoBack.module.scss';
 
-const GoBack: React.FC = () => {
+const GoBack = (): JSX.Element => {
   const router = useRouter();
 
   const handleGoBack = () => {
@@ -12,7 +12,7 @@ const GoBack: React.FC = () => {
   };
 
   return (
-    <button type="button" className={css.GoBack} onClick={handleGoBack}>
+    <button type="button" className={css.GoBack} onClick={handleGoBack} aria-label="Go back">
       <Icon name="back" />
       <span>Back</span>
     </button>

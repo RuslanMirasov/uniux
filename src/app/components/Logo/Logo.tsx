@@ -1,12 +1,12 @@
-import css from "./Logo.module.scss";
-import { Icon } from "../../components";
-import Link from "next/link";
+import css from './Logo.module.scss';
+import { Icon } from '../../components';
+import Link from 'next/link';
 
 interface LogoProps {
-  position?: "left" | "right";
+  position?: 'left' | 'right';
 }
 
-const Logo: React.FC<LogoProps> = ({ position = "left" }) => {
+const Logo = ({ position = 'left' }: LogoProps) => {
   return (
     <Link href="/" className={`${css.Logo} ${css[position]}`}>
       <Icon name="logo" />

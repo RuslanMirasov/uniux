@@ -1,4 +1,8 @@
-const CloseButton = ({ onClick }) => {
+interface CloseButtonProps {
+  onClick: () => void;
+}
+
+const CloseButton = ({ onClick }: CloseButtonProps) => {
   return <button type="button" className="popup-close" onClick={onClick}></button>;
 };
 
