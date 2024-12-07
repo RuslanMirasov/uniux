@@ -9,10 +9,13 @@ const LoginPage: React.FC = () => {
         <Title tag="h1" size="h1">
           Sign up for Uniux
         </Title>
+
         <RegistrationForm />
+
         <Button variant="border" full icon="figma">
           Continue with Figma
         </Button>
+
         <Text align="center" color="grey">
           By clicking &quot;Create account&quot; or &quot;Continue with Figma&quot;, you agree to the{' '}
           <Link href="/" className="link">
@@ -23,10 +26,12 @@ const LoginPage: React.FC = () => {
             Privacy Policy
           </Link>
         </Text>
+
         <Text align="center" color="grey">
           *By opting in, you are consenting to receive product, service and events updates from Figma. You can
           unsubscribe at any time.
         </Text>
+
         <Text align="center" size="big">
           Already have an account?{' '}
           <Link href="/login" className="link">
