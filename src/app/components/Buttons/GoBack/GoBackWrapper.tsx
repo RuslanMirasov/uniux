@@ -1,6 +1,10 @@
 import css from './GoBack.module.scss';
 
-const GoBackWrapper = ({ children }) => {
+interface GoBackWrapperProps {
+  children: React.ReactNode;
+}
+
+const GoBackWrapper: React.FC<GoBackWrapperProps> = ({ children }) => {
   return <div className={css.GoBackWrapper}>{children}</div>;
 };
 

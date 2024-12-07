@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Logo, FormWrapper, Text, Title, RegistrationForm } from '../components';
+import { Logo, FormWrapper, Text, Title, RegistrationForm, Button } from '../components';
 
 const LoginPage: React.FC = () => {
   return (
@@ -10,6 +10,9 @@ const LoginPage: React.FC = () => {
           Sign up for Uniux
         </Title>
         <RegistrationForm />
+        <Button variant="border" full icon="figma">
+          Continue with Figma
+        </Button>
         <Text align="center" color="grey">
           By clicking &quot;Create account&quot; or &quot;Continue with Figma&quot;, you agree to the{' '}
           <Link href="/" className="link">

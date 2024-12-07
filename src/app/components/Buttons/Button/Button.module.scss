@@ -19,8 +19,8 @@ $btn_red_background: var(--red);
 
 //border
 $btn_border_color: var(--white);
-$btn_border_border: 1px solid var(--grey);
-$btn_border_border_hover: 1px solid var(--white);
+$btn_border_border: 2px solid var(--grey);
+$btn_border_border_hover: 2px solid var(--grey);
 $btn_border_background: none;
 
 //small
@@ -42,7 +42,7 @@ $btn_small_padding: 0px 10px;
   opacity: 1;
   cursor: pointer;
   user-select: none;
-  transition: background 0.3s;
+  transition: background-color 0.3s, border 0.3s, color 0.3s;
   font-family: $btn_font_family;
 
   &.Loading {
@@ -123,6 +123,11 @@ $btn_small_padding: 0px 10px;
         border-right: 2px solid var(--black);
       }
     }
+    &:hover {
+      border: 2px solid var(--color);
+      background: var(--color);
+      color: var(--white);
+    }
   }
 
   //red
@@ -144,7 +149,6 @@ $btn_small_padding: 0px 10px;
     background: $btn_border_background;
     border: $btn_border_border;
     font-weight: 500;
-    font-size: 14px;
     &.Loading {
       &:before {
         border-bottom: 1px solid var(--white);
@@ -152,7 +156,8 @@ $btn_small_padding: 0px 10px;
       }
     }
     &:hover {
-      border: $btn_border_border_hover;
+      border: 2px solid var(--color);
+      background: var(--color);
     }
   }
 }

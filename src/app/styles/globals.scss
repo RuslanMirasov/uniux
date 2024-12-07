@@ -47,6 +47,13 @@ img {
   height: auto;
 }
 
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}
+
 .body {
   display: flex;
   width: 100%;
