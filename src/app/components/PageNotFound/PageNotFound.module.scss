@@ -1,5 +1,5 @@
 .PageNotFound {
-  display: block;
+  display: flex;
   width: 512px;
   max-width: 100%;
   height: auto;
@@ -13,6 +13,7 @@
   align-content: center;
   text-align: center;
   margin: 0 auto;
+  gap: 14px;
   padding: 60px 20px;
 
   a {

@@ -5,16 +5,15 @@ import { useForm, SubmitHandler, Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
-import { Button, InputError } from '../../../components';
+import { Button, InputError } from '../..';
 import css from '../../../styles/Forms.module.scss';
 
 interface IRegistrationForm {
   email: string;
   password: string;
-  subscribe?: boolean;
 }
 
-const RegistrationForm: React.FC = () => {
+const LoginForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const validationSchema = Yup.object({
@@ -27,7 +26,6 @@ const RegistrationForm: React.FC = () => {
       .matches(/[a-zA-Z]/, 'Password must contain at least one letter')
       .matches(/\d/, 'Password must contain at least one number')
       .matches(/[@$!%*?&]/, 'Password must contain at least one special character'),
-    subscribe: Yup.boolean().optional(),
   });
 
   const {
@@ -67,19 +65,11 @@ const RegistrationForm: React.FC = () => {
         <InputError text={errors.password && errors.password.message} />
       </div>
 
-      <div className={css.InputWrapper}>
-        <input id="subscribe" type="checkbox" {...register('subscribe')} />
-        <label htmlFor="subscribe" className={errors.subscribe ? css.Invalid : ''}>
-          <span>Subscribe to UniUXtips and updates</span>
-        </label>
-        <InputError text={errors.subscribe && errors.subscribe.message} />
-      </div>
-
       <Button type="submit" full variant="white" isLoading={isLoading}>
-        Create account
+        Log in
       </Button>
     </form>
   );
 };
 
-export default RegistrationForm;
+export default LoginForm;

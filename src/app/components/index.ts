@@ -15,6 +15,8 @@ export { default as PageNotFound } from './PageNotFound/PageNotFound';
 // Forms
 export { default as FormWrapper } from './Forms/FormWrapper/FormWrapper';
 export { default as InputError } from './Forms/InputError/InputError';
+export { default as RegistrationForm } from './Forms/RegistrationForm/RegistrationForm';
+export { default as LoginForm } from './Forms/LoginForm/LoginForm';
 
 // Typography
 export { default as TitleBox } from './Typography/TitleBox/TitleBox';

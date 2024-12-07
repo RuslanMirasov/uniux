@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Logo, FormWrapper, Button, Text, Title } from '../components';
+import { Logo, FormWrapper, Button, Text, Title, RegistrationForm } from '../components';
 
 const LoginPage: React.FC = () => {
   return (
@@ -9,14 +9,7 @@ const LoginPage: React.FC = () => {
         <Title tag="h1" size="h1">
           Sign up for Uniux
         </Title>
-        <Text align="center" size="big">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus suscipit impedit ab. Tempore laudantium
-          similique accusamus nobis, itaque ipsa dicta asperiores quam, placeat nesciunt incidunt, accusantium esse
-          labore dolores vel.
-        </Text>
-        <Button href="/" full variant="white">
-          Create account
-        </Button>
+        <RegistrationForm />
         <Text align="center" color="grey">
           By clicking "Create account" or "Continue with Google", you agree to the{' '}
           <Link href="/" className="link">

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Logo, FormWrapper, Button, Text, Title } from './../components';
+import { Logo, FormWrapper, Button, Text, Title, LoginForm } from './../components';
 
 const LoginPage: React.FC = () => {
   return (
@@ -9,13 +9,7 @@ const LoginPage: React.FC = () => {
         <Title tag="h1" size="h1">
           Log in to Uniux
         </Title>
-        <Text align="center" size="big">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus suscipit impedit ab. Tempore laudantium similique accusamus nobis, itaque
-          ipsa dicta asperiores quam, placeat nesciunt incidunt, accusantium esse labore dolores vel.
-        </Text>
-        <Button href="/" full variant="white">
-          Log in
-        </Button>
+        <LoginForm />
         <Text align="center" size="big">
           No account?{' '}
           <Link href="/SignUp" className="link">
