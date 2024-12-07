@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
 import { Button, InputError } from '../..';
-import css from '../../../styles/Forms.module.scss';
+import css from '../Forms.module.scss';
 
 interface IRegistrationForm {
   email: string;

@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
 import { Button, InputError } from '../../../components';
-import css from '../../../styles/Forms.module.scss';
+import css from '../Forms.module.scss';
 
 interface IRegistrationForm {
   email: string;
@@ -69,10 +69,9 @@ const RegistrationForm: React.FC = () => {
 
       <div className={css.InputWrapper}>
         <input id="subscribe" type="checkbox" {...register('subscribe')} />
-        <label htmlFor="subscribe" className={errors.subscribe ? css.Invalid : ''}>
+        <label htmlFor="subscribe">
           <span>Subscribe to UniUXtips and updates</span>
         </label>
-        <InputError text={errors.subscribe && errors.subscribe.message} />
       </div>
 
       <Button type="submit" full variant="white" isLoading={isLoading}>
