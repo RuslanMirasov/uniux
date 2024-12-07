@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { PageNotFound } from "./components";
+import { Logo, PageNotFound } from "./components";
 
 export const metadata: Metadata = {
   title: "Uniux | Page Not Found",
@@ -7,7 +7,12 @@ export const metadata: Metadata = {
 };
 
 const NotFound: React.FC = () => {
-  return <PageNotFound />;
+  return (
+    <>
+      <Logo />
+      <PageNotFound />
+    </>
+  );
 };
 
 export default NotFound;
