@@ -18,7 +18,7 @@ interface FigmaTokenData {
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const code = url.searchParams.get('code');
-  const redirectAppUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  const redirectAppUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://uniux.vercel.app';
 
   if (!code) {
     return NextResponse.redirect(redirectAppUrl);
