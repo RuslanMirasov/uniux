@@ -29,12 +29,10 @@ const userRegistrationWithFigma = async (data: FigmaUserData) => {
   } else {
     const newUser = new User({
       email: email,
-      password: null,
       handle: handle,
       img_url: img_url,
       figmaId: id,
       authType: 'figma',
-      subscribe: false,
     });
 
     await newUser.save();

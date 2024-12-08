@@ -18,14 +18,15 @@ interface FigmaTokenData {
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const code = url.searchParams.get('code');
+  const redirectAppUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
 
   if (!code) {
-    return NextResponse.redirect('http://localhost:3000'); // Если нет кода, перенаправляем на главную
+    return NextResponse.redirect(redirectAppUrl);
   }
 
   const CLIENT_ID = process.env.FIGMA_CLIENT_ID;
   const CLIENT_SECRET = process.env.FIGMA_CLIENT_SECRET;
-  const redirectUri = 'http://localhost:3000/api/auth/figma/callback';
+  const redirectUri = `${redirectAppUrl}/api/auth/figma/callback`;
 
   const tokenResponse = await fetch('https://api.figma.com/v1/oauth/token', {
     method: 'POST',
@@ -44,12 +45,11 @@ export async function GET(request: Request) {
   const tokenData: FigmaTokenData = (await tokenResponse.json()) as FigmaTokenData;
 
   if (tokenData.error) {
-    return NextResponse.redirect('http://localhost:3000'); // В случае ошибки, перенаправляем на главную
+    return NextResponse.redirect('/');
   }
 
   const { access_token } = tokenData;
 
-  // Запрос к Figma API для получения данных пользователя
   const userInfoResponse = await fetch('https://api.figma.com/v1/me', {
     headers: {
       Authorization: `Bearer ${access_token}`,
@@ -58,8 +58,7 @@ export async function GET(request: Request) {
 
   const userInfo: FigmaUserData = (await userInfoResponse.json()) as FigmaUserData;
 
-  // Логируем данные пользователя
-  userRegistrationWithFigma(userInfo);
+  await userRegistrationWithFigma(userInfo);
 
-  return NextResponse.redirect('http://localhost:3000');
+  return NextResponse.redirect(redirectAppUrl);
 }

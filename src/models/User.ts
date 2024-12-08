@@ -13,12 +13,12 @@ export interface IUser extends Document {
 const UserSchema: Schema<IUser> = new Schema(
   {
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true, default: null },
-    handle: { type: String, required: true, default: null },
-    img_url: { type: String, required: true, default: null },
-    figmaId: { type: String, required: true, unique: true, sparse: true },
-    authType: { type: String, required: true, enum: ['local', 'figma'], default: 'local' },
-    subscribe: { type: Boolean, required: true, default: false },
+    password: { type: String, default: null },
+    handle: { type: String, default: null },
+    img_url: { type: String, default: null },
+    figmaId: { type: String, unique: true, sparse: true },
+    authType: { type: String, enum: ['local', 'figma'], default: 'local' },
+    subscribe: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
