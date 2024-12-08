@@ -10,24 +10,35 @@ interface FigmaUserData {
 
 const userRegistrationWithFigma = async (data: FigmaUserData) => {
   const { id, email, handle, img_url } = data;
+  console.log('data: ', data);
 
-  await console.log('---------------------');
   await dbConnect();
 
   const existingUser = await User.findOne({ email });
 
-  if (existingUser) {
-    console.log('Пользователь с таким email найден:', existingUser);
+  if (existingUser && existingUser.figmaId === id) return;
 
-    // Проверяем, совпадает ли figmaId
-    if (existingUser.figmaId === id) {
-      console.log('figmaId совпадает, никаких действий не требуется.');
-    } else {
-      console.log('figmaId не совпадает.');
-      // Тут можно выполнить дополнительные действия, если необходимо
-    }
+  if (existingUser) {
+    existingUser.figmaId = id;
+    existingUser.handle = handle;
+    existingUser.img_url = img_url;
+    existingUser.authType = 'figma';
+
+    await existingUser.save();
+    console.log('Пользователь обновлен');
   } else {
-    console.log('Пользователь с таким email не найден.');
+    const newUser = new User({
+      email: email,
+      password: null,
+      handle: handle,
+      img_url: img_url,
+      figmaId: id,
+      authType: 'figma',
+      subscribe: false,
+    });
+
+    await newUser.save();
+    console.log('Новый пользователь создан');
   }
 };
 
