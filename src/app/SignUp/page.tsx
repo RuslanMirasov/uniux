@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { Logo, FormWrapper, Text, Title, RegistrationForm, Button } from '../components';
 
@@ -12,7 +14,7 @@ const LoginPage: React.FC = () => {
 
         <RegistrationForm />
 
-        <Button variant="border" full icon="figma">
+        <Button variant="border" full icon="figma" onClick={() => (window.location.href = '/api/auth/figma')}>
           Continue with Figma
         </Button>
 

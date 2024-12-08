@@ -1,3 +1,5 @@
+'use client';
+
 import { Icon } from '../../../components';
 import Link from 'next/link';
 import clsx from 'clsx';

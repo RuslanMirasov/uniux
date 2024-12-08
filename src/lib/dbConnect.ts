@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 let isConnected = false;
 
-export const dbConnect = async () => {
+const dbConnect = async () => {
   if (isConnected) {
     console.log('Database is already connected.');
     return;
@@ -24,3 +24,5 @@ export const dbConnect = async () => {
     throw error;
   }
 };
+
+export default dbConnect;

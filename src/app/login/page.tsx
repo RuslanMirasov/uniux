@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { Logo, FormWrapper, Text, Title, LoginForm, Button } from './../components';
 
@@ -10,7 +12,7 @@ const LoginPage: React.FC = () => {
           Log in to Uniux
         </Title>
         <LoginForm />
-        <Button variant="border" full icon="figma">
+        <Button variant="border" full icon="figma" onClick={() => (window.location.href = '/api/auth/figma')}>
           Continue with Figma
         </Button>
         <Text align="center" color="grey">
