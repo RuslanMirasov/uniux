@@ -11,10 +11,13 @@ const LoginPage: React.FC = () => {
         <Title tag="h1" size="h1">
           Log in to Uniux
         </Title>
+
         <LoginForm />
+
         <Button variant="border" full icon="figma" onClick={() => (window.location.href = '/api/auth/figma')}>
           Continue with Figma
         </Button>
+
         <Text align="center" color="grey">
           By clicking &quot;Continue with Figma&quot;, you agree <br />
           to the{' '}
@@ -26,11 +29,13 @@ const LoginPage: React.FC = () => {
             Privacy Policy
           </Link>
         </Text>
+
         <Text align="center" size="big">
           <Link href="/reset-password" className="link">
             Reset password
           </Link>
         </Text>
+
         <Text align="center" size="big">
           No account?{' '}
           <Link href="/sign-up" className="link">

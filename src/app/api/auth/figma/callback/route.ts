@@ -1,14 +1,6 @@
-import userRegistrationWithFigma from '@/lib/userRegistrationWithFigma';
 import addTokenToCookie from '@/lib/addTokenToCookie';
 import { NextResponse } from 'next/server';
 import fetch from 'node-fetch';
-
-interface FigmaUserData {
-  id: string;
-  email: string;
-  handle?: string;
-  img_url?: string;
-}
 
 interface FigmaTokenData {
   access_token: string;
@@ -50,14 +42,6 @@ export async function GET(request: Request) {
   }
 
   const { access_token, refresh_token } = tokenData;
-
-  const userInfoResponse = await fetch('https://api.figma.com/v1/me', {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-  });
-  const userInfo: FigmaUserData = (await userInfoResponse.json()) as FigmaUserData;
-  await userRegistrationWithFigma(userInfo);
 
   const response = NextResponse.redirect(redirectAppUrl);
 
