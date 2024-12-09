@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Logo, FormWrapper, Text, Title, RegistrationForm, Button } from '../components';
 
-const LoginPage: React.FC = () => {
+const SignUpPage: React.FC = () => {
   return (
     <>
       <Logo position="left" />
@@ -45,4 +45,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;

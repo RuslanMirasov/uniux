@@ -27,13 +27,13 @@ const LoginPage: React.FC = () => {
           </Link>
         </Text>
         <Text align="center" size="big">
-          <Link href="/ResetPassword" className="link">
+          <Link href="/reset-password" className="link">
             Reset password
           </Link>
         </Text>
         <Text align="center" size="big">
           No account?{' '}
-          <Link href="/SignUp" className="link">
+          <Link href="/sign-up" className="link">
             Create one
           </Link>
         </Text>

@@ -1,4 +1,5 @@
 import userRegistrationWithFigma from '@/lib/userRegistrationWithFigma';
+import addTokenToCookie from '@/lib/addTokenToCookie';
 import { NextResponse } from 'next/server';
 import fetch from 'node-fetch';
 
@@ -21,7 +22,7 @@ export async function GET(request: Request) {
   const redirectAppUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://uniux.vercel.app';
 
   if (!code) {
-    return NextResponse.redirect(redirectAppUrl);
+    return NextResponse.redirect(`${redirectAppUrl}/login`);
   }
 
   const CLIENT_ID = process.env.FIGMA_CLIENT_ID;
@@ -45,20 +46,22 @@ export async function GET(request: Request) {
   const tokenData: FigmaTokenData = (await tokenResponse.json()) as FigmaTokenData;
 
   if (tokenData.error) {
-    return NextResponse.redirect('/');
+    return NextResponse.redirect(`${redirectAppUrl}/login`);
   }
 
-  const { access_token } = tokenData;
+  const { access_token, refresh_token } = tokenData;
 
   const userInfoResponse = await fetch('https://api.figma.com/v1/me', {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
   });
-
   const userInfo: FigmaUserData = (await userInfoResponse.json()) as FigmaUserData;
-
   await userRegistrationWithFigma(userInfo);
 
-  return NextResponse.redirect(redirectAppUrl);
+  const response = NextResponse.redirect(redirectAppUrl);
+
+  await addTokenToCookie(response, access_token, refresh_token);
+
+  return response;
 }

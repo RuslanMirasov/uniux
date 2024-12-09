@@ -10,7 +10,6 @@ interface FigmaUserData {
 
 const userRegistrationWithFigma = async (data: FigmaUserData) => {
   const { id, email, handle, img_url } = data;
-  console.log('data: ', data);
 
   await dbConnect();
 
@@ -25,7 +24,6 @@ const userRegistrationWithFigma = async (data: FigmaUserData) => {
     existingUser.authType = 'figma';
 
     await existingUser.save();
-    console.log('Пользователь обновлен');
   } else {
     const newUser = new User({
       email: email,
@@ -36,7 +34,6 @@ const userRegistrationWithFigma = async (data: FigmaUserData) => {
     });
 
     await newUser.save();
-    console.log('Новый пользователь создан');
   }
 };
 

@@ -10,7 +10,7 @@ const HomePage: React.FC = () => {
       </p>
       <ButtonsList>
         <Button href="/login">Login</Button>
-        <Button href="/CreateNewProject">Create New Project</Button>
+        <Button href="/create-new-project">Create New Project</Button>
       </ButtonsList>
     </>
   );
