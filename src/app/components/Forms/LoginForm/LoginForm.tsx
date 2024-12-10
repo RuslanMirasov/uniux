@@ -1,13 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import { mutate } from 'swr';
+import { fetcher } from '@/lib/fetcher';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
 import { Button, InputError } from '../..';
 import css from '../Forms.module.scss';
-import { useUser } from '@/hooks/useUser';
 
 interface IRegistrationForm {
   email: string;
@@ -16,7 +17,6 @@ interface IRegistrationForm {
 
 const LoginForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { mutate } = useUser();
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -40,22 +40,10 @@ const LoginForm: React.FC = () => {
 
   const onSubmit: SubmitHandler<IRegistrationForm> = async data => {
     setIsLoading(true);
+
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        mutate();
-      } else {
-        console.error('Registration failed:', result.message);
-      }
+      await fetcher('/api/auth/login', { method: 'POST', data });
+      await mutate('/api/auth/me');
     } catch (error) {
       console.error('An error occurred:', error);
     } finally {
@@ -66,19 +54,12 @@ const LoginForm: React.FC = () => {
   return (
     <form className={css.Form} onSubmit={handleSubmit(onSubmit)}>
       <div className={css.InputWrapper}>
-        <input
-          id="email"
-          {...register('email')}
-          type="email"
-          placeholder="Email"
-          className={errors.email ? css.Invalid : ''}
-        />
+        <input {...register('email')} type="email" placeholder="Email" className={errors.email ? css.Invalid : ''} />
         <InputError text={errors.email && errors.email.message} />
       </div>
 
       <div className={css.InputWrapper}>
         <input
-          id="password"
           {...register('password')}
           type="password"
           placeholder="Password"

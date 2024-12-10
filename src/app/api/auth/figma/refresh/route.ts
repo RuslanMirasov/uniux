@@ -4,8 +4,6 @@ export async function POST(req: NextRequest) {
   try {
     const { refresh_token }: { refresh_token?: { value: string } } = await req.json();
 
-    console.log('refresh_token: ', refresh_token);
-
     if (!refresh_token) {
       return NextResponse.json({ error: 'Refresh token is missing' }, { status: 400 });
     }
@@ -24,14 +22,10 @@ export async function POST(req: NextRequest) {
     if (!response.ok) {
       const errorData = await response.json();
 
-      console.log('Failed to refresh token: ', errorData);
-
       return NextResponse.json({ error: 'Failed to refresh token', details: errorData }, { status: response.status });
     }
 
     const { access_token, refresh_token: new_refresh_token, expires_in } = await response.json();
-
-    console.log('response: ', response);
 
     return NextResponse.json({
       access_token,

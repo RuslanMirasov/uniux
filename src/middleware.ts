@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import jwt from 'jsonwebtoken';
 import addTokenToCookie from '@/lib/addTokenToCookie';
 
 const PUBLIC_ROUTES_REGEX = [
@@ -26,7 +27,11 @@ export async function middleware(request: NextRequest) {
   }
 
   if (refresh_token) {
-    const refreshResponse = await fetch(`${url.origin}/api/auth/figma/refresh`, {
+    const tokenValue = refresh_token?.value;
+    const decodedValue = jwt.decode(tokenValue) as { email?: string; authType?: string };
+    const refreshPath = decodedValue ? '' : 'figma/';
+
+    const refreshResponse = await fetch(`${url.origin}/api/auth/${refreshPath}refresh`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ refresh_token }),
@@ -37,7 +42,6 @@ export async function middleware(request: NextRequest) {
 
       const response = NextResponse.next();
       await addTokenToCookie(response, access_token, null);
-
       return response;
     }
   }

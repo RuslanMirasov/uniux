@@ -5,7 +5,7 @@ const setTokensInCookies = (response: NextResponse, access_token: string, refres
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     path: '/',
-    maxAge: 60 * 60 * 24, // 1 day
+    maxAge: 3600, // 1h
   });
 
   if (!refresh_token) return;
@@ -14,7 +14,7 @@ const setTokensInCookies = (response: NextResponse, access_token: string, refres
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     path: '/',
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 30 * 24 * 60 * 60, // 30days
   });
 };
 

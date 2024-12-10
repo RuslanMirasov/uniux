@@ -69,8 +69,6 @@ export async function GET() {
       };
     }
 
-    console.log(currentUser);
-
     return NextResponse.json({ ...currentUser }, { status: 200 });
   } catch (error) {
     console.error('Error request to Figma API:', error);

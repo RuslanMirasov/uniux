@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useUser } from '@/hooks/useUser';
+import { mutate } from 'swr';
+import { fetcher } from '@/lib/fetcher';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -17,7 +18,7 @@ interface IRegistrationForm {
 
 const RegistrationForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { mutate } = useUser();
+  // const { mutate } = useUser();
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -44,21 +45,8 @@ const RegistrationForm: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        mutate();
-      } else {
-        console.error('Registration failed:', result.message);
-      }
+      await fetcher('/api/auth/register', { method: 'POST', data });
+      await mutate('/api/auth/me');
     } catch (error) {
       console.error('An error occurred:', error);
     } finally {

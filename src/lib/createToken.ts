@@ -13,7 +13,7 @@ interface IUser {
 }
 
 export const createTokens = (user: IUser) => {
-  const accessToken = jwt.sign({ email: user.email, authType: user.authType }, SECRET_KEY, { expiresIn: '1d' });
+  const accessToken = jwt.sign({ email: user.email, authType: user.authType }, SECRET_KEY, { expiresIn: '1h' });
 
   const refreshToken = jwt.sign({ email: user.email, authType: user.authType }, REFRESH_SECRET_KEY, {
     expiresIn: '30d',
