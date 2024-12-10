@@ -5,7 +5,16 @@ const nextConfig: NextConfig = {
     silenceDeprecations: ['legacy-js-api'],
   },
   images: {
-    domains: ['s3-alpha.figma.com', 'pluggedin.ru'], // Добавьте нужный домен
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 's3-alpha.figma.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'pluggedin.ru',
+      },
+    ],
   },
 };
 

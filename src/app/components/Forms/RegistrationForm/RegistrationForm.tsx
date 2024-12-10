@@ -45,7 +45,7 @@ const RegistrationForm: React.FC = () => {
     setIsLoading(true);
 
     try {
-      await fetcher('/api/auth/register', { method: 'POST', data });
+      await fetcher('/api/auth/register', { method: 'POST', data: { ...data } });
       await mutate('/api/auth/me');
     } catch (error) {
       console.error('An error occurred:', error);

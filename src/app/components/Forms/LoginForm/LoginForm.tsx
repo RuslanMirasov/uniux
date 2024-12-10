@@ -42,7 +42,7 @@ const LoginForm: React.FC = () => {
     setIsLoading(true);
 
     try {
-      await fetcher('/api/auth/login', { method: 'POST', data });
+      await fetcher('/api/auth/login', { method: 'POST', data: { ...data } });
       await mutate('/api/auth/me');
     } catch (error) {
       console.error('An error occurred:', error);
