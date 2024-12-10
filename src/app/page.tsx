@@ -32,17 +32,23 @@ const HomePage: React.FC = () => {
             gap: '30px',
           }}
         >
-          {user.img_url && <Image src={user.img_url} alt="User" width="100" height="100" />}
+          <Image
+            src={user.img_url ? user.img_url : '/placeholder.jpg'}
+            alt="User"
+            width="120"
+            height="120"
+            style={{ borderRadius: '100px', width: '120px', height: '120px' }}
+          />
 
           <p>
-            <strong style={{ color: 'var(--color)' }}>figmaId: </strong>
+            <strong style={{ color: 'var(--color)' }}>ID: </strong>
             {user?.figmaId}
           </p>
           <p>
             <strong style={{ color: 'var(--color)' }}>email: </strong>
             {user?.email}
           </p>
-          <h2>{user?.handle}</h2>
+          <h2>{user.handle ? user.handle : 'New User'}</h2>
           <p>
             <strong style={{ color: 'var(--color)' }}>authType: </strong>
             {user?.authType}

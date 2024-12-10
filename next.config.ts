@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     silenceDeprecations: ['legacy-js-api'],
   },
   images: {
-    domains: ['s3-alpha.figma.com'], // Добавьте нужный домен
+    domains: ['s3-alpha.figma.com', 'pluggedin.ru'], // Добавьте нужный домен
   },
 };
 
