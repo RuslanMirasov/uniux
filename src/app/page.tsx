@@ -3,9 +3,17 @@
 import { useAuth } from '@/hooks/useAuth';
 import Image from 'next/image';
 import { Preloader, Button, ButtonsList } from './components';
+import { usePopup } from '@/hooks/usePopup';
 
 const HomePage: React.FC = () => {
   const { user, isLogin, isLoading } = useAuth();
+  const { openPopup } = usePopup();
+
+  const handleClick = (): void => {
+    console.log('ssssss');
+
+    openPopup();
+  };
 
   if (isLoading) return <Preloader />;
 
@@ -53,6 +61,8 @@ const HomePage: React.FC = () => {
             <strong style={{ color: 'var(--color)' }}>authType: </strong>
             {user?.authType}
           </p>
+
+          <Button onClick={handleClick}>Popup</Button>
         </div>
       )}
     </>

@@ -25,3 +25,6 @@ export { default as PasswordResetForm } from './Forms/PasswordResetForm/Password
 export { default as TitleBox } from './Typography/TitleBox/TitleBox';
 export { default as Title } from './Typography/Title/Title';
 export { default as Text } from './Typography/Text/Text';
+
+//Popups
+export { default as Popup } from './Popup/Popup';

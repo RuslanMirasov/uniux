@@ -6,7 +6,6 @@ import { fetcher } from '@/lib/fetcher';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-
 import { Button, InputError } from '../..';
 import css from '../Forms.module.scss';
 

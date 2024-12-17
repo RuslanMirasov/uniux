@@ -3,7 +3,11 @@ interface CloseButtonProps {
 }
 
 const CloseButton = ({ onClick }: CloseButtonProps) => {
-  return <button type="button" className="popup-close" onClick={onClick}></button>;
+  return (
+    <button type="button" onClick={onClick}>
+      Close Button
+    </button>
+  );
 };
 
 export default CloseButton;
