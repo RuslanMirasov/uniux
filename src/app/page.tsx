@@ -10,9 +10,36 @@ const HomePage: React.FC = () => {
   const { openPopup } = usePopup();
 
   const handleClick = (): void => {
-    console.log('ssssss');
-
-    openPopup();
+    openPopup({
+      type: 'error',
+      title: 'Error 409',
+      subtitle: (
+        <>
+          Invalid login or password, <br />
+          please check if your data is correct and try again.
+        </>
+      ),
+      btn: 'Try again',
+      icon: 'error',
+      action: () =>
+        openPopup({
+          type: 'message',
+          title: (
+            <>
+              A new customer <br />
+              successfully created
+            </>
+          ),
+          subtitle: (
+            <>
+              Now you can use our service fully, <br />
+              create your first test and enjoy it.
+            </>
+          ),
+          btn: 'OK',
+          icon: 'confirm',
+        }),
+    });
   };
 
   if (isLoading) return <Preloader />;

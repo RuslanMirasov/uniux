@@ -1,9 +1,13 @@
+const modifyFixedElements: boolean = false;
+
 const setPaddingsToFixedElements = (scrollbar: number): void => {
+  document.body.style.paddingRight = `${scrollbar}px`;
+
+  if (!modifyFixedElements) return;
+
   const fixedElements = Array.from(document.all).filter(
     e => getComputedStyle(e as Element).position === 'fixed'
   ) as HTMLElement[];
-
-  document.body.style.paddingRight = `${scrollbar}px`;
 
   fixedElements.forEach(fix => {
     if (!fix.classList.contains('popup')) {
@@ -12,10 +16,11 @@ const setPaddingsToFixedElements = (scrollbar: number): void => {
   });
 };
 
-export const bodyLock = (scrollbar: number): void => {
+export const bodyLock = (): void => {
+  const scrollbarWidth: number = window.innerWidth - document.body.offsetWidth;
   if (!document.body.classList.contains('locked')) {
     document.body.classList.add('locked');
-    setPaddingsToFixedElements(scrollbar);
+    setPaddingsToFixedElements(scrollbarWidth);
   }
 };
 
