@@ -16,12 +16,18 @@ export async function POST(req: NextRequest) {
 
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
-      return NextResponse.json({ message: 'Invalid email or password' }, { status: 401 });
+      return NextResponse.json(
+        { message: 'Invalid email or password, please check your data and try again' },
+        { status: 401 }
+      );
     }
 
     const isPasswordValid = await existingUser.comparePassword(password);
     if (!isPasswordValid) {
-      return NextResponse.json({ message: 'Invalid email or password' }, { status: 401 });
+      return NextResponse.json(
+        { message: 'Invalid email or password, please check your data and try again' },
+        { status: 401 }
+      );
     }
 
     const { accessToken, refreshToken } = createTokens({ email: existingUser.email, authType: existingUser.authType });

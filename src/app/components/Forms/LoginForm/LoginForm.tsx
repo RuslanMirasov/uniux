@@ -8,16 +8,23 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { Button, InputError } from '../..';
 import css from '../Forms.module.scss';
+import { usePopup } from '@/hooks/usePopup';
 
-interface IRegistrationForm {
+interface FetchError extends Error {
+  status?: number;
+  message: string;
+}
+
+interface ILoginForm {
   email: string;
   password: string;
 }
 
 const LoginForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { openPopup } = usePopup();
 
-  const validationSchema = Yup.object({
+  const loginValidationSchema = Yup.object({
     email: Yup.string()
       .required('Required field')
       .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Wrong e-mail format'),
@@ -33,18 +40,25 @@ const LoginForm: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IRegistrationForm>({
-    resolver: yupResolver(validationSchema),
+  } = useForm<ILoginForm>({
+    resolver: yupResolver(loginValidationSchema),
   });
 
-  const onSubmit: SubmitHandler<IRegistrationForm> = async data => {
+  const onSubmit: SubmitHandler<ILoginForm> = async data => {
     setIsLoading(true);
 
     try {
       await fetcher('/api/auth/login', { method: 'POST', data: { ...data } });
       await mutate('/api/auth/me');
     } catch (error) {
-      console.error('An error occurred:', error);
+      const err = error as FetchError;
+      openPopup({
+        type: 'error',
+        title: `Error ${err?.status || ''}`,
+        subtitle: err?.message || 'An unexpected error occurred.',
+        icon: 'error',
+        btn: 'Close',
+      });
     } finally {
       setIsLoading(false);
     }

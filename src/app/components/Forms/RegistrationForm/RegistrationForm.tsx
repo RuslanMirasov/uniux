@@ -6,9 +6,15 @@ import { fetcher } from '@/lib/fetcher';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { usePopup } from '@/hooks/usePopup';
 
 import { Button, InputError } from '../../../components';
 import css from '../Forms.module.scss';
+
+interface FetchError extends Error {
+  status?: number;
+  message: string;
+}
 
 interface IRegistrationForm {
   email: string;
@@ -18,7 +24,7 @@ interface IRegistrationForm {
 
 const RegistrationForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  // const { mutate } = useUser();
+  const { openPopup } = usePopup();
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -47,8 +53,22 @@ const RegistrationForm: React.FC = () => {
     try {
       await fetcher('/api/auth/register', { method: 'POST', data: { ...data } });
       await mutate('/api/auth/me');
+      openPopup({
+        type: 'success',
+        title: 'Welcome!',
+        subtitle: 'Thank you for your interest in our service. Your account has been successfully created, have fun!',
+        icon: 'success',
+        btn: 'Get started',
+      });
     } catch (error) {
-      console.error('An error occurred:', error);
+      const err = error as FetchError;
+      openPopup({
+        type: 'error',
+        title: `Error ${err?.status || ''}`,
+        subtitle: err?.message || 'An unexpected error occurred.',
+        icon: 'error',
+        btn: 'Close',
+      });
     } finally {
       setIsLoading(false);
     }

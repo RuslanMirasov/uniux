@@ -43,6 +43,8 @@ export async function middleware(request: NextRequest) {
       const response = NextResponse.next();
       await addTokenToCookie(response, access_token, null);
       return response;
+    } else {
+      console.log('Истекло');
     }
   }
 

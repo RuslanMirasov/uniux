@@ -7,7 +7,7 @@
   width: 100%;
   height: 100%;
   backdrop-filter: blur(3px);
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0);
   z-index: 1000;
   overflow: auto;
   padding: 50px 20px;
@@ -23,21 +23,17 @@
 .Popup {
   position: relative;
   display: inline-block;
-  background: var(--sidebar);
-  padding: 30px 20px 20px 20px;
-  border-radius: 8px;
-  box-shadow: 0 0px 20px rgba(0, 0, 0, 0.3);
+  background: var(--main);
+  padding: 40px 34px 34px 34px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   width: 100%;
-  max-width: 300px;
+  max-width: 358px;
   text-align: center;
   height: auto;
   transition: background 0.6s, opacity 0.6s, transform 0.6s;
   opacity: 0;
   transform: translate(0px, 40px);
-  &.popup--error {
-    max-width: 250px;
-    background: var(--red);
-  }
   &.Visible {
     opacity: 1;
     transform: translate(0px, 0px);
@@ -50,11 +46,12 @@
   display: flex;
   position: relative;
   width: 100%;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   align-content: center;
-  gap: 20px;
+  gap: 12px;
   hr {
     background: var(--white);
     opacity: 0.2;
@@ -68,9 +65,10 @@
 }
 
 .Subtitle {
-  font-size: 14px;
-  line-height: 1.4;
-  opacity: 0.7;
-  margin-bottom: 10px;
-  font-weight: 900;
+  max-width: 230px;
+  font-family: var(--semibold);
+  font-size: 12px;
+  line-height: 1.33;
+  margin-top: -5px;
+  margin-bottom: 5px;
 }

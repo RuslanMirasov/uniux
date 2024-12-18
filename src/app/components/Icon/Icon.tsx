@@ -95,16 +95,21 @@ const NotFound: React.FC<IconProps> = ({ size = 61, color }) => (
   </svg>
 );
 
-const Error: React.FC<IconProps> = ({ size = 50, color }) => (
-  <svg width={size} height={size} viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+const Error: React.FC<IconProps> = ({ size = 50 }) => (
+  <svg width={size} height={size} viewBox="0 0 65 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="65" height="65" rx="20" fill="#F06960" />
+    <rect x="0.5" y="0.5" width="64" height="64" rx="19.5" stroke="#E75349" strokeOpacity="0.5" />
     <path
-      d="M28.0424 5.38355L48.0255 40.5197C49.3525 42.853 47.6673 45.75 44.9831 45.75H5.0169C2.33269 45.75 0.647527 42.853 1.97453 40.5197L21.9576 5.38354C23.2996 3.02395 26.7004 3.02395 28.0424 5.38355Z"
-      stroke={color}
-      strokeWidth="2"
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M16.5462 16.6863C17.7041 15.5284 19.5815 15.5284 20.7394 16.6863L48.4584 44.4053C49.6164 45.5632 49.6164 47.4406 48.4584 48.5986C47.3005 49.7565 45.4231 49.7565 44.2652 48.5986L16.5462 20.8796C15.3883 19.7216 15.3883 17.8443 16.5462 16.6863Z"
+      fill="#ECEBEB"
     />
     <path
-      d="M22.9062 17.7656C22.8854 16.9844 23.25 16.5938 24 16.5938H26.5C27.25 16.5938 27.6146 16.9844 27.5938 17.7656L27.1719 31.4219C27.151 32.099 26.8125 32.4375 26.1562 32.4375H24.3438C23.6875 32.4375 23.349 32.099 23.3281 31.4219L22.9062 17.7656ZM24.0625 39C23.3333 39 22.9688 38.6094 22.9688 37.8281V35.7344C22.9688 34.9531 23.3333 34.5625 24.0625 34.5625H26.4375C27.1667 34.5625 27.5312 34.9531 27.5312 35.7344V37.8281C27.5312 38.6094 27.1667 39 26.4375 39H24.0625Z"
-      fill={color}
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M16.5462 48.5983C15.3882 47.4404 15.3882 45.563 16.5462 44.4051L44.2652 16.6861C45.4231 15.5282 47.3005 15.5282 48.4584 16.6861C49.6164 17.8441 49.6164 19.7214 48.4584 20.8794L20.7394 48.5983C19.5815 49.7563 17.7041 49.7563 16.5462 48.5983Z"
+      fill="#ECEBEB"
     />
   </svg>
 );
@@ -123,9 +128,15 @@ const Plus: React.FC<IconProps> = ({ size = 12, color }) => (
 );
 
 const Confirm: React.FC<IconProps> = ({ size = 60 }) => (
-  <svg width={size} height={size} viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M13 26.5L24.5 33.5L36.5 17" stroke="#0d99ff" strokeWidth="2" strokeLinecap="round" />
-    <circle cx="25" cy="25" r="23.5" stroke="#0d99ff" strokeWidth="2" />
+  <svg width={size} height={size} viewBox="0 0 65 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="65" height="65" rx="20" fill="#BBD95D" />
+    <rect x="0.5" y="0.5" width="64" height="64" rx="19.5" stroke="#91AC58" strokeOpacity="0.5" />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M11.7947 30.2386C12.9103 29.0399 14.7865 28.9726 15.9852 30.0883L26.7479 40.1057L49.0613 18.8199C50.2462 17.6895 52.1231 17.7338 53.2534 18.9187C54.3837 20.1036 54.3395 21.9804 53.1546 23.1108L28.9143 46.2348C27.7257 47.3686 25.8595 47.3801 24.6571 46.2609L11.945 34.4292C10.7463 33.3135 10.679 31.4373 11.7947 30.2386Z"
+      fill="#ECEBEB"
+    />
   </svg>
 );
 
@@ -393,7 +404,7 @@ const Icon: React.FC<{ name: IconName } & IconProps> = ({ name, color = 'current
     <>
       {name === 'logo' && <Logo color={color} {...props} />}
       {name === 'error' && <Error color={color} {...props} />}
-      {name === 'confirm' && <Confirm color={color} {...props} />}
+      {name === 'success' && <Confirm color={color} {...props} />}
       {name === 'select-arrow' && <SelectArrow color={color} {...props} />}
       {name === 'plus' && <Plus color={color} {...props} />}
       {name === 'play' && <Play color={color} {...props} />}

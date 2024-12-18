@@ -25,10 +25,9 @@ const Popup = () => {
               {title}
             </h2>
           )}
-          <hr />
           {subtitle && <p className={css.Subtitle}>{subtitle}</p>}
           {btn && (
-            <Button type="button" variant={type === 'error' ? 'white' : 'default'} full onClick={action}>
+            <Button type="button" variant={type === 'error' ? 'black' : 'default'} full onClick={action}>
               {btn}
             </Button>
           )}

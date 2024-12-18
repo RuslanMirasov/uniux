@@ -25,8 +25,8 @@ export const fetcher = async <T = unknown>(url: string, options: FetcherOptions 
   const res = await fetch(url, fetchOptions);
 
   if (!res.ok) {
-    const errorText = await res.json();
-    throw Object.assign(new Error(errorText.message), { status: res.status });
+    const { message } = await res.json();
+    throw { message, status: res.status };
   }
 
   return res.json() as Promise<T>;

@@ -9,7 +9,7 @@ interface ButtonPropsType {
   href?: string;
   type?: 'submit' | 'button';
   onClick?: () => void;
-  variant?: 'default' | 'white' | 'red' | 'border';
+  variant?: 'default' | 'white' | 'red' | 'border' | 'black';
   size?: 'normal' | 'small';
   full?: boolean;
   target?: '_self' | '_blank';

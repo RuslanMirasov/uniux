@@ -12,6 +12,11 @@ $btn_white_color: var(--black);
 $btn_white_border: 2px solid var(--white);
 $btn_white_background: var(--white);
 
+//black
+$btn_black_color: var(--white);
+$btn_black_border: 2px solid var(--sidebar);
+$btn_black_background: var(--sidebar);
+
 //red
 $btn_red_color: var(--white);
 $btn_red_border: 2px solid var(--red);
@@ -140,6 +145,24 @@ $btn_small_padding: 0px 10px;
         border-bottom: 2px solid var(--white);
         border-right: 2px solid var(--white);
       }
+    }
+  }
+
+  //black
+  &.button--black {
+    color: $btn_black_color;
+    background: $btn_black_background;
+    border: $btn_black_border;
+    &.Loading {
+      &:before {
+        border-bottom: 2px solid var(--white);
+        border-right: 2px solid var(--white);
+      }
+    }
+    &:hover {
+      border: 2px solid var(--color);
+      background: var(--color);
+      color: var(--white);
     }
   }
 
