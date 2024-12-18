@@ -1,0 +1,33 @@
+.CloseButton {
+  font-size: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  transition: 0.3s;
+  transform: rotate(0deg);
+  z-index: 3;
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background: var(--white);
+  }
+  &:before {
+    transform: rotate(45deg);
+  }
+  &:after {
+    transform: rotate(-45deg);
+  }
+  &:hover,
+  &:focus {
+    transform: rotate(90deg);
+  }
+}

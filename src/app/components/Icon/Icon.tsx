@@ -122,10 +122,10 @@ const Plus: React.FC<IconProps> = ({ size = 12, color }) => (
   </svg>
 );
 
-const Confirm: React.FC<IconProps> = ({ size = 60, color }) => (
+const Confirm: React.FC<IconProps> = ({ size = 60 }) => (
   <svg width={size} height={size} viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M13 26.5L24.5 33.5L36.5 17" stroke={color} strokeWidth="2" strokeLinecap="round" />
-    <circle cx="25" cy="25" r="23.5" stroke={color} strokeWidth="2" />
+    <path d="M13 26.5L24.5 33.5L36.5 17" stroke="#0d99ff" strokeWidth="2" strokeLinecap="round" />
+    <circle cx="25" cy="25" r="23.5" stroke="#0d99ff" strokeWidth="2" />
   </svg>
 );
 

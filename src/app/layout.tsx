@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { AuthProvider } from '@/context/AuthContext';
+import { PopupProvider } from '@/context/PopupContext';
 import localFont from 'next/font/local';
 import './styles/globals.scss';
+import { Popup } from './components';
 
 const involveMedium = localFont({
   src: './fonts/subset-involve-medium.woff',
@@ -36,11 +38,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`body ${involveBold.variable} ${involveSemiBold.variable} ${involveMedium.variable}`}>
-        <main className="main">
-          <AuthProvider>{children}</AuthProvider>
-        </main>
-      </body>
+      <AuthProvider>
+        <PopupProvider>
+          <body className={`body ${involveBold.variable} ${involveSemiBold.variable} ${involveMedium.variable}`}>
+            <main className="main">{children}</main>
+            <Popup />
+          </body>
+        </PopupProvider>
+      </AuthProvider>
     </html>
   );
 }
