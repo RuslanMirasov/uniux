@@ -14,6 +14,7 @@ export { default as Logo } from './Logo/Logo';
 export { default as PageNotFound } from './PageNotFound/PageNotFound';
 export { default as SidebarMain } from './Sidebars/SidebarMain/SidebarMain';
 export { default as Projects } from './Projects/Projects';
+export { default as Profile } from './Profile/Profile';
 
 // Forms
 export { default as FormWrapper } from './Forms/FormWrapper/FormWrapper';

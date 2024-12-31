@@ -13,16 +13,6 @@ const Projects: React.FC = () => {
       subtitle: 'You just click to the thumbnail area!',
       icon: 'success',
       btn: 'ОК, I got it',
-      action: () => {
-        openPopup({
-          type: 'error',
-          title: `OOOOPS.....`,
-          subtitle:
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora minus, deserunt dignissimos ratione numquam esse illo magnam ullam sapiente minima quisquam, adipisci reiciendis incidunt error quam blanditiis libero commodi officia. Odio delectus iusto labore debitis sapiente dolore! Delectus, ipsum. Maiores odio, iste maxime odit veniam pariatur explicabo eos omnis eius non? Sit, quo nihil! Quas illo quos veritatis dignissimos ab! Repellat porro harum nostrum laudantium? Magnam, nisi libero ut tempore animi, dolores nam similique ratione reprehenderit quas eveniet facilis aliquam deserunt? Quia maiores illo ex debitis quo expedita dignissimos voluptatem. Accusantium exercitationem ex tenetur a suscipit iure omnis harum sunt inventore, placeat voluptatum iste quasi. Qui optio, at nemo, sed odit facere aperiam odio assumenda mollitia illo quia, facilis cum! Eligendi, quia? Laudantium voluptates rerum dolorem tempora eum magnam non, aperiam inventore, aliquam quas tempore facilis! Accusantium velit odio excepturi id ut, inventore rem, nobis sed quaerat temporibus cum reiciendis? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora minus, deserunt dignissimos ratione numquam esse illo magnam ullam sapiente minima quisquam, adipisci reiciendis incidunt error quam blanditiis libero commodi officia. Odio delectus iusto labore debitis sapiente dolore! Delectus, ipsum. Maiores odio, iste maxime odit veniam pariatur explicabo eos omnis eius non? Sit, quo nihil! Quas illo quos veritatis dignissimos ab! Repellat porro harum nostrum laudantium? Magnam, nisi libero ut tempore animi, dolores nam similique ratione reprehenderit quas eveniet facilis aliquam deserunt? Quia maiores illo ex debitis quo expedita dignissimos voluptatem. Accusantium exercitationem ex tenetur a suscipit iure omnis harum sunt inventore, placeat voluptatum iste quasi. Qui optio, at nemo, sed odit facere aperiam odio assumenda mollitia illo quia, facilis cum! Eligendi, quia? Laudantium voluptates rerum dolorem tempora eum magnam non, aperiam inventore, aliquam quas tempore facilis! Accusantium velit odio excepturi id ut, inventore rem, nobis sed quaerat temporibus cum reiciendis?',
-          icon: 'error',
-          btn: 'Close',
-        });
-      },
     });
   };
 
@@ -48,6 +38,15 @@ const Projects: React.FC = () => {
         <button className={css.ChangeViewButton}></button>
       </nav>
       <ul className={css.ProjectsCollection}>
+        <li className={css.ProjectsCollectionItem} onClick={handleClick}>
+          <div className={css.Thumbnail}>
+            <Image src="/placeholder.jpg" width="500" height="500" alt="Uniux" />
+          </div>
+          <Title tag="h2" size="h6">
+            Project name
+          </Title>
+          <Text>Edited 5 minutes ago</Text>
+        </li>
         <li className={css.ProjectsCollectionItem} onClick={handleClick}>
           <div className={css.Thumbnail}>
             <Image src="/placeholder.jpg" width="500" height="500" alt="Uniux" />
