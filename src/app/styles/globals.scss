@@ -19,7 +19,7 @@
 
 html,
 body {
-  height: 100%;
+  min-height: 100vh;
   color: var(--white);
   background: var(--sidebar);
   font-family: var(--semibold);
@@ -73,7 +73,12 @@ hr {
 }
 
 .main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;
+  height: auto;
   flex: 1;
 }
 

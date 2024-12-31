@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { AuthProvider } from '@/context/AuthContext';
 import { PopupProvider } from '@/context/PopupContext';
+import { Popup } from './components';
 import localFont from 'next/font/local';
 import './styles/globals.scss';
-import { Popup } from './components';
 
 const involveMedium = localFont({
   src: './fonts/subset-involve-medium.woff',

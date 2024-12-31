@@ -2,7 +2,7 @@
 
 import { useAuth } from '@/hooks/useAuth';
 import Image from 'next/image';
-import { Preloader, Button, ButtonsList } from './components';
+import { Preloader, SidebarMain, Projects } from './components';
 
 const HomePage: React.FC = () => {
   const { user, isLogin, isLoading } = useAuth();
@@ -11,16 +11,12 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      <h1>Main page</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt necessitatibus molestias voluptates facere
-        cumque, harum id autem vitae ad quasi eius excepturi reprehenderit iste, pariatur cum quod veniam quibusdam in.
-      </p>
-      <ButtonsList>
-        <Button href="/login">Login</Button>
-        <Button href="/create-new-project">Create New Project</Button>
-      </ButtonsList>
-      {isLogin && user && (
+      <SidebarMain>
+        <h1>Sidebar</h1>
+      </SidebarMain>
+      <Projects />
+
+      {/* {isLogin && user && (
         <div
           style={{
             display: 'flex',
@@ -35,8 +31,8 @@ const HomePage: React.FC = () => {
           <Image
             src={user.img_url ? user.img_url : '/placeholder.jpg'}
             alt="User"
-            width="120"
-            height="120"
+            width="320"
+            height="320"
             style={{ borderRadius: '100px', width: '120px', height: '120px' }}
           />
 
@@ -54,7 +50,7 @@ const HomePage: React.FC = () => {
             {user?.authType}
           </p>
         </div>
-      )}
+      )} */}
     </>
   );
 };

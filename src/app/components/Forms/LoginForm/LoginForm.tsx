@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { mutate } from 'swr';
+import { useRouter } from 'next/navigation';
+// import { mutate } from 'swr';
 import { fetcher } from '@/lib/fetcher';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -23,6 +24,7 @@ interface ILoginForm {
 const LoginForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { openPopup } = usePopup();
+  const router = useRouter();
 
   const loginValidationSchema = Yup.object({
     email: Yup.string()
@@ -40,6 +42,7 @@ const LoginForm: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<ILoginForm>({
     resolver: yupResolver(loginValidationSchema),
   });
@@ -49,7 +52,8 @@ const LoginForm: React.FC = () => {
 
     try {
       await fetcher('/api/auth/login', { method: 'POST', data: { ...data } });
-      await mutate('/api/auth/me');
+      // await mutate('/api/auth/me');
+      router.push('/');
     } catch (error) {
       const err = error as FetchError;
       openPopup({
@@ -61,6 +65,7 @@ const LoginForm: React.FC = () => {
       });
     } finally {
       setIsLoading(false);
+      reset();
     }
   };
 

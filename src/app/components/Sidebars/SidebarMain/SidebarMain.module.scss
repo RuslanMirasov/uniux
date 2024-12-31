@@ -1,0 +1,9 @@
+.SidebarMain {
+  position: sticky;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  width: 270px;
+  min-height: 100vh;
+  border-right: 1px solid var(--grey-dark);
+}

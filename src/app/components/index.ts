@@ -12,6 +12,8 @@ export { default as Preloader } from './Preloader/Preloader';
 export { default as Icon } from './Icon/Icon';
 export { default as Logo } from './Logo/Logo';
 export { default as PageNotFound } from './PageNotFound/PageNotFound';
+export { default as SidebarMain } from './Sidebars/SidebarMain/SidebarMain';
+export { default as Projects } from './Projects/Projects';
 
 // Forms
 export { default as FormWrapper } from './Forms/FormWrapper/FormWrapper';
