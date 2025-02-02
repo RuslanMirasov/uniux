@@ -1,6 +1,8 @@
 export const avatarSignature = (name: string): string => {
-  const words = name.split(' ');
-  const firstLetters = words.map(word => word[0]).join('');
-
-  return firstLetters;
+  return name
+    .split(' ')
+    .map(word => word[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase();
 };

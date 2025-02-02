@@ -77,13 +77,23 @@ export async function GET(request: Request) {
       authType: 'figma',
     });
     await user.save();
-  } else if (!user.figmaId) {
-    user.figmaId = figmaId;
-    user.authType = 'figma';
-    user.img_url = !user.img_url ? img_url : null;
-    user.handle = !user.handle ? handle : null;
+  } else {
+    if (!user.figmaId) {
+      user.figmaId = figmaId;
+      user.authType = 'figma';
+    }
+
+    if (user.handle === null) {
+      user.handle = handle;
+    }
+
+    if (user.img_url === null) {
+      user.img_url = img_url;
+    }
+
     await user.save();
   }
+
   const response = NextResponse.redirect(redirectAppUrl);
 
   await addTokenToCookie(response, access_token, refresh_token);

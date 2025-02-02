@@ -1,77 +1,76 @@
 import { NextResponse } from 'next/server';
-import fetch from 'node-fetch';
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
 import dbConnect from '@/lib/dbConnect';
 import User from '@/models/User';
 
-interface FigmaUserData {
-  id: string;
+interface DecodedToken {
   email: string;
-  handle?: string;
-  authType?: string;
-  img_url?: string;
+  authType: 'local' | 'figma';
+  exp?: number;
 }
 
 export async function GET() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get('access_token')?.value;
+  await dbConnect(); // Подключаем базу данных
 
-  let currentUser = null;
+  const cookieStore = await cookies();
+  const token = cookieStore.get('access_token')?.value; // Используем правильное имя куки
 
   if (!token) {
-    return NextResponse.json(currentUser, { status: 200 });
+    return NextResponse.json(null, { status: 200 });
   }
 
-  const decodedToken = jwt.decode(token) as { email?: string; authType?: string };
-
   try {
-    if (decodedToken?.email && decodedToken?.authType) {
-      await dbConnect();
-      const userFromDb = await User.findOne({ email: decodedToken.email, authType: decodedToken.authType });
+    let user;
 
-      currentUser = {
-        email: userFromDb.email,
-        handle: userFromDb.handle || null,
-        img_url: userFromDb.img_url || null,
-        figmaId: userFromDb._id,
-        authType: 'local',
-        subscribe: userFromDb.subscribe,
-      };
+    if (token.startsWith('figu_')) {
+      const figmaResponse = await fetch('https://api.figma.com/v1/me', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-      // Если пользователя не нашли, возвращаем ошибку
-      if (!userFromDb) {
+      if (!figmaResponse.ok) {
+        return NextResponse.json({ message: 'Failed to fetch Figma user data' }, { status: 401 });
+      }
+
+      const figmaData = await figmaResponse.json();
+      const figmaId = figmaData.id; // Получаем figmaId
+
+      if (!figmaId) {
+        return NextResponse.json({ message: 'Invalid Figma response' }, { status: 401 });
+      }
+
+      user = await User.findOne({ authType: 'figma', figmaId });
+
+      if (!user) {
+        console.log('Figma user not found in database');
         return NextResponse.json({ message: 'User not found' }, { status: 404 });
       }
     } else {
-      const userInfoResponse = await fetch('https://api.figma.com/v1/me', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY!) as DecodedToken;
 
-      if (!userInfoResponse.ok) {
-        return NextResponse.json(
-          { message: 'Error get user data', status: userInfoResponse.status },
-          { status: userInfoResponse.status }
-        );
+      if (!decodedToken.email || !decodedToken.authType) {
+        return NextResponse.json({ message: 'Invalid token' }, { status: 401 });
       }
 
-      const userInfo: FigmaUserData = (await userInfoResponse.json()) as FigmaUserData;
+      user = await User.findOne({ email: decodedToken.email, authType: decodedToken.authType });
 
-      currentUser = {
-        email: userInfo.email,
-        handle: userInfo.handle || null,
-        img_url: userInfo.img_url || null,
-        figmaId: userInfo.id,
-        authType: userInfo.authType || 'figma',
-        subscribe: false,
-      };
+      if (!user) {
+        return NextResponse.json({ message: 'User not found' }, { status: 404 });
+      }
     }
 
-    return NextResponse.json({ ...currentUser }, { status: 200 });
+    const currentUser = {
+      id: user.id,
+      email: user.email,
+      handle: user.handle || null,
+      img_url: user.img_url || null,
+      figmaId: user.figmaId || null,
+      authType: user.authType,
+      subscribe: user.subscribe,
+    };
+
+    return NextResponse.json(currentUser, { status: 200 });
   } catch (error) {
-    console.error('Error request to Figma API:', error);
-    return NextResponse.json({ message: 'Server error' }, { status: 500 });
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
 }
