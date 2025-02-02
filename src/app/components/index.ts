@@ -21,6 +21,7 @@ export { default as FormWrapper } from './Forms/FormWrapper/FormWrapper';
 export { default as InputError } from './Forms/InputError/InputError';
 export { default as RegistrationForm } from './Forms/RegistrationForm/RegistrationForm';
 export { default as LoginForm } from './Forms/LoginForm/LoginForm';
+export { default as LogoutForm } from './Forms/LogoutForm/LogoutForm';
 export { default as CreateNewTestForm } from './Forms/CreateNewTestForm/CreateNewTestForm';
 export { default as PasswordResetForm } from './Forms/PasswordResetForm/PasswordResetForm';
 

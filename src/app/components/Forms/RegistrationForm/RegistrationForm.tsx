@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-// import { mutate } from 'swr';
 import { fetcher } from '@/lib/fetcher';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -55,7 +54,6 @@ const RegistrationForm: React.FC = () => {
 
     try {
       await fetcher('/api/auth/register', { method: 'POST', data: { ...data } });
-      // await mutate('/api/auth/me');
       router.push('/');
       openPopup({
         type: 'success',
