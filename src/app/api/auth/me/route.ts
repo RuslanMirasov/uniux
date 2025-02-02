@@ -11,10 +11,10 @@ interface DecodedToken {
 }
 
 export async function GET() {
-  await dbConnect(); // Подключаем базу данных
+  await dbConnect();
 
   const cookieStore = await cookies();
-  const token = cookieStore.get('access_token')?.value; // Используем правильное имя куки
+  const token = cookieStore.get('access_token')?.value;
 
   if (!token) {
     return NextResponse.json(null, { status: 200 });
@@ -33,7 +33,7 @@ export async function GET() {
       }
 
       const figmaData = await figmaResponse.json();
-      const figmaId = figmaData.id; // Получаем figmaId
+      const figmaId = figmaData.id;
 
       if (!figmaId) {
         return NextResponse.json({ message: 'Invalid Figma response' }, { status: 401 });
@@ -42,7 +42,6 @@ export async function GET() {
       user = await User.findOne({ authType: 'figma', figmaId });
 
       if (!user) {
-        console.log('Figma user not found in database');
         return NextResponse.json({ message: 'User not found' }, { status: 404 });
       }
     } else {
@@ -70,7 +69,7 @@ export async function GET() {
     };
 
     return NextResponse.json(currentUser, { status: 200 });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
 }
