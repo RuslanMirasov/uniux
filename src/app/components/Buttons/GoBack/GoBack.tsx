@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { Icon } from '../../../components';
 import css from './GoBack.module.scss';
 
-const GoBack = (): JSX.Element => {
+const GoBack: React.FC = () => {
   const router = useRouter();
 
   const handleGoBack = () => {

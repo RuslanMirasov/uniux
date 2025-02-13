@@ -4,6 +4,7 @@ import AuthProvider from '@/context/SessionContext';
 import { Popup } from './components';
 import localFont from 'next/font/local';
 import './styles/globals.scss';
+import './styles/popup.scss';
 
 const involveMedium = localFont({
   src: './fonts/subset-involve-medium.woff',
