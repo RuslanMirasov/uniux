@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { AuthProvider } from '@/context/AuthContext';
 import { PopupProvider } from '@/context/PopupContext';
+import AuthProvider from '@/context/SessionContext';
 import { Popup } from './components';
 import localFont from 'next/font/local';
 import './styles/globals.scss';
@@ -38,14 +38,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <AuthProvider>
+      <head />
+      <body className={`body ${involveBold.variable} ${involveSemiBold.variable} ${involveMedium.variable}`}>
         <PopupProvider>
-          <body className={`body ${involveBold.variable} ${involveSemiBold.variable} ${involveMedium.variable}`}>
+          <AuthProvider>
             <main className="main">{children}</main>
             <Popup />
-          </body>
+          </AuthProvider>
         </PopupProvider>
-      </AuthProvider>
+      </body>
     </html>
   );
 }

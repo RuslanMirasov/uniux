@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Logo, FormWrapper, Text, Title, LoginForm, Button } from './../components';
+import { Logo, FormWrapper, Text, Title, LoginForm, GoogleButton } from './../components';
 
 const LoginPage: React.FC = () => {
   return (
@@ -13,19 +13,16 @@ const LoginPage: React.FC = () => {
         </Title>
 
         <LoginForm />
-
-        <Button variant="border" full icon="figma" onClick={() => (window.location.href = '/api/auth/figma')}>
-          Continue with Figma
-        </Button>
+        <GoogleButton />
 
         <Text align="center" color="grey">
-          By clicking &quot;Continue with Figma&quot;, you agree <br />
+          By clicking &quot;Continue with Google&quot;, you agree <br />
           to the{' '}
           <Link href="/" className="link">
             UniUX
           </Link>{' '}
           TOS and{' '}
-          <Link href="/" className="link">
+          <Link href="/policy" className="link">
             Privacy Policy
           </Link>
         </Text>

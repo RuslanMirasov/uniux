@@ -9,16 +9,17 @@ export const fetcher = async <T = unknown>(url: string, options: FetcherOptions 
 
   const fetchOptions: RequestInit = {
     method,
+    credentials: 'include',
   };
 
   if (data) {
     if (isFormData && data instanceof FormData) {
-      fetchOptions.body = data; // Убедились, что это точно FormData
+      fetchOptions.body = data;
     } else if (typeof data === 'object' && data !== null) {
       fetchOptions.headers = {
         'Content-Type': 'application/json',
       };
-      fetchOptions.body = JSON.stringify(data); // Преобразуем объект в JSON
+      fetchOptions.body = JSON.stringify(data);
     }
   }
 

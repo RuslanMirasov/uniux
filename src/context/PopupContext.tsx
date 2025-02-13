@@ -3,7 +3,7 @@
 import { createContext, useState, ReactNode } from 'react';
 import { bodyLock, bodyUnlock } from '../lib/popup';
 
-interface PopupParams {
+export interface PopupParams {
   type?: 'error' | 'success' | 'message';
   title?: string | React.ReactNode;
   subtitle?: string | React.ReactNode;
@@ -12,7 +12,7 @@ interface PopupParams {
   action?: () => void;
 }
 
-interface PopupContextProps {
+export interface PopupContextProps {
   isOpen: boolean;
   isVisible: boolean;
   params: Partial<PopupParams>;

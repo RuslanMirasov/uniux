@@ -8,13 +8,12 @@ const dbConnect = async () => {
 
   try {
     const connection = await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: 'Uniux',
+      dbName: 'uniuxdb',
     });
 
     isConnected = !!connection.connections[0].readyState;
     console.log('Connected to Uniux MongoDB.');
   } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
     throw error;
   }
 };

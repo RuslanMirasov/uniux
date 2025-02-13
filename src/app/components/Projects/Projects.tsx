@@ -1,3 +1,5 @@
+'use client';
+
 import { Title, Text, Button } from '../../components';
 import { usePopup } from '@/hooks/usePopup';
 import css from './Projects.module.scss';

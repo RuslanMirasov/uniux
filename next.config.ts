@@ -12,11 +12,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'pluggedin.ru',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.futura-sciences.com',
+        hostname: 'lh3.googleusercontent.com',
       },
     ],
   },

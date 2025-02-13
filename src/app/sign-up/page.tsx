@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Logo, FormWrapper, Text, Title, RegistrationForm, Button } from '../components';
+import { Logo, FormWrapper, Text, Title, RegistrationForm, GoogleButton } from '../components';
 
 const SignUpPage: React.FC = () => {
   return (
@@ -13,13 +13,10 @@ const SignUpPage: React.FC = () => {
         </Title>
 
         <RegistrationForm />
-
-        <Button variant="border" full icon="figma" onClick={() => (window.location.href = '/api/auth/figma')}>
-          Continue with Figma
-        </Button>
+        <GoogleButton />
 
         <Text align="center" color="grey">
-          By clicking &quot;Create account&quot; or &quot;Continue with Figma&quot;, you agree to the{' '}
+          By clicking &quot;Create account&quot; or &quot;Continue with Google&quot;, you agree to the{' '}
           <Link href="/" className="link">
             UniUX
           </Link>{' '}

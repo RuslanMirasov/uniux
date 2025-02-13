@@ -1,5 +1,3 @@
-'use client';
-
 import { SidebarMain, Projects, Profile } from './components';
 
 const HomePage: React.FC = () => {
