@@ -11,18 +11,18 @@ const SignUpPage: React.FC = () => {
           Sign up for Uniux
         </Title>
 
-        <Suspense>
+        <Suspense fallback={null}>
           <RegistrationForm />
           <GoogleButton />
         </Suspense>
 
         <Text align="center" color="grey">
           By clicking &quot;Create account&quot; or &quot;Continue with Google&quot;, you agree to the{' '}
-          <Link href="/" className="link">
+          <Link href="/uniux-tos" className="link">
             UniUX
           </Link>{' '}
           TOS and{' '}
-          <Link href="/" className="link">
+          <Link href="/policy" className="link">
             Privacy Policy
           </Link>
         </Text>

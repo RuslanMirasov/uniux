@@ -11,7 +11,7 @@ const LoginPage: React.FC = () => {
           Log in to Uniux
         </Title>
 
-        <Suspense>
+        <Suspense fallback={null}>
           <LoginForm />
           <GoogleButton />
         </Suspense>
@@ -19,7 +19,7 @@ const LoginPage: React.FC = () => {
         <Text align="center" color="grey">
           By clicking &quot;Continue with Google&quot;, you agree <br />
           to the{' '}
-          <Link href="/" className="link">
+          <Link href="/uniux-tos" className="link">
             UniUX
           </Link>{' '}
           TOS and{' '}
