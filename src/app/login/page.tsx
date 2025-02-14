@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Suspense } from 'react';
 import { Logo, FormWrapper, Text, Title, LoginForm, GoogleButton } from './../components';
 
 const LoginPage: React.FC = () => {
@@ -11,10 +10,8 @@ const LoginPage: React.FC = () => {
           Log in to Uniux
         </Title>
 
-        <Suspense fallback={null}>
-          <LoginForm />
-          <GoogleButton />
-        </Suspense>
+        <LoginForm />
+        <GoogleButton />
 
         <Text align="center" color="grey">
           By clicking &quot;Continue with Google&quot;, you agree <br />

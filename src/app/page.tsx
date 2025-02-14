@@ -1,13 +1,13 @@
-import { SidebarMain, Projects, Profile } from './components';
+import { PrivatPage, SidebarMain, Projects, Profile } from './components';
 
-const HomePage: React.FC = () => {
+const HomePage = async () => {
   return (
-    <>
+    <PrivatPage>
       <SidebarMain>
         <Profile />
       </SidebarMain>
       <Projects />
-    </>
+    </PrivatPage>
   );
 };
 

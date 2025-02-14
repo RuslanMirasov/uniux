@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Suspense } from 'react';
 import { Logo, FormWrapper, Text, Title, RegistrationForm, GoogleButton } from '../components';
 
 const SignUpPage: React.FC = () => {
@@ -11,10 +10,8 @@ const SignUpPage: React.FC = () => {
           Sign up for Uniux
         </Title>
 
-        <Suspense fallback={null}>
-          <RegistrationForm />
-          <GoogleButton />
-        </Suspense>
+        <RegistrationForm />
+        <GoogleButton />
 
         <Text align="center" color="grey">
           By clicking &quot;Create account&quot; or &quot;Continue with Google&quot;, you agree to the{' '}

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useState, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { usePopup } from '@/hooks/usePopup';
@@ -19,10 +19,15 @@ interface FetchError extends Error {
 
 export const useAuth = (type: 'login' | 'register') => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { openPopup } = usePopup();
-  const searchParams = useSearchParams();
   const router = useRouter();
-  const callbackUrl = searchParams.get('callbackUrl') || '/';
+  const { openPopup } = usePopup();
+  const callbackUrl = useMemo(() => {
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      return url.searchParams.get('callbackUrl') || '/';
+    }
+    return '/';
+  }, []);
 
   const {
     register,
@@ -34,6 +39,7 @@ export const useAuth = (type: 'login' | 'register') => {
   });
 
   const onSubmit: SubmitHandler<IAuthForm> = async data => {
+    if (isLoading) return;
     setIsLoading(true);
 
     try {
@@ -52,7 +58,7 @@ export const useAuth = (type: 'login' | 'register') => {
           btn: 'Close',
         });
       } else {
-        router.push(callbackUrl);
+        router.replace(callbackUrl);
       }
     } catch (error) {
       const err = error as FetchError;
