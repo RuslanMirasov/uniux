@@ -10,7 +10,12 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(`${req.nextUrl.origin}/login?callbackUrl=${req.nextUrl.href}`);
   }
 
-  return NextResponse.next();
+  const response = NextResponse.next();
+  response.headers.set('Cache-Control', 'no-store, must-revalidate');
+  response.headers.set('Pragma', 'no-cache');
+  response.headers.set('Expires', '0');
+
+  return response;
 }
 
 export const config = {
