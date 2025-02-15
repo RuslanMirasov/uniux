@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "go": "npm run build && npm run start"
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.7.4",

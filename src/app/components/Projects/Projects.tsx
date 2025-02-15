@@ -4,9 +4,11 @@ import { Title, Text, Button } from '../../components';
 import { usePopup } from '@/hooks/usePopup';
 import css from './Projects.module.scss';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const Projects: React.FC = () => {
-  const { openPopup } = usePopup();
+  const router = useRouter();
+  const { openPopup, closePopup } = usePopup();
 
   const handleClick = (): void => {
     openPopup({
@@ -15,6 +17,12 @@ const Projects: React.FC = () => {
       subtitle: 'You just click to the thumbnail area!',
       icon: 'success',
       btn: 'ОК, I got it',
+      action: () => {
+        closePopup();
+        setTimeout(() => {
+          router.push('/projects');
+        }, 600);
+      },
     });
   };
 

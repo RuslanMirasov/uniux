@@ -18,7 +18,7 @@ interface FetchError extends Error {
 }
 
 export const useAuth = (type: 'login' | 'register') => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/';
@@ -35,9 +35,6 @@ export const useAuth = (type: 'login' | 'register') => {
 
   const onSubmit: SubmitHandler<IAuthForm> = async data => {
     if (isLoading) return;
-
-    console.log('callbackUrl: ', callbackUrl);
-
     setIsLoading(true);
 
     try {
