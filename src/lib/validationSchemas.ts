@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-//registration
+//registration form
 export const registerValidationSchema = Yup.object({
   email: Yup.string()
     .required('Required field')
@@ -14,7 +14,7 @@ export const registerValidationSchema = Yup.object({
   subscribe: Yup.boolean().optional(),
 });
 
-//login
+//login form
 export const loginValidationSchema = Yup.object({
   email: Yup.string()
     .required('Required field')

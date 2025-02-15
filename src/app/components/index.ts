@@ -32,6 +32,4 @@ export { default as Text } from './Typography/Text/Text';
 
 //Popups
 export { default as Popup } from './Popup/Popup';
-
-//PrivatPage
-export { default as PrivatPage } from './PrivatPage/PrivatPage';
+export { default as PrivateRoute } from './PrivateRoute/PrivateRoute';

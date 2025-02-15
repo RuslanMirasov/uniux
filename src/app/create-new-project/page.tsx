@@ -1,8 +1,8 @@
-import { Logo, FormWrapper, CreateNewTestForm, Title, GoBackWrapper, GoBack } from '../components';
+import { PrivateRoute, Logo, FormWrapper, CreateNewTestForm, Title, GoBackWrapper, GoBack } from '../components';
 
 const CreateNewProject: React.FC = () => {
   return (
-    <>
+    <PrivateRoute>
       <GoBackWrapper>
         <GoBack />
       </GoBackWrapper>
@@ -13,7 +13,7 @@ const CreateNewProject: React.FC = () => {
         </Title>
         <CreateNewTestForm />
       </FormWrapper>
-    </>
+    </PrivateRoute>
   );
 };
 

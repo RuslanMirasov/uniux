@@ -1,11 +1,11 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
-import { useRouter, usePathname } from 'next/navigation';
 import { useEffect } from 'react';
-import { Preloader } from '..';
+import { useSession } from 'next-auth/react';
+import { usePathname, useRouter } from 'next/navigation';
+import Preloader from '../Preloader/Preloader';
 
-const PrivatPage = ({ children }: { children: React.ReactNode }) => {
+const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   const { status } = useSession();
   const router = useRouter();
   const pathname = usePathname();
@@ -16,9 +16,11 @@ const PrivatPage = ({ children }: { children: React.ReactNode }) => {
     }
   }, [status, router, pathname]);
 
-  if (status === 'loading' || status === 'unauthenticated') return <Preloader />;
+  if (status === 'loading' || status === 'unauthenticated') {
+    return <Preloader />;
+  }
 
   return <>{children}</>;
 };
 
-export default PrivatPage;
+export default PrivateRoute;

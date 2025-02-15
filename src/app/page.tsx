@@ -1,13 +1,13 @@
-import { PrivatPage, SidebarMain, Projects, Profile } from './components';
+import { PrivateRoute, SidebarMain, Projects, Profile } from './components';
 
 const HomePage = async () => {
   return (
-    <PrivatPage>
+    <PrivateRoute>
       <SidebarMain>
         <Profile />
       </SidebarMain>
       <Projects />
-    </PrivatPage>
+    </PrivateRoute>
   );
 };
 
