@@ -9,7 +9,7 @@ const PageNotFound: React.FC = () => {
         Error 404
       </Title>
       <Text align="center">The page you are looking for can`t be found.</Text>
-      <Image src="/notfound.png" alt="uniux" width="512" height="451" priority />
+      <Image src="/notfound.webp" alt="uniux" width="512" height="451" priority />
       <Button href="/">Back to main page</Button>
     </div>
   );

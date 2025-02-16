@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { PopupProvider } from '@/context/PopupContext';
-import AuthProvider from '@/context/SessionContext';
+import AuthProvider from '@/context/AuthContext';
 import { Popup } from './components';
 import localFont from 'next/font/local';
 import './styles/globals.scss';
@@ -44,8 +44,8 @@ export default async function RootLayout({
         <PopupProvider>
           <AuthProvider>
             <main className="main">{children}</main>
-            <Popup />
           </AuthProvider>
+          <Popup />
         </PopupProvider>
       </body>
     </html>

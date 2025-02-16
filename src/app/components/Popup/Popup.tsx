@@ -11,13 +11,13 @@ const Popup = () => {
 
   if (!isOpen || !params) return null;
 
-  const { type, title, subtitle, btn, icon, action = closePopup } = params;
+  const { type, title, subtitle, btn, icon, locked, action = closePopup } = params;
   const PopupClasses = clsx(css.Popup, css[`popup--${type}`], { [css.Visible]: isVisible });
 
   return (
-    <div className={`${css.Backdrop} ${isVisible ? css.Visible : ''}`} onClick={closePopup}>
+    <div className={`${css.Backdrop} ${isVisible ? css.Visible : ''}`} onClick={!locked ? closePopup : undefined}>
       <div className={PopupClasses} onClick={e => e.stopPropagation()}>
-        <CloseButton onClick={closePopup} />
+        {!locked && <CloseButton onClick={closePopup} />}
         <div className={css.Content}>
           {title && (
             <h2 className={css.Title}>

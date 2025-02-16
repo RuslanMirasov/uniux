@@ -28,6 +28,11 @@ export const authOptions: AuthOptions = {
   pages: {
     signIn: '/login',
   },
+  session: {
+    strategy: 'jwt',
+    // maxAge: 60 * 60 * 24 * 7,
+    maxAge: 30,
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.AUTH_GOOGLE_ID!,
@@ -48,10 +53,15 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }): Promise<JWT> {
+    async jwt({ token, user, account }): Promise<JWT> {
       if (user) {
         token.id = (user as ExtendedUser).id;
         token.subscribe = (user as ExtendedUser).subscribe ?? false;
+        if (account?.provider === 'credentials') {
+          // const expiresIn = 60 * 60 * 24 * 7;
+          const expiresIn = 30;
+          token.expires = new Date(Date.now() + expiresIn * 1000).toISOString();
+        }
       } else if (!token.subscribe && typeof token.id === 'string') {
         const dbUser = await getUserCustomFieldsById(token.id);
         token.subscribe = dbUser?.subscribe ?? false;
@@ -67,6 +77,7 @@ export const authOptions: AuthOptions = {
           id: (token as ExtendedJWT).id,
           subscribe: (token as ExtendedJWT).subscribe,
         },
+        expires: (token as ExtendedJWT).expires ?? session.expires,
       } as ExtendedSession;
     },
   },
