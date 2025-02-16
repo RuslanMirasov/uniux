@@ -30,8 +30,7 @@ export const authOptions: AuthOptions = {
   },
   session: {
     strategy: 'jwt',
-    // maxAge: 60 * 60 * 24 * 7,
-    maxAge: 30,
+    maxAge: 60 * 60 * 24 * 7,
   },
   providers: [
     GoogleProvider({
@@ -58,8 +57,7 @@ export const authOptions: AuthOptions = {
         token.id = (user as ExtendedUser).id;
         token.subscribe = (user as ExtendedUser).subscribe ?? false;
         if (account?.provider === 'credentials') {
-          // const expiresIn = 60 * 60 * 24 * 7;
-          const expiresIn = 30;
+          const expiresIn = 60 * 60 * 24 * 7;
           token.expires = new Date(Date.now() + expiresIn * 1000).toISOString();
         }
       } else if (!token.subscribe && typeof token.id === 'string') {
