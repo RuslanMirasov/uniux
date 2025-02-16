@@ -1,6 +1,6 @@
 'use client';
 
-import { Title, Text, Button } from '../../components';
+import { Skeleton, Title, Text, Button } from '../../components';
 import { usePopup } from '@/hooks/usePopup';
 import css from './Projects.module.scss';
 import Image from 'next/image';
@@ -22,24 +22,7 @@ const Projects: React.FC = () => {
           type: 'success',
           icon: 'notfound',
           title: `Enother popup!`,
-          subtitle: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus culpa minima, dignissimos, officia iste
-          earum fugit non aut odio quae provident. Harum, atque expedita. Ipsam alias non sed? Aperiam, nemo. Illum
-          fugiat reiciendis iusto quia ex! Cumque consequatur omnis voluptate cupiditate libero corporis temporibus
-          pariatur architecto dolores, placeat corrupti odit impedit voluptatibus? Perspiciatis est molestiae qui magni!
-          Reiciendis, aliquid ut? Tempore consectetur voluptatibus molestias ad unde debitis ipsum error alias sequi
-          esse minus, eum voluptates incidunt, quasi rerum. Nostrum itaque quia necessitatibus minima tempora! Sit
-          similique cum officiis ratione dolores. Magni cumque facere beatae distinctio nesciunt a, nisi debitis
-          corporis ex iusto sequi quisquam, commodi ducimus quasi delectus sapiente dicta? Aliquid rem et, ipsam
-          praesentium cupiditate esse rerum nobis deserunt! Provident doloribus consectetur dicta iure fuga mollitia
-          esse quia quis dolor, magni porro sit labore ea maxime voluptatem. Ipsum quos repellendus quae accusamus minus
-          nobis illo labore quas recusandae quaerat. Non libero dignissimos fugit provident perferendis quod ipsa sint
-          beatae laudantium! Nesciunt, nostrum adipisci voluptatibus quasi sapiente sed, tenetur iure placeat at
-          corrupti esse voluptate dolore impedit ipsam non tempora. Dicta possimus exercitationem quis nemo nihil
-          dolorum placeat accusantium. Consectetur eveniet facere aliquam cumque odio sit id quisquam dignissimos amet,
-          assumenda fugiat, ullam nobis officiis, autem provident similique ut reprehenderit. Magnam totam delectus
-          nihil ad voluptates, odit quae provident minima dolores voluptatum aperiam eius est dolorem ducimus sint
-          soluta sit cupiditate obcaecati nesciunt esse omnis tenetur autem. Nobis, minima accusamus.`,
-          btn: 'Go to project',
+          subtitle: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus culpa minima, dignissimos, officia iste earum fugit non aut odio quae provident.`,
           action: () => {
             closePopup();
             setTimeout(() => {
@@ -73,59 +56,30 @@ const Projects: React.FC = () => {
         <button className={css.ChangeViewButton}></button>
       </nav>
       <ul className={css.ProjectsCollection}>
-        <li className={css.ProjectsCollectionItem} onClick={handleClick}>
-          <div className={css.Thumbnail}>
-            <Image src="/placeholder.webp" width="500" height="500" alt="Uniux" />
-          </div>
-          <Title tag="h2" size="h6">
-            Project name
-          </Title>
-          <Text>Edited 5 minutes ago</Text>
+        <li className={css.ProjectsCollectionItem}>
+          <Skeleton height="60%" radius="15px" />
+          <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+          <Skeleton width="22%" height="12%" radius="4px" />
         </li>
-        <li className={css.ProjectsCollectionItem} onClick={handleClick}>
-          <div className={css.Thumbnail}>
-            <Image src="/placeholder.webp" width="500" height="500" alt="Uniux" />
-          </div>
-          <Title tag="h2" size="h6">
-            Project name
-          </Title>
-          <Text>Edited 5 minutes ago</Text>
+        <li className={css.ProjectsCollectionItem}>
+          <Skeleton height="60%" radius="15px" />
+          <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+          <Skeleton width="22%" height="12%" radius="4px" />
         </li>
-        <li className={css.ProjectsCollectionItem} onClick={handleClick}>
-          <div className={css.Thumbnail}>
-            <Image src="/placeholder.webp" width="500" height="500" alt="Uniux" />
-          </div>
-          <Title tag="h2" size="h6">
-            Project name
-          </Title>
-          <Text>Edited 5 minutes ago</Text>
+        <li className={css.ProjectsCollectionItem}>
+          <Skeleton height="60%" radius="15px" />
+          <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+          <Skeleton width="22%" height="12%" radius="4px" />
         </li>
-        <li className={css.ProjectsCollectionItem} onClick={handleClick}>
-          <div className={css.Thumbnail}>
-            <Image src="/placeholder.webp" width="500" height="500" alt="Uniux" />
-          </div>
-          <Title tag="h2" size="h6">
-            Project name
-          </Title>
-          <Text>Edited 5 minutes ago</Text>
+        <li className={css.ProjectsCollectionItem}>
+          <Skeleton height="60%" radius="15px" />
+          <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+          <Skeleton width="22%" height="12%" radius="4px" />
         </li>
-        <li className={css.ProjectsCollectionItem} onClick={handleClick}>
-          <div className={css.Thumbnail}>
-            <Image src="/placeholder.webp" width="500" height="500" alt="Uniux" />
-          </div>
-          <Title tag="h2" size="h6">
-            Project name
-          </Title>
-          <Text>Edited 5 minutes ago</Text>
-        </li>
-        <li className={css.ProjectsCollectionItem} onClick={handleClick}>
-          <div className={css.Thumbnail}>
-            <Image src="/placeholder.webp" width="500" height="500" alt="Uniux" />
-          </div>
-          <Title tag="h2" size="h6">
-            Project name
-          </Title>
-          <Text>Edited 5 minutes ago</Text>
+        <li className={css.ProjectsCollectionItem}>
+          <Skeleton height="60%" radius="15px" />
+          <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+          <Skeleton width="22%" height="12%" radius="4px" />
         </li>
         <li className={css.ProjectsCollectionItem} onClick={handleClick}>
           <div className={css.Thumbnail}>

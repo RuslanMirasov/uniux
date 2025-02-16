@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react';
 import { avatarSignature } from '@/lib/avatarSignature';
 import Image from 'next/image';
-import { Title, LogoutButton } from '../../components';
+import { TitleBox, Title, LogoutButton, Skeleton } from '../../components';
 import css from './Profile.module.scss';
 
 const Profile: React.FC = () => {
@@ -25,6 +25,12 @@ const Profile: React.FC = () => {
 
   return (
     <>
+      <div className={css.ProfileHead}>
+        <TitleBox>
+          <Skeleton width="28px" radius="28px" />
+          <Skeleton width="120px" height="10px" radius="4px" />
+        </TitleBox>
+      </div>
       <div className={css.Profile}>
         <div className={css.Avatar}>
           {image ? (

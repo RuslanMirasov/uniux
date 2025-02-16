@@ -68,7 +68,7 @@ export const PopupProvider = ({ children }: { children: ReactNode }) => {
       setIsOpen(false);
       setParams({});
       bodyUnlock();
-    }, 600);
+    }, 400);
   };
 
   return (

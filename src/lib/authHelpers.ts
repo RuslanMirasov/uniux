@@ -1,5 +1,4 @@
 import dbConnect from '@/lib/dbConnect';
-import bcrypt from 'bcryptjs';
 import User, { IUser } from '@/models/User';
 
 interface CredentialsType {
@@ -57,7 +56,7 @@ export async function authorizeUser(credentials: CredentialsType | undefined) {
     );
   }
 
-  const isPasswordValid = await bcrypt.compare(password, user.password);
+  const isPasswordValid = await user.comparePassword(password);
   if (!isPasswordValid) {
     throw new Error(`Invalid email or password`);
   }
