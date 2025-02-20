@@ -3,9 +3,8 @@
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
-
-import { Button, InputError } from '../..';
+import { ResetPasswordValidationSchema } from '@/lib/validationSchemas';
+import { Button, Input } from '../..';
 import css from '../Forms.module.scss';
 
 interface IRegistrationForm {
@@ -13,20 +12,17 @@ interface IRegistrationForm {
 }
 
 const PasswordResetForm: React.FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const validationSchema = Yup.object({
-    email: Yup.string()
-      .required('Required field')
-      .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Wrong e-mail format'),
-  });
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<IRegistrationForm>({
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(ResetPasswordValidationSchema),
+    defaultValues: {
+      email: '',
+    },
   });
 
   const onSubmit: SubmitHandler<IRegistrationForm> = async data => {
@@ -35,19 +31,9 @@ const PasswordResetForm: React.FC = () => {
   };
 
   return (
-    <form className={css.Form} onSubmit={handleSubmit(onSubmit)}>
-      <div className={css.InputWrapper}>
-        <input
-          id="email"
-          {...register('email')}
-          type="email"
-          placeholder="Email"
-          className={errors.email ? css.Invalid : ''}
-        />
-        <InputError text={errors.email && errors.email.message} />
-      </div>
-
-      <Button type="submit" full isLoading={isLoading}>
+    <form className={css.Form} onSubmit={handleSubmit(onSubmit)} noValidate>
+      <Input type="email" placeholder="Email" register={register('email')} error={errors.email?.message} />
+      <Button type="submit" full isLoading={isLoading} disabled={!isDirty}>
         Reset password
       </Button>
     </form>

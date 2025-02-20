@@ -1,0 +1,59 @@
+.Fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  border: none;
+  margin-bottom: 10px;
+  legend {
+    font-size: 12px;
+    line-height: 1.6;
+    padding-bottom: 10px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .Col-Desctop--auto > div {
+    width: auto;
+  }
+  .Col-Desctop--1 > div {
+    width: 100%;
+  }
+  .Col-Desctop--2 > div {
+    width: calc((100% - 10px) / 2);
+  }
+  .Col-Desctop--3 > div {
+    width: calc((100% - 20px) / 3);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .Col-Tablet--auto > div {
+    width: auto;
+  }
+  .Col-Tablet--1 > div {
+    width: 100%;
+  }
+  .Col-Tablet--2 > div {
+    width: calc((100% - 10px) / 2);
+  }
+  .Col-Tablet--3 > div {
+    width: calc((100% - 20px) / 3);
+  }
+}
+
+@media (max-width: 767px) {
+  .Col-Mobil--auto > div {
+    width: auto;
+  }
+  .Col-Mobil--1 > div {
+    width: 100%;
+  }
+  .Col-Mobil--2 > div {
+    width: calc((100% - 10px) / 2);
+  }
+  .Col-Mobil--3 > div {
+    width: calc((100% - 20px) / 3);
+  }
+}

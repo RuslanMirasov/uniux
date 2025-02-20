@@ -1,48 +1,81 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import { avatarSignature } from '@/lib/avatarSignature';
-import Image from 'next/image';
-import { TitleBox, Title, LogoutButton, Skeleton } from '../../components';
+import { useEffect, useState, useRef } from 'react';
+import { signOut } from 'next-auth/react';
+import { Title, Text, Avatar, Icon, ButtonIcon, ProfileUpdateForm } from '../../components';
 import css from './Profile.module.scss';
+
+interface Session {
+  name: string;
+  email: string;
+  image: string;
+  subscribe: boolean;
+}
 
 const Profile: React.FC = () => {
   const { data: session, status } = useSession();
+  const profileRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-  if (status === 'loading' || !session?.user)
-    return (
-      <div className={css.Profile}>
-        <div className={css.Avatar}>
-          <span>??</span>
-        </div>
-        <Title size="h6">Loading...</Title>
-      </div>
-    );
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleClickOutside = (event: MouseEvent) => {
+      if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
 
-  const name = session.user.name || null;
-  const email = session.user.email || '';
-  const image = session.user.image || null;
+    document.body.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.body.removeEventListener('click', handleClickOutside);
+    };
+  }, [isOpen]);
+
+  const handleOpenToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  if (status === 'loading' || !session?.user) return null;
+
+  const { name, email, image } = session.user as Session;
 
   return (
-    <>
-      <div className={css.ProfileHead}>
-        <TitleBox>
-          <Skeleton width="28px" radius="28px" />
-          <Skeleton width="120px" height="10px" radius="4px" />
-        </TitleBox>
-      </div>
-      <div className={css.Profile}>
-        <div className={css.Avatar}>
-          {image ? (
-            <Image src={image} width="56" height="56" alt="Uniux avatar" />
-          ) : (
-            <span>{avatarSignature(name ? name : email)}</span>
-          )}
-        </div>
+    <div className={css.Profile} ref={profileRef}>
+      <div className={`${css.ProfileHead} ${isOpen ? css['isOpen'] : ''}`} onClick={handleOpenToggle}>
+        <Avatar size="small" email={email} name={name} image={image} />
         <Title size="h6">{name ? name : email}</Title>
+        <Icon name="select-arrow" size="10" />
       </div>
-      <LogoutButton />
-    </>
+      <ul className={`${css.ProfileBody} ${isOpen ? css['isOpen'] : ''}`}>
+        <li>
+          <div className={css.AvatarForm}>
+            <Avatar email={email} name={name} image={image} />
+            <div className={css.AvatarFormIcon}>
+              <Icon name="pen" size="10" />
+            </div>
+          </div>
+          <span>
+            <Text align="center">{name ? name : 'New User'}</Text>
+            <Text size="small" align="center" color="grey">
+              {email}
+            </Text>
+          </span>
+        </li>
+        <li>
+          <ProfileUpdateForm session={session.user as Session} />
+        </li>
+        <li>
+          <ButtonIcon icon="logout" onClick={() => signOut({ redirect: false })}>
+            Logout
+          </ButtonIcon>
+          <ButtonIcon icon="close" iconSize="14" color="rgb(231, 83, 73)" onClick={() => signOut({ redirect: false })}>
+            Delete
+          </ButtonIcon>
+        </li>
+      </ul>
+    </div>
   );
 };
 

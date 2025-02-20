@@ -363,14 +363,20 @@ const Done: React.FC<IconProps> = ({ size = 22, color }) => (
   </svg>
 );
 
-const Fail: React.FC<IconProps> = ({ size = 22 }) => (
-  <svg width={size} height={size} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+const Close: React.FC<IconProps> = ({ size = 20, color = 'currentColor' }) => (
+  <svg width={size} height={size} viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
-      d="M16.9231 0H5.07692C2.27302 0 0 2.27302 0 5.07692V16.9231C0 19.7271 2.27302 22 5.07692 22H16.9231C19.7271 22 22 19.7271 22 16.9231V5.07692C22 2.27302 19.7271 0 16.9231 0Z"
-      fill="#A22626"
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M1.47587 1.4749C2.63381 0.316961 4.5112 0.316961 5.66914 1.4749L33.3881 29.1939C34.546 30.3518 34.546 32.2292 33.3881 33.3871C32.2302 34.5451 30.3528 34.5451 29.1948 33.3871L1.47587 5.66816C0.317938 4.51022 0.317938 2.63284 1.47587 1.4749Z"
+      fill={color}
     />
-    <path d="M6.00015 6.27793L16.0005 16.277" stroke="white" strokeWidth="2" strokeLinecap="round" />
-    <path d="M15.9945 5.99992L6.34314 16.338" stroke="white" strokeWidth="2" strokeLinecap="round" />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M1.47587 33.3874C0.317937 32.2295 0.317937 30.3521 1.47587 29.1941L29.1948 1.47518C30.3528 0.317239 32.2302 0.317239 33.3881 1.47518C34.546 2.63311 34.546 4.5105 33.3881 5.66844L5.66914 33.3874C4.5112 34.5453 2.63381 34.5453 1.47587 33.3874Z"
+      fill={color}
+    />
   </svg>
 );
 
@@ -452,7 +458,7 @@ const Icon: React.FC<{ name: IconName } & IconProps> = ({ name, color = 'current
       {name === 'accordeon-arrow' && <AccordeonArrow color={color} {...props} />}
       {name === 'pen' && <Pen color={color} {...props} />}
       {name === 'done' && <Done {...props} />}
-      {name === 'fail' && <Fail {...props} />}
+      {name === 'close' && <Close {...props} />}
       {name === 'figma' && <Figma {...props} />}
       {name === 'google' && <Google {...props} />}
     </>

@@ -3,20 +3,22 @@
   width: 100%;
   flex-wrap: wrap;
   gap: 16px;
-
-  [data-col='2'] {
-    width: calc((100% - 20px) / 2);
+  fieldset {
+    gap: 16px;
+    &.colD--auto > div {
+      width: auto !important;
+    }
   }
-
   @media (max-width: 599px) {
     gap: 14px;
-    [data-col='2'] {
-      width: 100%;
+    fieldset {
+      gap: 14px;
     }
   }
 }
 
 .InputWrapper {
+  display: block;
   width: 100%;
   input[type='text'],
   input[type='url'],
@@ -43,6 +45,12 @@
     &.Invalid {
       border: 2px solid var(--invalid);
     }
+    &:disabled {
+      user-select: none;
+      pointer-events: none;
+      color: var(--grey);
+      opacity: 0.7;
+    }
   }
   textarea {
     height: 150px;
@@ -65,34 +73,108 @@
   input[type='radio'] + label {
     display: inline-flex;
     width: auto;
+    position: relative;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    padding-left: 32px;
+    line-height: 1.2;
     cursor: pointer;
     &:before {
       content: '';
       display: inline-block;
+      position: absolute;
+      left: 0px;
+      top: -1px;
       width: 20px;
       height: 20px;
-      border-radius: 5px;
       border: 2px solid var(--grey-dark);
       background: rgba(0, 0, 0, 0);
       transition: border 0.3s, background-color 0.3s;
     }
-    &.Invalid {
-      &:before {
-        border: 2px solid var(--invalid);
-        background: rgba(0, 0, 0, 0);
-      }
+  }
+
+  input[type='checkbox'].Invalid + label,
+  input[type='radio'].Invalid + label {
+    &:before {
+      border: 2px solid var(--invalid);
+      background: rgba(0, 0, 0, 0);
     }
   }
 
-  input[type='checkbox']:checked + label,
-  input[type='radio']:checked + label {
+  input[type='checkbox'] + label {
+    &:before {
+      border-radius: 5px;
+    }
+  }
+  input[type='radio'] + label {
+    &:before {
+      border-radius: 50px;
+    }
+  }
+
+  input[type='checkbox']:checked + label {
     &:before {
       border: 2px solid var(--color);
       background: var(--color) url('/checkbox.svg') no-repeat center center;
       background-size: 80% 80%;
+    }
+  }
+
+  input[type='radio']:checked + label {
+    &:before {
+      border: 2px solid var(--color);
+      background: url('/radio.svg') no-repeat center center;
+      background-size: 65% 65%;
+    }
+  }
+}
+
+.Form.Mini {
+  gap: 10px;
+  fieldset {
+    gap: 10px;
+  }
+  @media (max-width: 599px) {
+    gap: 10px;
+    fieldset {
+      gap: 14px;
+    }
+  }
+
+  .InputWrapper {
+    input[type='text'],
+    input[type='url'],
+    input[type='number'],
+    input[type='email'],
+    input[type='password'],
+    textarea {
+      min-height: 40px;
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+    textarea {
+      height: 100px;
+    }
+    label {
+      font-size: 11px;
+    }
+
+    input[type='checkbox'] + label,
+    input[type='radio'] + label {
+      padding-left: 26px;
+      &:before {
+        width: 16px;
+        height: 16px;
+      }
+    }
+    input[type='radio'] + label {
+      font-size: 12px;
+    }
+    input[type='checkbox'] + label {
+      &:before {
+        border-radius: 3px;
+      }
     }
   }
 }

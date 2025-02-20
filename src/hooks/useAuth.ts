@@ -27,10 +27,15 @@ export const useAuth = (type: 'login' | 'register') => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
     reset,
   } = useForm<IAuthForm>({
     resolver: yupResolver(type === 'login' ? loginValidationSchema : registerValidationSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+      subscribe: false,
+    },
   });
 
   const onSubmit: SubmitHandler<IAuthForm> = async data => {
@@ -70,5 +75,5 @@ export const useAuth = (type: 'login' | 'register') => {
     }
   };
 
-  return { register, handleSubmit, errors, isLoading, onSubmit };
+  return { register, handleSubmit, errors, isLoading, isDirty, onSubmit };
 };

@@ -60,6 +60,46 @@ const Projects: React.FC = () => {
           <Skeleton height="60%" radius="15px" />
           <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
           <Skeleton width="22%" height="12%" radius="4px" />
+        </li>{' '}
+        <li className={css.ProjectsCollectionItem}>
+          <Skeleton height="60%" radius="15px" />
+          <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+          <Skeleton width="22%" height="12%" radius="4px" />
+        </li>{' '}
+        <li className={css.ProjectsCollectionItem}>
+          <Skeleton height="60%" radius="15px" />
+          <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+          <Skeleton width="22%" height="12%" radius="4px" />
+        </li>{' '}
+        <li className={css.ProjectsCollectionItem}>
+          <Skeleton height="60%" radius="15px" />
+          <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+          <Skeleton width="22%" height="12%" radius="4px" />
+        </li>
+        <li className={css.ProjectsCollectionItem}>
+          <Skeleton height="60%" radius="15px" />
+          <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+          <Skeleton width="22%" height="12%" radius="4px" />
+        </li>
+        <li className={css.ProjectsCollectionItem}>
+          <Skeleton height="60%" radius="15px" />
+          <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+          <Skeleton width="22%" height="12%" radius="4px" />
+        </li>
+        <li className={css.ProjectsCollectionItem}>
+          <Skeleton height="60%" radius="15px" />
+          <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+          <Skeleton width="22%" height="12%" radius="4px" />
+        </li>
+        <li className={css.ProjectsCollectionItem}>
+          <Skeleton height="60%" radius="15px" />
+          <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+          <Skeleton width="22%" height="12%" radius="4px" />
+        </li>
+        <li className={css.ProjectsCollectionItem}>
+          <Skeleton height="60%" radius="15px" />
+          <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+          <Skeleton width="22%" height="12%" radius="4px" />
         </li>
         <li className={css.ProjectsCollectionItem}>
           <Skeleton height="60%" radius="15px" />

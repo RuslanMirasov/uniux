@@ -1,0 +1,19 @@
+.ButtonIcon {
+  display: inline-flex;
+  position: relative;
+  flex-wrap: nowrap;
+  align-items: center;
+  align-content: center;
+  gap: 5px;
+  transition: color 0.3s;
+  color: inherit;
+  font-size: 12px;
+  line-height: 12px;
+  &:hover {
+    color: var(--color) !important;
+  }
+
+  svg {
+    color: currentColor;
+  }
+}

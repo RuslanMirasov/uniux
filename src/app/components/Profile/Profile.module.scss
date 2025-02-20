@@ -1,39 +1,145 @@
-.ProfileHead {
-  display: block;
-  border: 1px solid red;
-}
-
 .Profile {
   display: flex;
+  position: relative;
+  flex-wrap: wrap;
   width: 100%;
+  padding: 5px;
+  align-content: center;
+}
+
+.ProfileHead {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 5px 7px;
   align-items: center;
   align-content: center;
-  padding: 12px;
-  gap: 10px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  transition: background 0.3s;
 
   strong {
     display: block;
-    max-width: calc(100% - 38px);
+    width: calc(100% - 68px);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  svg {
+    margin-right: 8px;
+    margin-left: auto;
+  }
+
+  &:hover,
+  &.isOpen {
+    background: var(--grey-dark);
   }
 }
 
-.Avatar {
+.ProfileBody {
   display: flex;
+  position: absolute;
+  top: 100%;
+  left: 5px;
+  width: calc(100% - 10px);
+  flex-wrap: wrap;
+  padding: 8px 20px;
+  z-index: 10;
+  justify-content: center;
+  border-radius: 5px;
+  background: var(--select);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+  transform: translate(0px, 20px);
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 14px;
+    padding: 14px 0px;
+    border-top: 1px solid var(--grey-dark);
+    &:first-child {
+      border-top: none;
+      justify-content: center;
+    }
+    &:last-child {
+      justify-content: space-between;
+    }
+    span {
+      display: block;
+      width: 100%;
+    }
+  }
+  &.isOpen {
+    pointer-events: all;
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0px, 0px);
+  }
+}
+
+//AvatarForm
+.AvatarForm {
   position: relative;
-  width: 100%;
+  cursor: pointer;
+  border-radius: 200px;
+  &:hover {
+    .AvatarFormIcon {
+      background: #fff;
+      color: var(--select);
+    }
+  }
+}
+
+.AvatarFormIcon {
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   align-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 28px;
-  overflow: hidden;
-  z-index: 1;
-  background: var(--color);
-  span {
-    font-size: 12px;
-    line-height: 12px;
-    text-transform: uppercase;
+  width: 24px;
+  height: 24px;
+  border-radius: 24px;
+  background: var(--select);
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  z-index: 2;
+  transition: background 0.3s, color 0.3s;
+  svg {
+    width: 80%;
   }
+}
+
+.AvatarForm + span p:last-child {
+  position: relative;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* При ховере на AvatarForm, скрываем email */
+
+.AvatarForm + span p:last-child::before {
+  content: 'Upload photo';
+  display: block;
+  width: 100%;
+  position: absolute;
+  opacity: 1;
+  color: var(--sidebar);
+  opacity: 0;
+}
+.AvatarForm:hover + span p:last-child {
+  position: relative;
+  text-align: center;
+  color: rgba(0, 0, 0, 0);
+}
+.AvatarForm:hover + span p:last-child::before {
+  color: var(--grey);
+  opacity: 1;
 }

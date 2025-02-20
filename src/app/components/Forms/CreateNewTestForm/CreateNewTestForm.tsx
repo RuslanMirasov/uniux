@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
+import { ProjectValidationSchema } from '@/lib/validationSchemas';
 
-import { Button, InputError } from '../..';
+import { Button, Input } from '../..';
 import css from '../Forms.module.scss';
 
 interface IRegistrationForm {
@@ -15,16 +15,15 @@ interface IRegistrationForm {
 const CreateNewTestForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const validationSchema = Yup.object({
-    project: Yup.string().required('Required field').url('Invalid URL format'),
-  });
-
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<IRegistrationForm>({
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(ProjectValidationSchema),
+    defaultValues: {
+      project: '',
+    },
   });
 
   const onSubmit: SubmitHandler<IRegistrationForm> = async data => {
@@ -33,19 +32,14 @@ const CreateNewTestForm: React.FC = () => {
   };
 
   return (
-    <form className={css.Form} onSubmit={handleSubmit(onSubmit)}>
-      <div className={css.InputWrapper}>
-        <input
-          id="project"
-          {...register('project')}
-          type="url"
-          placeholder="Link to Figma project"
-          className={errors.project ? css.Invalid : ''}
-        />
-        <InputError text={errors.project && errors.project.message} />
-      </div>
-
-      <Button type="submit" full isLoading={isLoading}>
+    <form className={css.Form} onSubmit={handleSubmit(onSubmit)} noValidate>
+      <Input
+        type="url"
+        register={register('project')}
+        placeholder="Link to Figma prototype"
+        error={errors.project?.message}
+      />
+      <Button type="submit" full isLoading={isLoading} disabled={!isDirty}>
         Create test
       </Button>
     </form>

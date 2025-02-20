@@ -68,6 +68,9 @@ $btn_small_padding: 0px 10px;
   &.Disabled {
     opacity: 0.3;
     pointer-events: none;
+    &.Loading {
+      opacity: 1;
+    }
   }
 
   //----------------- SIZES ---------------------//
