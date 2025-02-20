@@ -12,7 +12,7 @@ const RegistrationForm: React.FC = () => {
       <Input type="email" placeholder="Email" register={register('email')} error={errors.email?.message} />
       <Input type="password" placeholder="Password" register={register('password')} error={errors.password?.message} />
       <Input type="checkbox" label="Subscribe to UniUXtips and updates" register={register('subscribe')} />
-      <Button type="submit" full variant="white" isLoading={isLoading} disabled={!isDirty}>
+      <Button type="submit" full variant="white" isLoading={isLoading} disabled={!isDirty || isLoading}>
         Create account
       </Button>
     </form>

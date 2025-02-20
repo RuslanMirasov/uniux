@@ -11,7 +11,7 @@ const LoginForm: React.FC = () => {
     <form className={css.Form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <Input type="email" placeholder="Email" register={register('email')} error={errors.email?.message} />
       <Input type="password" placeholder="Password" register={register('password')} error={errors.password?.message} />
-      <Button type="submit" full variant="white" isLoading={isLoading} disabled={!isDirty}>
+      <Button type="submit" full variant="white" isLoading={isLoading} disabled={!isDirty || isLoading}>
         Log in
       </Button>
     </form>

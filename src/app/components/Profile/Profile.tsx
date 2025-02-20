@@ -1,12 +1,13 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
+import { useUser } from '@/hooks/useUser';
 import { useEffect, useState, useRef } from 'react';
 import { signOut } from 'next-auth/react';
-import { Title, Text, Avatar, Icon, ButtonIcon, ProfileUpdateForm } from '../../components';
+import { Title, Text, Avatar, Icon, ButtonIcon, ProfileUpdateForm, Skeleton } from '../../components';
 import css from './Profile.module.scss';
 
 interface Session {
+  id: string;
   name: string;
   email: string;
   image: string;
@@ -14,9 +15,9 @@ interface Session {
 }
 
 const Profile: React.FC = () => {
-  const { data: session, status } = useSession();
   const profileRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const { user, isLoading, error, mutate } = useUser();
 
   useEffect(() => {
     if (!isOpen) return;
@@ -37,9 +38,18 @@ const Profile: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
-  if (status === 'loading' || !session?.user) return null;
+  if (isLoading || !user || error) {
+    return (
+      <div className={css.Profile}>
+        <div className={css.ProfileHead}>
+          <Skeleton width="28px" radius="28px" />
+          <Skeleton width="150px" height="14px" radius="4px" />
+        </div>
+      </div>
+    );
+  }
 
-  const { name, email, image } = session.user as Session;
+  const { name, email, image } = user as Session;
 
   return (
     <div className={css.Profile} ref={profileRef}>
@@ -64,7 +74,7 @@ const Profile: React.FC = () => {
           </span>
         </li>
         <li>
-          <ProfileUpdateForm session={session.user as Session} />
+          <ProfileUpdateForm user={user as Session} mutate={mutate} />
         </li>
         <li>
           <ButtonIcon icon="logout" onClick={() => signOut({ redirect: false })}>

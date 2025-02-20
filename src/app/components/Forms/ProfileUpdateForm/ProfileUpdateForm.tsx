@@ -1,10 +1,17 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Input, Fieldset } from '../../../components';
 import { useForm, SubmitHandler, Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { profileValidationSchema } from '@/lib/validationSchemas';
+import { fetcher } from '@/lib/fetcher';
+import { usePopup } from '@/hooks/usePopup';
 import css from '../Forms.module.scss';
+
+interface FetchError extends Error {
+  status?: number;
+  message: string;
+}
 
 interface IProfileForm {
   name: string;
@@ -13,22 +20,24 @@ interface IProfileForm {
   newpassword: string;
   confirmpassword: string;
   subscribe?: boolean;
-  device?: string;
 }
 
 interface Session {
+  id: string;
   name: string;
   email: string;
   image: string;
   subscribe: boolean;
 }
 
-interface ProfileUpdateFormProps {
-  session: Session;
+interface ProfileProps {
+  user: Session;
+  mutate: () => void;
 }
 
-const ProfileUpdateForm: React.FC<ProfileUpdateFormProps> = ({ session }) => {
+const ProfileUpdateForm: React.FC<ProfileProps> = ({ user, mutate }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const { openPopup } = usePopup();
 
   const {
     register,
@@ -37,23 +46,41 @@ const ProfileUpdateForm: React.FC<ProfileUpdateFormProps> = ({ session }) => {
     reset,
   } = useForm<IProfileForm>({
     resolver: yupResolver(profileValidationSchema) as Resolver<IProfileForm>,
-    defaultValues: {
-      email: session.email || '',
-      name: session.name || '',
-      subscribe: session.subscribe || false,
-      currentpassword: '',
-      newpassword: '',
-      confirmpassword: '',
-      device: 'app',
-    },
+    defaultValues: {},
   });
 
+  useEffect(() => {
+    if (user) {
+      reset({
+        ...(user as Session),
+        currentpassword: '',
+        newpassword: '',
+        confirmpassword: '',
+      });
+    }
+  }, [user, reset]);
+
   const onSubmit: SubmitHandler<IProfileForm> = async data => {
-    if (isLoading) return;
     setIsLoading(true);
-    console.log('DATA: ', data);
-    setIsLoading(false);
-    reset();
+    try {
+      await fetcher('/api/auth/profile', {
+        method: 'PATCH',
+        data: data,
+      });
+      mutate();
+      reset();
+    } catch (error) {
+      const err = error as FetchError;
+      openPopup({
+        type: 'error',
+        title: `Update error${err.status ? ' ' + err.status : ''}`,
+        subtitle: err.message,
+        icon: 'error',
+        btn: 'Закрыть',
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

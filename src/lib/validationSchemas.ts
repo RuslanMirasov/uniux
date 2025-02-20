@@ -12,7 +12,8 @@ const regEx = {
   },
   password: {
     code: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
-    error: 'Oops! Your password needs at least one uppercase letter, one lowercase letter, and a number to be strong enough',
+    error:
+      'Oops! Your password needs at least one uppercase letter, one lowercase letter, and a number to be strong enough',
     errorMin: 'Password must be at least 8 characters',
   },
 };
@@ -36,7 +37,8 @@ const yupFields = {
     .test('password-strength', regEx.password.error, value => (value ? regEx.password.code.test(value) : true)),
   newpassword: Yup.string().when(['currentpassword'], {
     is: (currentpassword: string) => currentpassword.trim() === '',
-    then: schema => schema.test('current', '"Current password" must be filled in!', value => !value || value.trim() === ''),
+    then: schema =>
+      schema.test('current', '"Current password" must be filled in!', value => !value || value.trim() === ''),
     otherwise: schema =>
       schema
         .required('Required field')
@@ -57,7 +59,7 @@ const yupFields = {
   project: Yup.string().required('Required field').url('Invalid URL format'),
 };
 
-const { name, email, subscribe, password, currentpassword, newpassword, confirmpassword, device, project } = yupFields;
+const { name, email, subscribe, password, currentpassword, newpassword, confirmpassword, project } = yupFields;
 
 //registration form
 export const registerValidationSchema = Yup.object({
@@ -90,5 +92,4 @@ export const profileValidationSchema = Yup.object({
   currentpassword,
   newpassword,
   confirmpassword,
-  device,
 });

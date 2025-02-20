@@ -33,7 +33,7 @@ const PasswordResetForm: React.FC = () => {
   return (
     <form className={css.Form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <Input type="email" placeholder="Email" register={register('email')} error={errors.email?.message} />
-      <Button type="submit" full isLoading={isLoading} disabled={!isDirty}>
+      <Button type="submit" full isLoading={isLoading} disabled={!isDirty || isLoading}>
         Reset password
       </Button>
     </form>

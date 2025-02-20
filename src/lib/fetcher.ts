@@ -1,6 +1,6 @@
 type FetcherOptions = {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
-  data?: FormData | Record<string, unknown> | null;
+  data?: FormData | Record<string, unknown> | object | null;
   isFormData?: boolean;
 };
 

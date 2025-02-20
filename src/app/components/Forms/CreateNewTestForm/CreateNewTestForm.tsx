@@ -39,7 +39,7 @@ const CreateNewTestForm: React.FC = () => {
         placeholder="Link to Figma prototype"
         error={errors.project?.message}
       />
-      <Button type="submit" full isLoading={isLoading} disabled={!isDirty}>
+      <Button type="submit" full isLoading={isLoading} disabled={!isDirty || isLoading}>
         Create test
       </Button>
     </form>
