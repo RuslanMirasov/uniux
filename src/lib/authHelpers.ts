@@ -68,9 +68,3 @@ export async function authorizeUser(credentials: CredentialsType | undefined) {
     image: user.image || null,
   };
 }
-
-export async function getUserCustomFieldsById(userId: string) {
-  await dbConnect();
-  const user = await User.findById(userId);
-  return user ? { id: user._id.toString(), subscribe: user.subscribe } : null;
-}

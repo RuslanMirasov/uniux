@@ -10,11 +10,11 @@ export async function PATCH(req: Request) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
 
-  const { email, name, currentpassword, newpassword, confirmpassword, subscribe } = await req.json();
+  const { name, currentpassword, newpassword, confirmpassword, subscribe, image } = await req.json();
 
   try {
     await dbConnect();
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email: session?.user?.email });
 
     if (!existingUser) {
       return NextResponse.json({ message: 'User not found' }, { status: 404 });
@@ -24,6 +24,7 @@ export async function PATCH(req: Request) {
 
     if (name && name !== existingUser.name) updateData.name = name;
     if (subscribe !== existingUser.subscribe) updateData.subscribe = subscribe;
+    if (image && image !== existingUser.image) updateData.image = image;
 
     if (newpassword && newpassword === confirmpassword) {
       if (existingUser.password) {
@@ -39,12 +40,11 @@ export async function PATCH(req: Request) {
       updateData.password = await bcrypt.hash(newpassword, salt);
     }
 
-    let updatedUser = null;
     if (Object.keys(updateData).length > 0) {
-      updatedUser = await User.findByIdAndUpdate(existingUser._id, updateData, { new: true });
+      await User.findByIdAndUpdate(existingUser._id, updateData, { new: true });
     }
 
-    return NextResponse.json(updatedUser);
+    return NextResponse.json({ message: 'User data is updated!' }, { status: 200 });
   } catch {
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
   }

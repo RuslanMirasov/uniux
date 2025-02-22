@@ -23,7 +23,7 @@ interface IProfileForm {
 }
 
 interface Session {
-  id: string;
+  _id: string;
   name: string;
   email: string;
   image: string;

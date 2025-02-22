@@ -30,6 +30,7 @@ export { default as LoginForm } from './Forms/LoginForm/LoginForm';
 export { default as CreateNewTestForm } from './Forms/CreateNewTestForm/CreateNewTestForm';
 export { default as PasswordResetForm } from './Forms/PasswordResetForm/PasswordResetForm';
 export { default as ProfileUpdateForm } from './Forms/ProfileUpdateForm/ProfileUpdateForm';
+export { default as AvatarForm } from './Forms/AvatarForm/AvatarForm';
 
 // Typography
 export { default as TitleBox } from './Typography/TitleBox/TitleBox';

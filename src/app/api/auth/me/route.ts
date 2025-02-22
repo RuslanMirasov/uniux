@@ -23,7 +23,7 @@ export async function GET() {
       return NextResponse.json({ message: 'User not found' }, { status: 404 });
     }
 
-    return NextResponse.json(user);
+    return NextResponse.json(user, { status: 200 });
   } catch {
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
   }

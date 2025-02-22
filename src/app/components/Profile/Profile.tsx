@@ -3,11 +3,11 @@
 import { useUser } from '@/hooks/useUser';
 import { useEffect, useState, useRef } from 'react';
 import { signOut } from 'next-auth/react';
-import { Title, Text, Avatar, Icon, ButtonIcon, ProfileUpdateForm, Skeleton } from '../../components';
+import { Title, Text, Avatar, Icon, ButtonIcon, ProfileUpdateForm, Skeleton, AvatarForm } from '../../components';
 import css from './Profile.module.scss';
 
 interface Session {
-  id: string;
+  _id: string;
   name: string;
   email: string;
   image: string;
@@ -49,7 +49,7 @@ const Profile: React.FC = () => {
     );
   }
 
-  const { name, email, image } = user as Session;
+  const { _id, name, email, image } = user as Session;
 
   return (
     <div className={css.Profile} ref={profileRef}>
@@ -60,12 +60,7 @@ const Profile: React.FC = () => {
       </div>
       <ul className={`${css.ProfileBody} ${isOpen ? css['isOpen'] : ''}`}>
         <li>
-          <div className={css.AvatarForm}>
-            <Avatar email={email} name={name} image={image} />
-            <div className={css.AvatarFormIcon}>
-              <Icon name="pen" size="10" />
-            </div>
-          </div>
+          <AvatarForm id={_id} email={email} name={name} image={image} />
           <span>
             <Text align="center">{name ? name : 'New User'}</Text>
             <Text size="small" align="center" color="grey">

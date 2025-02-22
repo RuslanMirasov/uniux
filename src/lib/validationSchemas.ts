@@ -12,9 +12,14 @@ const regEx = {
   },
   password: {
     code: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
-    error:
-      'Oops! Your password needs at least one uppercase letter, one lowercase letter, and a number to be strong enough',
+    error: 'Password needs at least one uppercase letter, one lowercase letter, and a number to be strong enough',
     errorMin: 'Password must be at least 8 characters',
+  },
+  image: {
+    code: 3 * 1024 * 1024,
+    error: 'File is too large (max. 3 MB)',
+    formats: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
+    errorFormat: 'Wrong file format (JPEG, PNG, WebP)',
   },
 };
 
@@ -57,9 +62,17 @@ const yupFields = {
   }),
   device: Yup.string().required('Select one'),
   project: Yup.string().required('Required field').url('Invalid URL format'),
+  image: Yup.mixed<File>()
+    .test('file', 'You need to provide a file', value => value instanceof File)
+    .test(
+      'fileFormat',
+      regEx.image.errorFormat,
+      value => value instanceof File && regEx.image.formats.includes(value.type)
+    )
+    .test('fileSize', regEx.image.error, value => value instanceof File && value.size <= regEx.image.code),
 };
 
-const { name, email, subscribe, password, currentpassword, newpassword, confirmpassword, project } = yupFields;
+const { name, email, image, subscribe, password, currentpassword, newpassword, confirmpassword, project } = yupFields;
 
 //registration form
 export const registerValidationSchema = Yup.object({
@@ -92,4 +105,9 @@ export const profileValidationSchema = Yup.object({
   currentpassword,
   newpassword,
   confirmpassword,
+});
+
+//Upload avatar-photo form
+export const avatarValidationSchema = Yup.object({
+  image,
 });

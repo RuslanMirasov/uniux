@@ -43,6 +43,7 @@
   display: flex;
   position: absolute;
   top: 100%;
+  margin-top: 0px;
   left: 5px;
   width: calc(100% - 10px);
   flex-wrap: wrap;
@@ -76,70 +77,13 @@
     }
   }
   &.isOpen {
+    position: relative;
+    width: 100%;
+    left: 0px;
+    margin-top: 6px;
     pointer-events: all;
     opacity: 1;
     visibility: visible;
     transform: translate(0px, 0px);
   }
-}
-
-//AvatarForm
-.AvatarForm {
-  position: relative;
-  cursor: pointer;
-  border-radius: 200px;
-  &:hover {
-    .AvatarFormIcon {
-      background: #fff;
-      color: var(--select);
-    }
-  }
-}
-
-.AvatarFormIcon {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 24px;
-  background: var(--select);
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-  z-index: 2;
-  transition: background 0.3s, color 0.3s;
-  svg {
-    width: 80%;
-  }
-}
-
-.AvatarForm + span p:last-child {
-  position: relative;
-  display: block;
-  pointer-events: none;
-  user-select: none;
-}
-
-/* При ховере на AvatarForm, скрываем email */
-
-.AvatarForm + span p:last-child::before {
-  content: 'Upload photo';
-  display: block;
-  width: 100%;
-  position: absolute;
-  opacity: 1;
-  color: var(--sidebar);
-  opacity: 0;
-}
-.AvatarForm:hover + span p:last-child {
-  position: relative;
-  text-align: center;
-  color: rgba(0, 0, 0, 0);
-}
-.AvatarForm:hover + span p:last-child::before {
-  color: var(--grey);
-  opacity: 1;
 }
