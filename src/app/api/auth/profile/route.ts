@@ -4,6 +4,26 @@ import dbConnect from '@/lib/dbConnect';
 import User from '@/models/User';
 import bcrypt from 'bcryptjs';
 
+export async function GET() {
+  const session = await getServerSession();
+  if (!session) {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+  }
+
+  try {
+    await dbConnect();
+    const user = await User.findOne({ email: session?.user?.email }).select('-password');
+
+    if (!user) {
+      return NextResponse.json({ message: 'User not found' }, { status: 404 });
+    }
+
+    return NextResponse.json(user, { status: 200 });
+  } catch {
+    return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
+  }
+}
+
 export async function PATCH(req: Request) {
   const session = await getServerSession();
   if (!session) {
@@ -24,7 +44,7 @@ export async function PATCH(req: Request) {
 
     if (name && name !== existingUser.name) updateData.name = name;
     if (subscribe !== existingUser.subscribe) updateData.subscribe = subscribe;
-    if (image && image !== existingUser.image) updateData.image = image;
+    if ((image || image === null) && image !== existingUser.image) updateData.image = image;
 
     if (newpassword && newpassword === confirmpassword) {
       if (existingUser.password) {
@@ -45,6 +65,28 @@ export async function PATCH(req: Request) {
     }
 
     return NextResponse.json({ message: 'User data is updated!' }, { status: 200 });
+  } catch {
+    return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
+  }
+}
+
+export async function DELETE() {
+  const session = await getServerSession();
+  if (!session) {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+  }
+
+  try {
+    await dbConnect();
+    const user = await User.findOne({ email: session?.user?.email });
+
+    if (!user) {
+      return NextResponse.json({ message: 'User not found' }, { status: 404 });
+    }
+
+    await User.findByIdAndDelete(user._id);
+
+    return NextResponse.json({ message: 'Account deleted successfully' }, { status: 200 });
   } catch {
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
   }

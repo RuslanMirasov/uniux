@@ -1,14 +1,23 @@
 'use client';
-
+import { useState } from 'react';
 import { usePopup } from '@/hooks/usePopup';
-import { Button, Icon } from './../../components';
+import { Button, Icon, ButtonsList } from './../../components';
 import CloseButton from '../Buttons/CloseButton/CloseButton';
 import clsx from 'clsx';
 import css from './Popup.module.scss';
 
 const Popup = () => {
   const { isOpen, isVisible, params, closePopup } = usePopup();
+  const [isAction, setIsAction] = useState(false);
 
+  const handleClick = async (action: () => void) => {
+    setIsAction(true);
+    try {
+      await action();
+    } finally {
+      setIsAction(false);
+    }
+  };
   if (!isOpen || !params) return null;
 
   const { type, title, subtitle, btn, icon, locked, action = closePopup } = params;
@@ -27,9 +36,22 @@ const Popup = () => {
           )}
           {subtitle && <p className={css.Subtitle}>{subtitle}</p>}
           {btn && (
-            <Button type="button" variant={type === 'error' ? 'black' : 'default'} full onClick={action}>
-              {btn}
-            </Button>
+            <ButtonsList align="center">
+              <Button
+                type="button"
+                variant={type === 'error' ? 'black' : 'default'}
+                full={type === 'confirm' ? false : true}
+                isLoading={isAction}
+                onClick={() => handleClick(action)}
+              >
+                {btn}
+              </Button>
+              {type === 'confirm' && (
+                <Button type="button" variant="white" onClick={closePopup}>
+                  No
+                </Button>
+              )}
+            </ButtonsList>
           )}
         </div>
       </div>

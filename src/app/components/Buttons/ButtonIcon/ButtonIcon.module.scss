@@ -10,10 +10,40 @@
   font-size: 12px;
   line-height: 12px;
   &:hover {
-    color: var(--color) !important;
+    color: var(--color);
   }
 
   svg {
+    width: 14px;
     color: currentColor;
+  }
+
+  &.Loading {
+    svg {
+      opacity: 0;
+    }
+    &:before {
+      content: '';
+      display: block;
+      width: 12px;
+      height: 12px;
+      border-radius: 12px;
+      position: absolute;
+      left: 0px;
+      border-left: 1px solid var(--white);
+      border-top: 1px solid var(--white);
+      border-right: 1px solid rgba(0, 0, 0, 0);
+      border-bottom: 1px solid rgba(0, 0, 0, 0);
+      animation: rotate 0.4s linear infinite;
+    }
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

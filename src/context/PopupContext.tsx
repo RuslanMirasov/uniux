@@ -4,7 +4,7 @@ import { createContext, useState, ReactNode, useEffect } from 'react';
 import { bodyLock, bodyUnlock } from '../lib/popup';
 
 export interface PopupParams {
-  type?: 'error' | 'success' | 'message';
+  type?: 'error' | 'success' | 'message' | 'confirm';
   title?: string | React.ReactNode;
   subtitle?: string | React.ReactNode;
   btn?: string;

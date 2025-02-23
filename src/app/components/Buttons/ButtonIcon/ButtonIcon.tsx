@@ -17,7 +17,6 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({ children, icon, iconSize = '20'
 
   const handleClick = async () => {
     setIsLoading(true);
-
     try {
       await onClick();
     } finally {
