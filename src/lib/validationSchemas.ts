@@ -21,6 +21,10 @@ const regEx = {
     formats: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
     errorFormat: 'Wrong file format (JPEG, PNG, WebP)',
   },
+  protoUrl: {
+    code: /^(https?:\/\/)?(www\.)?figma\.com\/proto/,
+    error: 'URL must be a valid Figma prototype link',
+  },
 };
 
 const yupFields = {
@@ -61,7 +65,6 @@ const yupFields = {
     otherwise: schema => schema.oneOf([Yup.ref('newpassword')], 'Passwords must match'),
   }),
   device: Yup.string().required('Select one'),
-  project: Yup.string().required('Required field').url('Invalid URL format'),
   image: Yup.mixed<File>()
     .test('file', 'You need to provide a file', value => value instanceof File)
     .test(
@@ -70,9 +73,15 @@ const yupFields = {
       value => value instanceof File && regEx.image.formats.includes(value.type)
     )
     .test('fileSize', regEx.image.error, value => value instanceof File && value.size <= regEx.image.code),
+  protoUrl: Yup.string()
+    .required('Required field')
+    .url('Invalid URL format')
+    .matches(regEx.protoUrl.code, regEx.protoUrl.error),
+  owner: Yup.string().required('Owner ID is empty!'),
 };
 
-const { name, email, image, subscribe, password, currentpassword, newpassword, confirmpassword, project } = yupFields;
+const { name, email, image, subscribe, password, currentpassword, newpassword, confirmpassword, protoUrl, owner } =
+  yupFields;
 
 //registration form
 export const registerValidationSchema = Yup.object({
@@ -92,9 +101,10 @@ export const ResetPasswordValidationSchema = Yup.object({
   email,
 });
 
-//Add new project form
-export const ProjectValidationSchema = Yup.object({
-  project,
+//Create new project form
+export const CreateNewProjectValidationSchema = Yup.object({
+  owner,
+  protoUrl,
 });
 
 //profile update form

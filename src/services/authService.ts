@@ -8,7 +8,7 @@ interface RegisterData {
 }
 
 export const registerUser = async (data: RegisterData) => {
-  return fetcher('/api/register', { method: 'POST', data: { ...data } });
+  return fetcher('/api/auth/register', { method: 'POST', data: { ...data } });
 };
 
 export const loginUser = async (email: string, password: string) => {

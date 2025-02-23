@@ -6,10 +6,9 @@ import clsx from 'clsx';
 import css from './Button.module.scss';
 
 interface ButtonPropsType {
-  href?: string;
-  type?: 'submit' | 'button';
-  onClick?: () => void;
   variant?: 'default' | 'white' | 'red' | 'border' | 'black';
+  href?: string;
+  type?: 'submit' | 'button' | 'reset';
   size?: 'normal' | 'small';
   full?: boolean;
   target?: '_self' | '_blank';
@@ -17,6 +16,7 @@ interface ButtonPropsType {
   isLoading?: boolean;
   icon?: string;
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
 const Button: React.FC<ButtonPropsType> = ({

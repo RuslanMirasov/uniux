@@ -5,6 +5,8 @@ import { InputProps } from './type';
 import css from '../Forms.module.scss';
 
 const Input: React.FC<InputProps> = ({ placeholder, type, label, register, error, disabled, value }) => {
+  if (type === 'hidden') return <input {...register} type={type} value={value} id={register.name} />;
+
   return (
     <div className={css.InputWrapper}>
       <input

@@ -1,43 +1,96 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ProjectValidationSchema } from '@/lib/validationSchemas';
-
-import { Button, Input } from '../..';
+import { CreateNewProjectValidationSchema } from '@/lib/validationSchemas';
+import { Button, Input, Skeleton } from '../..';
 import css from '../Forms.module.scss';
+import { useUser } from '@/hooks/useUser';
+import { fetcher } from '@/lib/fetcher';
+import { useRouter } from 'next/navigation';
+import { usePopup } from '@/hooks/usePopup';
 
-interface IRegistrationForm {
-  project: string;
+interface FetchError extends Error {
+  status?: number;
+  message: string;
+}
+interface ICreateNewProjectForm {
+  owner: string;
+  protoUrl: string;
+}
+
+interface Session {
+  _id: string;
+  name: string;
+  email: string;
+  image: string;
+  subscribe: boolean;
 }
 
 const CreateNewTestForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { user } = useUser() as { user: Session };
+  const { openPopup } = usePopup();
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isDirty },
-  } = useForm<IRegistrationForm>({
-    resolver: yupResolver(ProjectValidationSchema),
+    reset,
+  } = useForm<ICreateNewProjectForm>({
+    resolver: yupResolver(CreateNewProjectValidationSchema),
     defaultValues: {
-      project: '',
+      owner: user?._id || '',
+      protoUrl: '',
     },
   });
 
-  const onSubmit: SubmitHandler<IRegistrationForm> = async data => {
+  useEffect(() => {
+    if (user?._id) setValue('owner', user._id);
+  }, [user, setValue]);
+
+  const onSubmit: SubmitHandler<ICreateNewProjectForm> = async data => {
     setIsLoading(true);
-    console.log(data);
+    try {
+      await fetcher('api/project', { method: 'POST', data: data });
+      router.push('/');
+    } catch (error) {
+      const err = error as FetchError;
+      openPopup({
+        type: 'error',
+        icon: 'error',
+        title: `Conflict ${err.status}`,
+        subtitle: err.message,
+        btn: 'Close',
+      });
+    } finally {
+      setIsLoading(false);
+      reset({
+        owner: user?._id || '',
+        protoUrl: '',
+      });
+    }
   };
+
+  if (!user)
+    return (
+      <div className={css.Form}>
+        <Skeleton height="50px" radius="5px" />
+        <Skeleton height="50px" radius="5px" />
+      </div>
+    );
 
   return (
     <form className={css.Form} onSubmit={handleSubmit(onSubmit)} noValidate>
+      <Input type="hidden" register={register('owner')} />
       <Input
         type="url"
-        register={register('project')}
+        register={register('protoUrl')}
         placeholder="Link to Figma prototype"
-        error={errors.project?.message}
+        error={errors.protoUrl?.message}
       />
       <Button type="submit" full isLoading={isLoading} disabled={!isDirty || isLoading}>
         Create test

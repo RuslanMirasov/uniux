@@ -13,6 +13,7 @@
     "@auth/mongodb-adapter": "^3.7.4",
     "bcryptjs": "^2.4.3",
     "browser-image-compression": "^2.0.2",
+    "cheerio": "^1.0.0",
     "clsx": "^2.1.1",
     "firebase": "^11.3.1",
     "firebase-admin": "^13.1.0",

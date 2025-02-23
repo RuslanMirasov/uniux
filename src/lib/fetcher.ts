@@ -25,10 +25,21 @@ export const fetcher = async <T = unknown>(url: string, options: FetcherOptions 
 
   const res = await fetch(url, fetchOptions);
 
+  const contentType = res.headers.get('Content-Type') || '';
+  console.log(`Fetching ${url}, status: ${res.status}, content-type: ${contentType}`);
+
   if (!res.ok) {
     const { message } = await res.json();
     throw { message, status: res.status };
   }
 
-  return res.json() as Promise<T>;
+  if (contentType.includes('application/json')) {
+    return res.json() as Promise<T>;
+  }
+
+  if (contentType.includes('text/html')) {
+    return res.text().then(text => text as unknown as T);
+  }
+
+  throw new Error(`Unsupported content type: ${contentType}`);
 };

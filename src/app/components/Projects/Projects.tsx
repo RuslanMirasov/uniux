@@ -1,38 +1,15 @@
 'use client';
 
 import { Skeleton, Title, Text, Button } from '../../components';
-import { usePopup } from '@/hooks/usePopup';
+import { useProject } from '@/hooks/useProject';
 import css from './Projects.module.scss';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const Projects: React.FC = () => {
-  const router = useRouter();
-  const { openPopup, closePopup, refreshPopup } = usePopup();
+  const { projects, isLoading, isError } = useProject();
 
-  const handleClick = (): void => {
-    openPopup({
-      type: 'success',
-      title: `Cangratulations!`,
-      subtitle: 'You just click to the thumbnail area!',
-      icon: 'success',
-      btn: 'ОК, I got it',
-      action: () => {
-        refreshPopup({
-          type: 'success',
-          icon: 'notfound',
-          title: `Enother popup!`,
-          subtitle: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus culpa minima, dignissimos, officia iste earum fugit non aut odio quae provident.`,
-          action: () => {
-            closePopup();
-            setTimeout(() => {
-              router.push('/projects');
-            }, 600);
-          },
-        });
-      },
-    });
-  };
+  if (isError) return null;
 
   return (
     <div className={css.Projects}>
@@ -55,22 +32,65 @@ const Projects: React.FC = () => {
         </ul>
         <button className={css.ChangeViewButton}></button>
       </nav>
-      <ul className={css.ProjectsCollection}>
-        <li className={css.ProjectsCollectionItem}>
-          <Skeleton height="60%" radius="15px" />
-          <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
-          <Skeleton width="22%" height="12%" radius="4px" />
-        </li>
-        <li className={css.ProjectsCollectionItem} onClick={handleClick}>
-          <div className={css.Thumbnail}>
-            <Image src="/placeholder.webp" width="500" height="500" alt="Uniux" />
-          </div>
-          <Title tag="h2" size="h6">
-            Project name
-          </Title>
-          <Text>Edited 5 minutes ago</Text>
-        </li>
-      </ul>
+      {isLoading && (
+        <ul className={css.ProjectsCollection}>
+          <li className={css.ProjectsCollectionItem}>
+            <Skeleton height="60%" radius="15px" />
+            <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+            <Skeleton width="22%" height="12%" radius="4px" />
+          </li>
+          <li className={css.ProjectsCollectionItem}>
+            <Skeleton height="60%" radius="15px" />
+            <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+            <Skeleton width="22%" height="12%" radius="4px" />
+          </li>
+          <li className={css.ProjectsCollectionItem}>
+            <Skeleton height="60%" radius="15px" />
+            <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+            <Skeleton width="22%" height="12%" radius="4px" />
+          </li>
+          <li className={css.ProjectsCollectionItem}>
+            <Skeleton height="60%" radius="15px" />
+            <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+            <Skeleton width="22%" height="12%" radius="4px" />
+          </li>
+          <li className={css.ProjectsCollectionItem}>
+            <Skeleton height="60%" radius="15px" />
+            <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+            <Skeleton width="22%" height="12%" radius="4px" />
+          </li>
+          <li className={css.ProjectsCollectionItem}>
+            <Skeleton height="60%" radius="15px" />
+            <Skeleton width="36%" height="8%" radius="4px" margin="2.4% 0px 2.4% 0px" />
+            <Skeleton width="22%" height="12%" radius="4px" />
+          </li>
+        </ul>
+      )}
+
+      {!isLoading && (
+        <ul className={css.ProjectsCollection}>
+          {projects.map(({ _id, image, name, updatedAt }) => (
+            <li key={_id} className={css.ProjectsCollectionItem}>
+              <Link href={`/${_id}`} className={css.Thumbnail}>
+                <Image src={image ? image : `/placeholder.webp`} width="1000" height="1000" alt={name} />
+              </Link>
+              <Title tag="h2" size="h6">
+                {name}
+              </Title>
+              <Text>{updatedAt}</Text>
+            </li>
+          ))}
+          {/* <li className={css.ProjectsCollectionItem}>
+            <div className={css.Thumbnail}>
+              <Image src="/placeholder.webp" width="500" height="500" alt="Uniux" />
+            </div>
+            <Title tag="h2" size="h6">
+              Project name
+            </Title>
+            <Text>Edited 5 minutes ago</Text>
+          </li> */}
+        </ul>
+      )}
     </div>
   );
 };
