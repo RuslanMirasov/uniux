@@ -29,7 +29,7 @@ const ProjectsCollection: React.FC = () => {
               {timeAgo(updatedAt)}
             </Text>
             <div className={css.Views}>
-              {views} <Icon name="views" size="16" color="var(--grey)" />
+              {views} <Icon name="views" size="15" color="var(--grey)" />
             </div>
           </div>
         </li>
