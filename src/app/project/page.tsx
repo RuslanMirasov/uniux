@@ -1,4 +1,4 @@
-import { GoBack, PrivateRoute, Sidebar, Projects } from '../components';
+import { GoBack, PrivateRoute, Sidebar } from '../components';
 
 const ProjectsPage: React.FC = () => {
   return (
@@ -6,7 +6,6 @@ const ProjectsPage: React.FC = () => {
       <Sidebar>
         <GoBack />
       </Sidebar>
-      <Projects />
     </PrivateRoute>
   );
 };

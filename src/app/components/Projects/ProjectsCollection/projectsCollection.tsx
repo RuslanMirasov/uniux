@@ -1,6 +1,6 @@
 'use client';
 
-import { Title, Text, Icon, ImageWithPreloader, ProjectsSkeleton, ProjectsNotFound } from '../../../components';
+import { Title, Text, Icon, ImageWithPreloader, ProjectsSkeleton, ProjectsNotFound } from '../..';
 import { timeAgo } from '@/lib/timeAgo';
 import Link from 'next/link';
 import { useProject } from '@/hooks/useProject';
