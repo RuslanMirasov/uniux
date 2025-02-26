@@ -42,9 +42,7 @@ export default async function RootLayout({
       <head />
       <body className={`body ${involveBold.variable} ${involveSemiBold.variable} ${involveMedium.variable}`}>
         <PopupProvider>
-          <AuthProvider>
-            <main className="main">{children}</main>
-          </AuthProvider>
+          <AuthProvider>{children}</AuthProvider>
           <Popup />
         </PopupProvider>
       </body>

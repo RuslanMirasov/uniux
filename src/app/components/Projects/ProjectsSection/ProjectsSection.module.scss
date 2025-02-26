@@ -1,0 +1,9 @@
+.Projects {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: calc(100% - 270px);
+  min-height: 100vh;
+  height: auto;
+  border-left: 1px solid var(--grey-dark);
+}

@@ -2,6 +2,7 @@ type FetcherOptions = {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
   data?: FormData | Record<string, unknown> | object | null;
   isFormData?: boolean;
+  headers?: HeadersInit;
 };
 
 export const fetcher = async <T = unknown>(url: string, options: FetcherOptions = {}): Promise<T> => {

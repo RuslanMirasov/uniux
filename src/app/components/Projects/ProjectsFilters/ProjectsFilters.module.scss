@@ -1,0 +1,92 @@
+.Navigation {
+  display: flex;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 22px 30px;
+  justify-content: space-between;
+}
+
+.ProjectsFilter {
+  display: flex;
+  gap: 5px;
+
+  button {
+    border-radius: 5px;
+    padding: 4px 10px;
+    font-family: var(--semibold);
+    font-size: 11px;
+    line-height: 1.33;
+    transition: 0.3s;
+    background: rgba(0, 0, 0, 0);
+    &:hover,
+    &:focus {
+      background: var(--main);
+    }
+    &[data-active='true'] {
+      background: var(--main);
+    }
+  }
+}
+
+.ChangeViewButton {
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  background: var(--main);
+}
+
+.Orders {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 14px;
+  align-items: center;
+}
+
+.ProjectsOrder {
+  position: relative;
+  font-size: 12px;
+  padding: 10px 0px;
+  cursor: pointer;
+  svg {
+    margin-left: 6px;
+    position: relative;
+    transition: 0.3s;
+    transform: rotate(0deg);
+  }
+  ul {
+    position: absolute;
+    left: 0px;
+    top: 100%;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    background: var(--select);
+    padding: 10px;
+    border-radius: 10px;
+    word-wrap: none;
+    transition: 0.3s;
+    li {
+      white-space: nowrap;
+
+      background: rgba(0, 0, 0, 0);
+      border-radius: 5px;
+      padding: 5px 10px;
+      transition: 0.3s;
+      &:hover {
+        background: var(--color);
+      }
+    }
+  }
+
+  &.Open {
+    svg {
+      transform: rotate(-180deg);
+    }
+    ul {
+      pointer-events: all;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

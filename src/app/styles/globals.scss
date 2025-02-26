@@ -13,6 +13,7 @@
   --sidebar: #2c2c2c;
   --select: #1e1e1e;
   --session-hover: #4d5876;
+  --custom-scrollbar: #707070;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -66,22 +67,14 @@ hr {
 
 .body {
   display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
   &.locked {
     overflow-y: hidden;
   }
-}
-
-.main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: auto;
-  flex: 1;
 }
 
 .link {
@@ -113,4 +106,34 @@ hr {
       transform-origin: left;
     }
   }
+}
+
+//Custom scrollbar
+
+.custom-scrollbar {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--custom-scrollbar);
+  border-radius: 2px;
+  background-clip: padding-box;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 2px;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--custom-scrollbar) rgba(0, 0, 0, 0);
 }

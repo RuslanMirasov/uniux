@@ -1,0 +1,12 @@
+.Header {
+  display: flex;
+  position: sticky;
+  flex-shrink: 0;
+  top: 0px;
+  width: 100%;
+  background: var(--sidebar);
+  border-bottom: 1px solid var(--grey-dark);
+  padding: 8px 30px;
+  justify-content: flex-end;
+  z-index: 5;
+}

@@ -10,14 +10,13 @@ export { default as PlayStop } from './Buttons/PlayStop/PlayStop';
 
 // Components
 export { default as Preloader } from './Preloader/Preloader';
+export { default as ImageWithPreloader } from './ImageWithPreloader/ImageWithPreloader';
 export { default as Skeleton } from './Skeleton/Skeleton';
 export { default as Icon } from './Icon/Icon';
 export { default as Logo } from './Logo/Logo';
 export { default as Avatar } from './Profile/Avatar/Avatar';
-
 export { default as PageNotFound } from './PageNotFound/PageNotFound';
-export { default as SidebarMain } from './Sidebars/SidebarMain/SidebarMain';
-export { default as Projects } from './Projects/Projects';
+export { default as Sidebar } from './Sidebar/Sidebar';
 export { default as Profile } from './Profile/Profile';
 
 // Forms
@@ -31,6 +30,7 @@ export { default as CreateNewTestForm } from './Forms/CreateNewTestForm/CreateNe
 export { default as PasswordResetForm } from './Forms/PasswordResetForm/PasswordResetForm';
 export { default as ProfileUpdateForm } from './Forms/ProfileUpdateForm/ProfileUpdateForm';
 export { default as AvatarForm } from './Forms/AvatarForm/AvatarForm';
+export { default as SearchForm } from './Forms/SearchForm/SearchForm';
 
 // Typography
 export { default as TitleBox } from './Typography/TitleBox/TitleBox';
@@ -40,3 +40,11 @@ export { default as Text } from './Typography/Text/Text';
 //Popups
 export { default as Popup } from './Popup/Popup';
 export { default as PrivateRoute } from './PrivateRoute/PrivateRoute';
+
+//Project section components
+export { default as ProjectsSection } from './Projects/ProjectsSection/ProjectsSection';
+export { default as ProjectsHeader } from './Projects/ProjectsHeader/ProjectsHeader';
+export { default as ProjectsFilters } from './Projects/ProjectsFilters/ProjectsFilters';
+export { default as ProjectsSkeleton } from './Projects/ProjectsSkeleton/ProjectsSkeleton';
+export { default as ProjectsNotFound } from './Projects/ProjectsNotFound/ProjectsNotFound';
+export { default as ProjectsCollection } from './Projects/ProjectsCollection/ProjectsCollection';

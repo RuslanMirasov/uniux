@@ -1,0 +1,38 @@
+.SearchForm {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  width: 248px;
+  height: 32px;
+  border-radius: 5px;
+  background: var(--grey-dark);
+  margin: 14px auto;
+
+  input {
+    width: calc(100% - 32px);
+    font-size: 11px;
+    height: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    color: inherit;
+    border-radius: 5px;
+    padding: 5px;
+    &::placeholder {
+      color: var(--grey);
+    }
+  }
+}
+
+.Icon {
+  display: flex;
+  position: absolute;
+  left: 2px;
+  top: 0px;
+  width: 32px;
+  height: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}

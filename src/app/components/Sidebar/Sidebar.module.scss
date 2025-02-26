@@ -1,0 +1,40 @@
+.Sidebar {
+  position: sticky;
+  top: 0px;
+  left: 0px;
+  width: 270px;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  background: var(--sidebar);
+  hr {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--grey-dark);
+  }
+
+  &.type--project {
+    width: 455px;
+    padding: 32px 50px 100px 50px;
+  }
+
+  &.type--main {
+    width: 270px;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--custom-scrollbar);
+    border-radius: 3px;
+    background-clip: padding-box;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 3px;
+  }
+}

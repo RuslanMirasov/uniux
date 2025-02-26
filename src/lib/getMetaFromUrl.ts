@@ -8,7 +8,13 @@ interface Metadata {
 
 export async function getMetaFromUrl(url: string): Promise<Metadata> {
   try {
-    const html = await fetcher<string>(url, { method: 'GET' });
+    const html = await fetcher<string>(url, {
+      method: 'GET',
+      headers: {
+        'User-Agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36',
+      },
+    });
     const $ = cheerio.load(html);
 
     const possibleNames = [
@@ -24,8 +30,8 @@ export async function getMetaFromUrl(url: string): Promise<Metadata> {
       possibleNames.find(value => String(value).trim() !== 'Figma' && String(value).trim() !== '') || 'New project';
 
     const image =
-      $('meta[property="og:image"]').attr('content') ||
       $('meta[name="twitter:image"]').attr('content') ||
+      $('meta[property="og:image"]').attr('content') ||
       $('link[rel="image_src"]').attr('href') ||
       null;
 

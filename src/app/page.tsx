@@ -1,14 +1,27 @@
-import { PrivateRoute, SidebarMain, Projects, Profile, Skeleton } from './components';
+import {
+  PrivateRoute,
+  Profile,
+  Sidebar,
+  SearchForm,
+  ProjectsSection,
+  ProjectsHeader,
+  ProjectsFilters,
+  ProjectsCollection,
+} from './components';
 
 const HomePage = async () => {
   return (
     <PrivateRoute>
-      <SidebarMain>
+      <Sidebar type="main">
         <Profile />
-        <Skeleton width="calc(100% - 20px)" height="40px" radius="5px" margin="10px 10px 20px 10px" />
+        <SearchForm />
         <hr />
-      </SidebarMain>
-      <Projects />
+      </Sidebar>
+      <ProjectsSection>
+        <ProjectsHeader />
+        <ProjectsFilters />
+        <ProjectsCollection />
+      </ProjectsSection>
     </PrivateRoute>
   );
 };

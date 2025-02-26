@@ -1,0 +1,13 @@
+.ProjectsSkeleton {
+  display: flex;
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 40px 30px;
+  padding: 0px 30px 30px 30px;
+
+  li {
+    width: calc((100% - 60px) / 3);
+  }
+}
