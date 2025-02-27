@@ -6,7 +6,6 @@ import { Icon, Avatar } from '../../../components';
 import css from './AvatarForm.module.scss';
 import { useUser } from '@/hooks/useUser';
 import { useState } from 'react';
-import { uploadAvatar } from '@/lib/uploadAvatar';
 
 interface AvatarFormProps {
   id: string;
@@ -43,6 +42,7 @@ const AvatarForm: React.FC<AvatarFormProps> = ({ id, email, name, image }) => {
 
     try {
       setIsLoading(true);
+      const { uploadAvatar } = await import('@/lib/uploadAvatar');
       await uploadAvatar(file, id);
       mutate();
     } finally {

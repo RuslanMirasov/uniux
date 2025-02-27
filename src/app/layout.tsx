@@ -4,24 +4,29 @@ import AuthProvider from '@/context/AuthContext';
 import { Popup } from './components';
 import localFont from 'next/font/local';
 import './styles/globals.scss';
-import './styles/popup.scss';
 
 const involveMedium = localFont({
   src: './fonts/subset-involve-medium.woff',
   variable: '--medium',
   weight: '500',
+  display: 'swap',
+  preload: true,
 });
 
 const involveSemiBold = localFont({
   src: './fonts/subset-involve-semibold.woff',
   variable: '--semibold',
   weight: '600',
+  display: 'swap',
+  preload: true,
 });
 
 const involveBold = localFont({
   src: './fonts/subset-involve-bold.woff',
   variable: '--bold',
   weight: '700',
+  display: 'swap',
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -32,11 +37,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head />

@@ -29,7 +29,6 @@ export const PopupProvider = ({ children }: { children: ReactNode }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [params, setParams] = useState<Partial<PopupParams>>({});
 
-  // Close Popup by Esc
   useEffect(() => {
     if (!isOpen || params.locked) return;
 

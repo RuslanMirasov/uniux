@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
@@ -10,7 +10,14 @@ const firebaseConfig = {
   appId: process.env.FIREBASE_APP_ID,
 };
 
-const app = initializeApp(firebaseConfig);
-const storage = getStorage(app);
+let firebaseApp: FirebaseApp;
 
-export { storage };
+if (!getApps().length) {
+  firebaseApp = initializeApp(firebaseConfig);
+} else {
+  firebaseApp = getApp();
+}
+
+const storage = getStorage(firebaseApp);
+
+export { firebaseApp, storage };

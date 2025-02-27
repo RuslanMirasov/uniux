@@ -18,6 +18,7 @@ const Popup = () => {
       setIsAction(false);
     }
   };
+
   if (!isOpen || !params) return null;
 
   const { type, title, subtitle, btn, icon, locked, action = closePopup } = params;

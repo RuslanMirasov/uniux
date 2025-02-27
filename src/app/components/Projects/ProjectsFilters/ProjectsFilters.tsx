@@ -1,16 +1,17 @@
 'use client';
 
 import { useProject } from '@/hooks/useProject';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Icon } from '../../../components';
 import css from './ProjectsFilters.module.scss';
 
 const ProjectsFilters: React.FC = () => {
-  const [isOrderOpen, setISOrderOpen] = useState(false);
+  const [isOrderOpen, setIsOrderOpen] = useState(false);
   const { filters, setFilters } = useProject();
+  const orderSelectRef = useRef<HTMLDivElement | null>(null);
 
   const toggleOrder = () => {
-    setISOrderOpen(!isOrderOpen);
+    setIsOrderOpen(!isOrderOpen);
   };
 
   const handleSortChange = (sort: 'visit' | 'name' | 'views' | 'createdAt') => {
@@ -20,6 +21,18 @@ const ProjectsFilters: React.FC = () => {
   const handleOrderChange = (order: 'asc' | 'desc') => {
     setFilters({ ...filters, order });
   };
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (orderSelectRef.current && !orderSelectRef.current.contains(e.target as Node)) {
+        setIsOrderOpen(false);
+      }
+    };
+
+    if (isOrderOpen) document.addEventListener('mousedown', handleClickOutside);
+
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOrderOpen]);
 
   return (
     <nav className={css.Navigation}>
@@ -46,7 +59,11 @@ const ProjectsFilters: React.FC = () => {
         </li>
       </ul>
       <div className={css.Orders}>
-        <div className={`${css.ProjectsOrder} ${isOrderOpen ? css.Open : ''}`} onClick={toggleOrder}>
+        <div
+          ref={orderSelectRef}
+          className={`${css.ProjectsOrder} ${isOrderOpen ? css.Open : ''}`}
+          onClick={toggleOrder}
+        >
           <span>{filters.order === 'desc' ? 'Newest first' : 'Oldest first'}</span>
           <Icon name="select-arrow" size="12" />
           <ul>

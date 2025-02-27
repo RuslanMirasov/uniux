@@ -5,7 +5,6 @@ import { useState, useRef } from 'react';
 import { signOut } from 'next-auth/react';
 import { Title, Text, Avatar, Icon, ButtonIcon, ProfileUpdateForm, Skeleton, AvatarForm } from '../../components';
 import css from './Profile.module.scss';
-import { deleteAvatar } from '@/lib/uploadAvatar';
 import { fetcher } from '@/lib/fetcher';
 import { usePopup } from '@/hooks/usePopup';
 
@@ -31,6 +30,7 @@ const Profile: React.FC = () => {
       subtitle: 'This action is irreversible, and all your data will be permanently lost.',
       btn: 'Yes',
       action: async () => {
+        const { deleteAvatar } = await import('@/lib/uploadAvatar');
         await deleteAvatar(id);
         await fetcher(`/api/auth/profile`, {
           method: 'DELETE',

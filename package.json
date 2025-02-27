@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "go": "npm run build && npm run start"
+    "go": "npm run build && npm run start",
+    "analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.7.4",
@@ -30,10 +31,12 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@hookform/resolvers": "^3.10.0",
+    "@next/bundle-analyzer": "^15.2.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "sass": "^1.83.4",

@@ -1,4 +1,4 @@
-import imageCompression from 'browser-image-compression';
+// import imageCompression from 'browser-image-compression';
 
 export const optimizeImage = async (file: File): Promise<File> => {
   return new Promise((resolve, reject) => {
@@ -31,6 +31,8 @@ export const optimizeImage = async (file: File): Promise<File> => {
           }
 
           const croppedFile = new File([blob], 'avatar.webp', { type: 'image/webp' });
+
+          const imageCompression = (await import('browser-image-compression')).default;
 
           const compressedFile = await imageCompression(croppedFile, {
             maxWidthOrHeight: size,
