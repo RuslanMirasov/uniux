@@ -28,6 +28,7 @@ const Popup = () => {
     <div className={`${css.Backdrop} ${isVisible ? css.Visible : ''}`} onClick={!locked ? closePopup : undefined}>
       <div className={PopupClasses} onClick={e => e.stopPropagation()}>
         {!locked && <CloseButton onClick={closePopup} />}
+
         <div className={css.Content}>
           {title && (
             <h2 className={css.Title}>
@@ -35,20 +36,23 @@ const Popup = () => {
               {title}
             </h2>
           )}
+
           {subtitle && <p className={css.Subtitle}>{subtitle}</p>}
+
           {btn && (
             <ButtonsList align="center">
               <Button
                 type="button"
                 variant={type === 'error' ? 'black' : 'default'}
                 full={type === 'confirm' ? false : true}
+                size={type === 'confirm' ? 'small' : 'normal'}
                 isLoading={isAction}
                 onClick={() => handleClick(action)}
               >
                 {btn}
               </Button>
               {type === 'confirm' && (
-                <Button type="button" variant="white" onClick={closePopup}>
+                <Button type="button" size="small" variant="white" onClick={closePopup}>
                   No
                 </Button>
               )}

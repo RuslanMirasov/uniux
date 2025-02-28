@@ -3,11 +3,11 @@
 import { Title, Text, Icon, ImageWithPreloader, ProjectsSkeleton, ProjectsNotFound } from '../..';
 import { timeAgo } from '@/lib/timeAgo';
 import Link from 'next/link';
-import { useProject } from '@/hooks/useProject';
+import { useProjects } from '@/hooks/useProjects';
 import css from './ProjectsCollection.module.scss';
 
 const ProjectsCollection: React.FC = () => {
-  const { projects, isLoading, isError } = useProject();
+  const { projects, isLoading, isError } = useProjects();
 
   if (isError) return null;
   if (isLoading || !projects) return <ProjectsSkeleton />;
@@ -17,7 +17,7 @@ const ProjectsCollection: React.FC = () => {
     <ul className={css.ProjectsCollection}>
       {projects.map(({ _id, image, name, views, updatedAt }) => (
         <li key={_id} className={css.ProjectCard}>
-          <Link href={`/project/${_id}`} className={css.Thumbnail}>
+          <Link href={`/project/${_id}/edit`} className={css.Thumbnail}>
             <ImageWithPreloader src={image} width="700" height="420" alt={name || 'uniux project poster'} />
           </Link>
           <div className={css.ProjectCardInfo}>

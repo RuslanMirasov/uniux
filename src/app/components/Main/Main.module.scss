@@ -1,0 +1,12 @@
+.Main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  background: var(--main);
+  padding: 70px 40px 40px 40px;
+}

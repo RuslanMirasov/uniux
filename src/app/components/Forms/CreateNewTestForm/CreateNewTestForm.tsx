@@ -55,7 +55,7 @@ const CreateNewTestForm: React.FC = () => {
   const onSubmit: SubmitHandler<ICreateNewProjectForm> = async data => {
     setIsLoading(true);
     try {
-      await fetcher('api/project', { method: 'POST', data: data });
+      await fetcher('api/projects', { method: 'POST', data: data });
       router.push('/');
     } catch (error) {
       const err = error as FetchError;

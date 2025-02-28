@@ -56,7 +56,7 @@
     min-width: calc(100% + 40px);
   }
   button {
-    min-width: 120px;
+    min-width: 100px;
   }
 }
 
@@ -70,6 +70,7 @@
   font-family: var(--semibold);
   font-size: 12px;
   line-height: 1.33;
-  margin-top: -5px;
-  margin-bottom: 5px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  color: var(--grey);
 }

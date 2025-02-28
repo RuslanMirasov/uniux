@@ -5,7 +5,7 @@ import css from './Avatar.module.scss';
 
 interface AvatarProps {
   email: string;
-  size?: 'normal' | 'small';
+  size?: 'big' | 'normal' | 'small';
   image?: string | null;
   name?: string | null;
   isLoading?: boolean;

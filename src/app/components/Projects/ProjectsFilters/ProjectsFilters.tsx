@@ -1,13 +1,13 @@
 'use client';
 
-import { useProject } from '@/hooks/useProject';
+import { useProjects } from '@/hooks/useProjects';
 import { useState, useEffect, useRef } from 'react';
 import { Icon } from '../../../components';
 import css from './ProjectsFilters.module.scss';
 
 const ProjectsFilters: React.FC = () => {
   const [isOrderOpen, setIsOrderOpen] = useState(false);
-  const { filters, setFilters } = useProject();
+  const { filters, setFilters } = useProjects();
   const orderSelectRef = useRef<HTMLDivElement | null>(null);
 
   const toggleOrder = () => {

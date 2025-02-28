@@ -53,7 +53,7 @@ const AvatarForm: React.FC<AvatarFormProps> = ({ id, email, name, image }) => {
   return (
     <>
       <form className={css.AvatarForm}>
-        <Avatar email={email} name={name} image={image} isLoading={isLoading} />
+        <Avatar size="big" email={email} name={name} image={image} isLoading={isLoading} />
         <div className={css.AvatarFormIcon}>
           <Icon name="pen" size="10" />
         </div>

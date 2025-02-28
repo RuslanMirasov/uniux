@@ -5,7 +5,7 @@ const ProjectsHeader: React.FC = () => {
   return (
     <header className={css.Header}>
       <Button href="/create-new-project" size="small">
-        +&nbsp;&nbsp;&nbsp;Test project
+        +&nbsp;&nbsp;New project
       </Button>
     </header>
   );

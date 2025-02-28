@@ -8,7 +8,8 @@ export { default as GoBack } from './Buttons/GoBack/GoBack';
 export { default as GoBackWrapper } from './Buttons/GoBack/GoBackWrapper';
 export { default as PlayStop } from './Buttons/PlayStop/PlayStop';
 
-// Components
+// Components (global)
+export { default as Main } from './Main/Main';
 export { default as Preloader } from './Preloader/Preloader';
 export { default as ImageWithPreloader } from './ImageWithPreloader/ImageWithPreloader';
 export { default as Skeleton } from './Skeleton/Skeleton';
@@ -18,6 +19,7 @@ export { default as Avatar } from './Profile/Avatar/Avatar';
 export { default as PageNotFound } from './PageNotFound/PageNotFound';
 export { default as Sidebar } from './Sidebar/Sidebar';
 export { default as Profile } from './Profile/Profile';
+export { default as Device } from './Device/Device';
 
 // Forms
 export { default as Input } from './Forms/Input/Input';
@@ -31,6 +33,7 @@ export { default as PasswordResetForm } from './Forms/PasswordResetForm/Password
 export { default as ProfileUpdateForm } from './Forms/ProfileUpdateForm/ProfileUpdateForm';
 export { default as AvatarForm } from './Forms/AvatarForm/AvatarForm';
 export { default as SearchForm } from './Forms/SearchForm/SearchForm';
+export { default as EditProjectForm } from './Forms/EditProjectForm/EditProjectForm';
 
 // Typography
 export { default as TitleBox } from './Typography/TitleBox/TitleBox';

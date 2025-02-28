@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
 
     const filter: Record<string, unknown> = { owner: user._id };
     if (search) {
-      filter.name = { $regex: search, $options: 'i' }; // Регистронезависимый поиск по названию проекта
+      filter.name = { $regex: search, $options: 'i' };
     }
 
     const sortOrder = order === 'asc' ? 1 : -1;

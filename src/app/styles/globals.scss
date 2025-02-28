@@ -65,6 +65,12 @@ hr {
   background: inherit;
 }
 
+iframe {
+  display: block;
+  flex: 1;
+  border: none;
+}
+
 .body {
   display: flex;
   justify-content: flex-end;

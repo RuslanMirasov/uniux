@@ -3,11 +3,11 @@
 import { ChangeEvent, useState, useEffect } from 'react';
 import { Icon } from '../../../components';
 import { useDebounce } from '@/hooks/useDebounce';
-import { useProject } from '@/hooks/useProject';
+import { useProjects } from '@/hooks/useProjects';
 import css from './SearchForm.module.scss';
 
 const SearchForm: React.FC = () => {
-  const { filters, setFilters } = useProject();
+  const { filters, setFilters } = useProjects();
   const [search, setSearch] = useState(filters.search || '');
   const debouncedSearch = useDebounce(search, 500);
 
