@@ -6,9 +6,8 @@ import { getServerSession } from 'next-auth/next';
 
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const { id } = await params;
-
     await dbConnect();
+    const { id } = await params;
 
     const project = await Project.findById(id).select('_id name tasks owner views visit');
     if (!project) return NextResponse.json({ error: 'Project not found!' }, { status: 404 });
@@ -30,7 +29,14 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
 
     await Project.findByIdAndUpdate(id, updateData, { new: true });
 
-    return NextResponse.json(project, { status: 200 });
+    return NextResponse.json(
+      {
+        _id: project._id,
+        name: project.name,
+        tasks: project.tasks,
+      },
+      { status: 200 }
+    );
   } catch (error) {
     console.log('Get Single project error: ', error);
     return NextResponse.json({ error: 'Server error' }, { status: 500 });
