@@ -1,15 +1,15 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-export interface ITask {
-  _id?: string;
-  name: string;
-  description?: string | null;
+export type ITask = {
+  _id: string;
   device: 'browser' | 'app';
+  taskName: string;
   protoUrl: string;
+  description: string;
   target: string;
-}
+};
 
-export interface IProject extends Document {
+interface IProject extends Document {
   protoUrl: string;
   owner: string;
   name: string;
@@ -19,17 +19,14 @@ export interface IProject extends Document {
   tasks?: ITask[];
 }
 
-const TaskSchema: Schema = new Schema(
-  {
-    _id: { type: Schema.Types.ObjectId, auto: true },
-    name: { type: String, required: true },
-    description: { type: String, default: null },
-    device: { type: String, enum: ['browser', 'app'], default: 'app' },
-    protoUrl: { type: String, required: true },
-    target: { type: String, required: true },
-  },
-  { _id: true }
-);
+const TaskSchema: Schema = new Schema({
+  _id: { type: String, required: true },
+  taskName: { type: String, required: true },
+  description: { type: String, required: true },
+  device: { type: String, enum: ['browser', 'app'], default: 'app' },
+  protoUrl: { type: String, required: true },
+  target: { type: String, required: true },
+});
 
 const ProjectSchema: Schema<IProject> = new Schema(
   {

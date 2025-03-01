@@ -509,7 +509,7 @@ const Icon: React.FC<{ name: IconName } & IconProps> = ({ name, color = 'current
       {name === 'accordeon-play' && <AccordeonPlay color={color} {...props} />}
       {name === 'accordeon-arrow' && <AccordeonArrow color={color} {...props} />}
       {name === 'pen' && <Pen color={color} {...props} />}
-      {name === 'done' && <Done {...props} />}
+      {name === 'done' && <Done color={color} {...props} />}
       {name === 'close' && <Close {...props} />}
       {name === 'figma' && <Figma {...props} />}
       {name === 'google' && <Google {...props} />}

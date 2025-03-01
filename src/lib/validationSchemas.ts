@@ -64,7 +64,7 @@ const yupFields = {
       ),
     otherwise: schema => schema.oneOf([Yup.ref('newpassword')], 'Passwords must match'),
   }),
-  device: Yup.string().required('Select one'),
+  device: Yup.string().oneOf(['browser', 'app']).required('Select one'),
   image: Yup.mixed<File>()
     .test('file', 'You need to provide a file', value => value instanceof File)
     .test(
@@ -78,10 +78,29 @@ const yupFields = {
     .url('Invalid URL format')
     .matches(regEx.protoUrl.code, regEx.protoUrl.error),
   owner: Yup.string().required('Owner ID is empty!'),
+  description: Yup.string().required('Describe your task!'),
+  taskName: Yup.string().required('Required field'),
+  target: Yup.string().required('Target frame is field'),
+  _id: Yup.string().required('ID is required'),
 };
 
-const { name, email, image, subscribe, password, currentpassword, newpassword, confirmpassword, protoUrl, owner } =
-  yupFields;
+const {
+  _id,
+  name,
+  description,
+  email,
+  image,
+  subscribe,
+  password,
+  currentpassword,
+  newpassword,
+  confirmpassword,
+  protoUrl,
+  owner,
+  device,
+  target,
+  taskName,
+} = yupFields;
 
 //registration form
 export const registerValidationSchema = Yup.object({
@@ -120,4 +139,14 @@ export const profileValidationSchema = Yup.object({
 //Upload avatar-photo form
 export const avatarValidationSchema = Yup.object({
   image,
+});
+
+// Create New Task in project forma
+export const CreateNewTaskValidationSchema = Yup.object({
+  _id,
+  device,
+  taskName,
+  protoUrl,
+  description,
+  target,
 });

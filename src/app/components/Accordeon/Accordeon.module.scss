@@ -1,0 +1,86 @@
+.Accordeon {
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  position: relative;
+  border-top: 1px solid var(--grey-dark);
+
+  &:last-child {
+    border-bottom: 1px solid var(--grey-dark);
+  }
+
+  svg {
+    color: var(--grey);
+  }
+
+  &.Open {
+    .Arrow {
+      transform: rotate(-180deg);
+    }
+    .AccordeonBody {
+      height: auto;
+      .AccordeonBodyContent {
+        opacity: 1;
+        transform: translate(0px, 0px);
+      }
+    }
+  }
+}
+
+.AccordeonHead {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  min-height: 46px;
+  padding-right: 46px;
+  padding-left: 10px;
+  user-select: none;
+  cursor: pointer;
+
+  strong {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--semibold);
+    font-size: 12px;
+    gap: 12px;
+  }
+}
+
+.AccordeonBody {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 0px;
+  .AccordeonBodyContent {
+    position: relative;
+    display: block;
+    width: 100%;
+    transition: 0.3s;
+    opacity: 0;
+    transform: translate(0px, 20px);
+    padding-bottom: 30px;
+    fieldset {
+      padding-left: 30px;
+    }
+  }
+}
+
+.Arrow {
+  display: flex;
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  right: 0px;
+  top: 0px;
+  z-index: 2;
+  transition: 0.3s;
+  transform: rotate(0deg);
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}

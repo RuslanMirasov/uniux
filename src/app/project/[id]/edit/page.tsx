@@ -3,12 +3,12 @@ import { PrivateRoute, Logo, GoBack, Main, Sidebar, Device, EditProjectForm } fr
 const EditProjectPage = async () => {
   return (
     <PrivateRoute>
-      <Logo position="right" />
       <Sidebar>
         <GoBack />
         <EditProjectForm />
       </Sidebar>
       <Main>
+        <Logo position="right" />
         <Device />
       </Main>
     </PrivateRoute>

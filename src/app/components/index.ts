@@ -20,6 +20,7 @@ export { default as PageNotFound } from './PageNotFound/PageNotFound';
 export { default as Sidebar } from './Sidebar/Sidebar';
 export { default as Profile } from './Profile/Profile';
 export { default as Device } from './Device/Device';
+export { default as Accordeon } from './Accordeon/Accordeon';
 
 // Forms
 export { default as Input } from './Forms/Input/Input';
@@ -34,6 +35,8 @@ export { default as ProfileUpdateForm } from './Forms/ProfileUpdateForm/ProfileU
 export { default as AvatarForm } from './Forms/AvatarForm/AvatarForm';
 export { default as SearchForm } from './Forms/SearchForm/SearchForm';
 export { default as EditProjectForm } from './Forms/EditProjectForm/EditProjectForm';
+export { default as AddTaskForm } from './Forms/AddTaskForm/AddTaskForm';
+export { default as InputCopyText } from './Forms/InputCopyText/InputCopyText';
 
 // Typography
 export { default as TitleBox } from './Typography/TitleBox/TitleBox';
@@ -43,6 +46,9 @@ export { default as Text } from './Typography/Text/Text';
 //Popups
 export { default as Popup } from './Popup/Popup';
 export { default as PrivateRoute } from './PrivateRoute/PrivateRoute';
+
+//Tasks section components
+export { default as TasksCollection } from './Tasks/TasksCollection/TasksCollection';
 
 //Project section components
 export { default as ProjectsSection } from './Projects/ProjectsSection/ProjectsSection';
