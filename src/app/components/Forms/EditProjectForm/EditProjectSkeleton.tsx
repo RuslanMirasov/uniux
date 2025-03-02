@@ -1,4 +1,4 @@
-import { Skeleton } from '../../../components';
+import { Skeleton } from '../..';
 import css from './EditProjectForm.module.scss';
 
 const EditProjectSkeleton: React.FC = () => {

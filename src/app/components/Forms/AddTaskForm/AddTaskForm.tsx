@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useState, useEffect, useRef } from 'react';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CreateNewTaskValidationSchema } from '@/lib/validationSchemas';
 import { Fieldset, Input, Accordeon, InputCopyText } from '../../../components';
@@ -9,20 +9,32 @@ import type { ITask } from '@/models/Project';
 import css from '../Forms.module.scss';
 
 interface AddTAskFormProps {
+  number?: number;
   open?: boolean;
+  onDirtyChange: (taskId: string, isDirty: boolean) => void;
+  registerSubmit: (submit: () => Promise<ITask | null>) => void;
   defaultValues: ITask;
 }
 
-const AddTaskForm: React.FC<AddTAskFormProps> = ({ open, defaultValues }) => {
+const AddTaskForm: React.FC<AddTAskFormProps> = ({ number, open, onDirtyChange, registerSubmit, defaultValues }) => {
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<ITask>({
     resolver: yupResolver(CreateNewTaskValidationSchema),
     defaultValues: defaultValues,
   });
+
+  const prevIsDirty = useRef<boolean>(isDirty);
+
+  useEffect(() => {
+    if (prevIsDirty.current !== isDirty) {
+      onDirtyChange(defaultValues._id, isDirty);
+      prevIsDirty.current = isDirty;
+    }
+  }, [isDirty, defaultValues._id, onDirtyChange]);
 
   const taskName = watch('taskName', defaultValues?.taskName || 'My new task');
   const [title, setTitle] = useState(taskName);
@@ -31,13 +43,25 @@ const AddTaskForm: React.FC<AddTAskFormProps> = ({ open, defaultValues }) => {
     setTitle(taskName);
   }, [taskName]);
 
-  const onSubmit: SubmitHandler<ITask> = async data => {
-    console.log(data);
-  };
+  useEffect(() => {
+    registerSubmit(
+      () =>
+        new Promise<ITask | null>(resolve => {
+          handleSubmit(
+            data => {
+              resolve(data);
+            },
+            () => {
+              resolve(null);
+            }
+          )();
+        })
+    );
+  }, [registerSubmit, handleSubmit]);
 
   return (
-    <Accordeon title={title} open={open}>
-      <form className={`${css.Form} ${css.Mini}`} onSubmit={handleSubmit(onSubmit)} noValidate>
+    <Accordeon number={number} title={title} open={open}>
+      <form className={`${css.Form} ${css.Mini}`} noValidate>
         <Input type="hidden" register={register('_id')} />
         <Fieldset grid={['auto', 'auto', 'auto']}>
           <Input

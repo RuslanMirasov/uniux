@@ -5,12 +5,13 @@ import { Icon } from '../../components';
 import css from './Accordeon.module.scss';
 
 interface AccordeonProps {
+  number?: number;
   title: string;
   open?: boolean;
   children: ReactNode;
 }
 
-const Accordeon: React.FC<AccordeonProps> = ({ title, open = false, children }) => {
+const Accordeon: React.FC<AccordeonProps> = ({ number, title, open = false, children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -28,7 +29,10 @@ const Accordeon: React.FC<AccordeonProps> = ({ title, open = false, children }) 
       <div className={css.AccordeonHead} onClick={handleOpenToggle}>
         <strong>
           <Icon name="accordeon" />
-          <span>{title}</span>
+          <span>
+            {number ? `${number}. ` : ''}
+            {title}
+          </span>
         </strong>
         <button className={css.Arrow}>
           <Icon name="accordeon-arrow" />

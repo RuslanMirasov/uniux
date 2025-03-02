@@ -1,32 +1,26 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import { useProject } from '@/hooks/useProject';
 import { generateObjectId } from '@/lib/generateObjectId';
 import { Button, Title, AddTaskForm } from '../../../components';
-import EditProjectSkeleton from './EditProfileSkeleton';
+import EditProjectSkeleton from './EditProjectSkeleton';
 import type { ITask } from '@/models/Project';
 import css from './EditProjectForm.module.scss';
-
-interface IProject {
-  _id: string;
-  name: string;
-  tasks: ITask[];
-}
 
 const EditProjectForm: React.FC = () => {
   const { id } = useParams();
   const { project, isLoading, isError } = useProject(id as string);
   const [newTasks, setNewTasks] = useState<ITask[]>([]);
-  const [isModified, setIsModified] = useState(false);
+  const [openedTaskIds, setOpenedTaskIds] = useState<string[]>([]);
+  const [dirtyStates, setDirtyStates] = useState<{ [taskId: string]: boolean }>({});
+  const isModified = Object.values(dirtyStates).some(Boolean);
+  const formRefs = useRef<{ [taskId: string]: () => Promise<ITask | null> }>({});
 
   useEffect(() => {
     if (!project) return;
-
-    setNewTasks(prevTasks =>
-      JSON.stringify(prevTasks) !== JSON.stringify(project.tasks) ? (project.tasks as ITask[]) : prevTasks
-    );
+    setNewTasks(project.tasks as ITask[]);
   }, [project]);
 
   const addTask = () => {
@@ -36,28 +30,72 @@ const EditProjectForm: React.FC = () => {
     const newTask: ITask = {
       _id: taskId,
       device: 'app',
-      taskName: 'New Task',
+      taskName: 'My new task',
       description: '',
       protoUrl: '',
       target: `uniux-${taskId}`,
     };
 
     setNewTasks([...newTasks, newTask]);
-    setIsModified(true);
+    setOpenedTaskIds(prev => [...prev, taskId]);
+  };
+
+  const handleDirtyChange = useCallback((taskId: string, isDirty: boolean) => {
+    setDirtyStates(prev => ({ ...prev, [taskId]: isDirty }));
+  }, []);
+
+  const validateTasks = async () => {
+    setOpenedTaskIds([]);
+    const invalidTaskIds: string[] = [];
+    let errorsCount = 0;
+
+    const formDataArray = await Promise.all(
+      Object.entries(formRefs.current).map(async ([taskId, submit]) => {
+        const formData = await submit();
+        if (!formData) {
+          errorsCount += 1;
+          invalidTaskIds.push(taskId);
+        }
+        return formData;
+      })
+    );
+    setOpenedTaskIds(prev => [...new Set([...prev, ...invalidTaskIds])]);
+
+    return { errors: errorsCount, data: formDataArray };
+  };
+
+  const updateProject = async () => {
+    const { errors, data } = await validateTasks();
+    if (errors > 0) return;
+
+    alert('ВСё хорошо');
+    console.log('TASKS DATA: ', data);
   };
 
   if (isError) return null;
   if (!project || project._id !== id || isLoading) return <EditProjectSkeleton />;
 
-  const { name } = project as IProject;
-
   return (
     <div className={css.EditProject}>
       <div className={css.Form}>
         <Title tag="h2" size="h3">
-          {name}
+          {project.name}
         </Title>
-        <div>{newTasks.length > 0 && newTasks.map(task => <AddTaskForm key={task._id} defaultValues={task} />)}</div>
+
+        {newTasks.length > 0 && (
+          <div>
+            {newTasks.map((task, index) => (
+              <AddTaskForm
+                key={task._id}
+                defaultValues={task}
+                number={index + 1}
+                open={openedTaskIds.includes(task._id)}
+                onDirtyChange={handleDirtyChange}
+                registerSubmit={validate => (formRefs.current[task._id] = validate)}
+              />
+            ))}
+          </div>
+        )}
 
         <Button type="button" full variant="white" onClick={addTask}>
           Add task
@@ -65,8 +103,8 @@ const EditProjectForm: React.FC = () => {
       </div>
 
       <div className={css.StartButtonWrapper}>
-        <Button type="button" full disabled={!isModified}>
-          Start test
+        <Button type="button" full disabled={!isModified} onClick={updateProject}>
+          Save changes
         </Button>
       </div>
     </div>
