@@ -6,7 +6,7 @@ import css from './ButtonIcon.module.scss';
 
 interface ButtonIconProps {
   children: ReactNode | string;
-  icon: string;
+  icon?: string;
   color?: string;
   iconSize?: string;
   onClick: () => void;
@@ -32,7 +32,7 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({ children, icon, iconSize = '20'
       onClick={handleClick}
       disabled={isLoading}
     >
-      <Icon name={icon} size={iconSize} />
+      {icon && <Icon name={icon} size={iconSize} />}
       <span>{children}</span>
     </button>
   );

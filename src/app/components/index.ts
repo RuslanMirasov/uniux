@@ -34,7 +34,6 @@ export { default as PasswordResetForm } from './Forms/PasswordResetForm/Password
 export { default as ProfileUpdateForm } from './Forms/ProfileUpdateForm/ProfileUpdateForm';
 export { default as AvatarForm } from './Forms/AvatarForm/AvatarForm';
 export { default as SearchForm } from './Forms/SearchForm/SearchForm';
-export { default as EditProjectForm } from './Forms/EditProjectForm/EditProjectForm';
 export { default as AddTaskForm } from './Forms/AddTaskForm/AddTaskForm';
 export { default as InputCopyText } from './Forms/InputCopyText/InputCopyText';
 
@@ -50,10 +49,13 @@ export { default as PrivateRoute } from './PrivateRoute/PrivateRoute';
 //Tasks section components
 export { default as TasksCollection } from './Tasks/TasksCollection/TasksCollection';
 
-//Project section components
+//Projects list section components
 export { default as ProjectsSection } from './Projects/ProjectsSection/ProjectsSection';
 export { default as ProjectsHeader } from './Projects/ProjectsHeader/ProjectsHeader';
 export { default as ProjectsFilters } from './Projects/ProjectsFilters/ProjectsFilters';
 export { default as ProjectsSkeleton } from './Projects/ProjectsSkeleton/ProjectsSkeleton';
 export { default as ProjectsNotFound } from './Projects/ProjectsNotFound/ProjectsNotFound';
 export { default as ProjectsCollection } from './Projects/ProjectsCollection/ProjectsCollection';
+
+//Project single components
+export { default as ProjectEdit } from './Project/ProjectEdit/ProjectEdit';

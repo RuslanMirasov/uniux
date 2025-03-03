@@ -4,19 +4,29 @@ import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CreateNewTaskValidationSchema } from '@/lib/validationSchemas';
-import { Fieldset, Input, Accordeon, InputCopyText } from '../../../components';
+import { Fieldset, Input, Accordeon, InputCopyText, ButtonIcon, ButtonsList } from '../../../components';
 import type { ITask } from '@/models/Project';
 import css from '../Forms.module.scss';
+import { usePopup } from '@/hooks/usePopup';
 
 interface AddTAskFormProps {
   number?: number;
   open?: boolean;
+  onRemoveTask: (taskId: string) => void;
   onDirtyChange: (taskId: string, isDirty: boolean) => void;
   registerSubmit: (submit: () => Promise<ITask | null>) => void;
   defaultValues: ITask;
 }
 
-const AddTaskForm: React.FC<AddTAskFormProps> = ({ number, open, onDirtyChange, registerSubmit, defaultValues }) => {
+const AddTaskForm: React.FC<AddTAskFormProps> = ({
+  number,
+  open,
+  onDirtyChange,
+  registerSubmit,
+  onRemoveTask,
+  defaultValues,
+}) => {
+  const { openPopup, closePopup } = usePopup();
   const {
     register,
     handleSubmit,
@@ -92,6 +102,27 @@ const AddTaskForm: React.FC<AddTAskFormProps> = ({ number, open, onDirtyChange, 
 
         <Input type="hidden" register={register('target')} />
         <InputCopyText text={defaultValues?.target} message="Copy frame name as finale target" />
+        <ButtonsList align="flex-end">
+          <ButtonIcon
+            iconSize="10"
+            color="#e75349"
+            onClick={() =>
+              openPopup({
+                type: 'confirm',
+                icon: 'question',
+                title: 'Are you sure you want to delete the task?',
+                subtitle: 'This action is irreversible, and all your data will be permanently lost.',
+                btn: 'yes',
+                action: () => {
+                  onRemoveTask(defaultValues._id);
+                  closePopup();
+                },
+              })
+            }
+          >
+            Delete task
+          </ButtonIcon>
+        </ButtonsList>
       </form>
     </Accordeon>
   );

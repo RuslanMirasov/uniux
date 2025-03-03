@@ -1,5 +1,4 @@
 import useSWR from 'swr';
-import useLocalStorageState from 'use-local-storage-state';
 import { fetcher } from '@/lib/fetcher';
 
 export interface IProject {
@@ -9,18 +8,10 @@ export interface IProject {
 }
 
 export function useProject(projectId: string) {
-  const [cachedProject, setCachedProject] = useLocalStorageState<IProject | null>('current-project', {
-    defaultValue: null,
-  });
-
-  const { data, error, isLoading, mutate } = useSWR<IProject>(`/api/projects/${projectId}`, fetcher, {
-    onSuccess: fetchedProject => {
-      setCachedProject(fetchedProject);
-    },
-  });
+  const { data, error, isLoading, mutate } = useSWR<IProject>(`/api/projects/${projectId}`, fetcher);
 
   return {
-    project: cachedProject || data,
+    project: data,
     isLoading,
     isError: !!error,
     mutate,
