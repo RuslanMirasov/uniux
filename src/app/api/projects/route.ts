@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
     const { name, image } = metaFromUrl;
 
     const newProject = await Project.create({ protoUrl, owner, name, image });
-    return NextResponse.json({ message: 'Project created successfully', project: newProject }, { status: 201 });
+    return NextResponse.json({ projectId: newProject._id }, { status: 201 });
   } catch (error) {
     console.log('Create New Project ERROR: ', error);
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });

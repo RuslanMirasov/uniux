@@ -6,10 +6,10 @@ import css from './InputCopyText.module.scss';
 
 interface InputCopyTextProps {
   text: string;
-  message: string;
+  message?: string | null;
 }
 
-const InputCopyText: React.FC<InputCopyTextProps> = ({ text, message }) => {
+const InputCopyText: React.FC<InputCopyTextProps> = ({ text, message = null }) => {
   const [copy, setCopy] = useState(false);
 
   const handleCopyText = (e: React.MouseEvent<HTMLDivElement>) => {

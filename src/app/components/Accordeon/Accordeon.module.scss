@@ -25,6 +25,16 @@
       }
     }
   }
+
+  &.Locked {
+    &:hover {
+      color: var(--color);
+    }
+    .Arrow {
+      transform: rotate(0deg);
+      color: var(--color);
+    }
+  }
 }
 
 .AccordeonHead {
@@ -44,6 +54,7 @@
     font-family: var(--semibold);
     font-size: 12px;
     gap: 12px;
+    transition: color 0.3s;
   }
 }
 

@@ -55,8 +55,8 @@ const CreateNewTestForm: React.FC = () => {
   const onSubmit: SubmitHandler<ICreateNewProjectForm> = async data => {
     setIsLoading(true);
     try {
-      await fetcher('api/projects', { method: 'POST', data: data });
-      router.push('/');
+      const { projectId } = (await fetcher('api/projects', { method: 'POST', data: data })) as { projectId: string };
+      if (projectId) router.push(`/project/${projectId}/edit`);
     } catch (error) {
       const err = error as FetchError;
       openPopup({

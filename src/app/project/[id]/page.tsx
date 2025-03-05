@@ -1,14 +1,15 @@
-import { Logo, GoBack, Main, Sidebar, Device, TasksCollection } from '../../components';
+import { Logo, Main, Sidebar, Device, Title } from '../../components';
 
 const ProjectPage = async () => {
   return (
     <>
-      <Logo position="right" />
       <Sidebar>
-        <GoBack />
-        <TasksCollection />
+        <Title tag="h1" size="h1">
+          Hello World
+        </Title>
       </Sidebar>
       <Main>
+        <Logo position="right" />
         <Device />
       </Main>
     </>

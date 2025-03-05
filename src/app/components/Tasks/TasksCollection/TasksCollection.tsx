@@ -1,23 +1,29 @@
 'use client';
 
-import { useParams } from 'next/navigation';
-import { useProject } from '@/hooks/useProject';
+import { Accordeon, Text } from '../../../components';
 
-interface IProject {
+interface Task {
   _id: string;
-  name: string;
-  tasks: object[];
+  taskName: string;
+  description: string;
 }
 
-const TasksCollection: React.FC = () => {
-  const { id } = useParams();
-  const { project, isError } = useProject(id as string);
+interface TasksCollectionProps {
+  locked?: boolean;
+  projectId?: string | string[] | undefined;
+  tasks: Task[];
+}
 
-  if (isError) return null;
-
-  const { name } = project as IProject;
-
-  return <h3>{name} </h3>;
+const TasksCollection: React.FC<TasksCollectionProps> = ({ locked = false, projectId = '', tasks }) => {
+  return (
+    <div>
+      {tasks.map(({ _id, taskName, description }, index) => (
+        <Accordeon key={_id} number={index + 1} title={taskName} locked={locked} href={`/project/${projectId}/${_id}`}>
+          <Text color="grey">{description}</Text>
+        </Accordeon>
+      ))}
+    </div>
+  );
 };
 
 export default TasksCollection;

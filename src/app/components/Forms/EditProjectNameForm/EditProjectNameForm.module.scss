@@ -1,0 +1,27 @@
+.TextareaWrapper {
+  display: flex;
+  position: relative;
+  width: 100%;
+  flex-direction: column;
+}
+
+.Textarea {
+  display: inline;
+  width: 100%;
+  height: 34px;
+  min-height: 34px;
+  resize: none;
+  outline: none;
+  user-select: none;
+  color: inherit;
+  background: none;
+  font-family: var(--semibold);
+  font-size: 30px;
+  line-height: 1.1;
+  overflow: hidden;
+  border: none;
+  border-radius: 5px;
+  &.Invalid {
+    border: 1px solid var(--invalid);
+  }
+}

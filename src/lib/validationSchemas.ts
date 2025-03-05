@@ -22,8 +22,8 @@ const regEx = {
     errorFormat: 'Wrong file format (JPEG, PNG, WebP)',
   },
   protoUrl: {
-    code: /^(https?:\/\/)?(www\.)?figma\.com\/proto/,
-    error: 'URL must be a valid Figma prototype link',
+    code: /^(https?:\/\/)?(www\.)?figma\.com\//,
+    error: 'URL must be a valid Figma link',
   },
 };
 

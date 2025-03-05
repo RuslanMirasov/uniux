@@ -1,10 +1,10 @@
-import { PrivateRoute, Logo, Main, Sidebar, Device, ProjectEdit } from '../../../components';
+import { PrivateRoute, Logo, Main, Sidebar, Device, ProjectStarted } from '../../../components';
 
 const EditProjectPage = async () => {
   return (
     <PrivateRoute>
       <Sidebar>
-        <ProjectEdit />
+        <ProjectStarted />
       </Sidebar>
       <Main>
         <Logo position="right" />

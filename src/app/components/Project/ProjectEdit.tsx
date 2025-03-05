@@ -1,15 +1,13 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter, notFound } from 'next/navigation';
 import { useProject } from '@/hooks/useProject';
 import { usePopup } from '@/hooks/usePopup';
 import { fetcher } from '@/lib/fetcher';
 import { generateObjectId } from '@/lib/generateObjectId';
-import { Button, AddTaskForm, InputError } from '../../../components';
-import ProjectEditSkeleton from './ProjectEditSkeleton';
+import { Button, AddTaskForm, EditProjectNameForm, StartProjectButton, ProjectSkeleton } from '../../components';
 import type { ITask } from '@/models/Project';
-import css from './ProjectEdit.module.scss';
 
 interface FetchError extends Error {
   status?: number;
@@ -17,39 +15,23 @@ interface FetchError extends Error {
 }
 
 const ProjectEdit: React.FC = () => {
+  const router = useRouter();
   const { id } = useParams();
   const [formSenging, setFormSending] = useState(false);
   const [projectName, setProjectName] = useState('');
   const { openPopup } = usePopup();
-  const { project, isLoading, isError, mutate } = useProject(id as string);
+  const { project, isLoading, isError } = useProject(id as string);
   const [newTasks, setNewTasks] = useState<ITask[]>([]);
   const [openedTaskIds, setOpenedTaskIds] = useState<string[]>([]);
   const [dirtyStates, setDirtyStates] = useState<{ [taskId: string]: boolean }>({});
   const isModified = Object.values(dirtyStates).some(Boolean);
   const formRefs = useRef<{ [taskId: string]: () => Promise<ITask | null> }>({});
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setProjectName(e.target.value);
-    setDirtyStates(prev => ({ ...prev, ['prjectName']: !!e.target.value }));
-  };
-
-  const setTextareaHeight = () => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = '0px';
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
-    }
-  };
 
   useEffect(() => {
     if (!project) return;
     setProjectName(project.name);
     setNewTasks(project.tasks as ITask[]);
   }, [project]);
-
-  useEffect(() => {
-    setTextareaHeight();
-  }, [projectName]);
 
   const addTask = () => {
     if (!project) return;
@@ -104,23 +86,16 @@ const ProjectEdit: React.FC = () => {
     const { errors, data } = await validateTasks();
     if (errors > 0) return;
 
-    setFormSending(true);
-    const updateData = {
-      name: projectName,
-      tasks: data,
-    };
-
     try {
-      await fetcher(`/api/projects/${project?._id}`, { method: 'PATCH', data: updateData });
-      mutate();
-
-      openPopup({
-        type: 'success',
-        icon: 'success',
-        title: `Project updated!`,
-        subtitle: 'The data has been successfully added, share the test with your team.',
-        btn: 'Ok',
+      setFormSending(true);
+      await fetcher(`/api/projects/${project?._id}`, {
+        method: 'PATCH',
+        data: {
+          name: projectName,
+          tasks: data,
+        },
       });
+      router.push(`/project/${project?._id}/start`);
     } catch (error) {
       const err = error as FetchError;
       openPopup({
@@ -137,45 +112,34 @@ const ProjectEdit: React.FC = () => {
     }
   };
 
-  if (isError) return null;
-  if (!project || project._id !== id || isLoading) return <ProjectEditSkeleton />;
+  if (isLoading) return <ProjectSkeleton />;
+  if (isError || !project) notFound();
 
   return (
-    <div className={css.EditProject}>
-      <div className={css.Form}>
-        <span>
-          <textarea
-            ref={textareaRef}
-            name="name"
-            className={`${css.Textarea} ${!projectName ? css.Invalid : ''}`}
-            value={projectName}
-            onInput={handleInput}
-          />
-          {!projectName && <InputError text="Project name can not be empty!" />}
-        </span>
+    <>
+      <EditProjectNameForm projectName={projectName} setProjectName={setProjectName} setDirtyStates={setDirtyStates} />
 
-        {newTasks.length > 0 && (
-          <div>
-            {newTasks.map((task, index) => (
-              <AddTaskForm
-                key={task._id}
-                defaultValues={task}
-                number={index + 1}
-                open={openedTaskIds.includes(task._id)}
-                onDirtyChange={handleDirtyChange}
-                onRemoveTask={() => removeTask(task._id)}
-                registerSubmit={validate => (formRefs.current[task._id] = validate)}
-              />
-            ))}
-          </div>
-        )}
+      {newTasks.length > 0 && (
+        <div>
+          {newTasks.map((task, index) => (
+            <AddTaskForm
+              key={task._id}
+              defaultValues={task}
+              number={index + 1}
+              open={openedTaskIds.includes(task._id)}
+              onDirtyChange={handleDirtyChange}
+              onRemoveTask={() => removeTask(task._id)}
+              registerSubmit={validate => (formRefs.current[task._id] = validate)}
+            />
+          ))}
+        </div>
+      )}
 
-        <Button type="button" full variant="white" onClick={addTask}>
-          Add task
-        </Button>
-      </div>
+      <Button type="button" full variant="white" onClick={addTask}>
+        Add task
+      </Button>
 
-      <div className={css.StartButtonWrapper}>
+      <StartProjectButton>
         <Button
           type="button"
           full
@@ -183,10 +147,10 @@ const ProjectEdit: React.FC = () => {
           isLoading={formSenging}
           onClick={updateProject}
         >
-          Save changes
+          Start test
         </Button>
-      </div>
-    </div>
+      </StartProjectButton>
+    </>
   );
 };
 

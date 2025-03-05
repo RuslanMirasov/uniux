@@ -7,6 +7,7 @@ export { default as GoogleButton } from './Buttons/GoogleButton/GoogleButton';
 export { default as GoBack } from './Buttons/GoBack/GoBack';
 export { default as GoBackWrapper } from './Buttons/GoBack/GoBackWrapper';
 export { default as PlayStop } from './Buttons/PlayStop/PlayStop';
+export { default as StartProjectButton } from './Buttons/StartProjectButton/StartProjectButton';
 
 // Components (global)
 export { default as Main } from './Main/Main';
@@ -36,6 +37,7 @@ export { default as AvatarForm } from './Forms/AvatarForm/AvatarForm';
 export { default as SearchForm } from './Forms/SearchForm/SearchForm';
 export { default as AddTaskForm } from './Forms/AddTaskForm/AddTaskForm';
 export { default as InputCopyText } from './Forms/InputCopyText/InputCopyText';
+export { default as EditProjectNameForm } from './Forms/EditProjectNameForm/EditProjectNameForm';
 
 // Typography
 export { default as TitleBox } from './Typography/TitleBox/TitleBox';
@@ -48,6 +50,7 @@ export { default as PrivateRoute } from './PrivateRoute/PrivateRoute';
 
 //Tasks section components
 export { default as TasksCollection } from './Tasks/TasksCollection/TasksCollection';
+export { default as TaskStatistic } from './Tasks/TaskStatistic/TaskStatistic';
 
 //Projects list section components
 export { default as ProjectsSection } from './Projects/ProjectsSection/ProjectsSection';
@@ -58,4 +61,13 @@ export { default as ProjectsNotFound } from './Projects/ProjectsNotFound/Project
 export { default as ProjectsCollection } from './Projects/ProjectsCollection/ProjectsCollection';
 
 //Project single components
-export { default as ProjectEdit } from './Project/ProjectEdit/ProjectEdit';
+export { default as ProjectEdit } from './Project/ProjectEdit';
+export { default as ProjectStarted } from './Project/ProjectStarted';
+export { default as ProjectSessions } from './Project/ProjectSessions';
+export { default as ProjectHeadline } from './Project/ProjectHeadline/ProjectHeadline';
+export { default as ProjectSection } from './Project/ProjectSection/ProjectSection';
+export { default as ProjectSkeleton } from './Project/ProjectSkeleton';
+
+//Session components
+export { default as SessionCollection } from './Sessions/SessionCollection/SessionCollection';
+export { default as SessionItem } from './Sessions/SessionItem/SessionItem';

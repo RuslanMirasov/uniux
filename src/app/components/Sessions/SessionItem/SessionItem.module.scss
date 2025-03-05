@@ -1,0 +1,106 @@
+.SessionItem {
+  display: flex;
+  position: relative;
+  width: 100%;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 14px;
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: -40px;
+    top: 0px;
+    width: calc(100% + 80px);
+    height: 100%;
+    background: #4d5876;
+    transition: 0.3s;
+    opacity: 0;
+  }
+  &:hover {
+    &:before {
+      opacity: 1;
+    }
+    .Content {
+      border-bottom: 1px solid rgba(0, 0, 0, 0);
+    }
+  }
+}
+
+.Content {
+  display: flex;
+  width: calc(100% - 50px);
+  position: relative;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding: 10px 20px 10px 0px;
+  border-bottom: 1px solid var(--grey-dark);
+  flex: 1;
+  gap: 2px;
+
+  span,
+  p {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  span {
+    color: var(--grey);
+    font-size: 10px;
+  }
+
+  p {
+    font-size: 12px;
+  }
+
+  svg {
+    position: absolute;
+    right: 0px;
+  }
+}
+
+.TasksList {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-start;
+  gap: 5px;
+  margin-top: 5px;
+  li {
+    font-size: 10px;
+    line-height: 1;
+    color: var(--white);
+    background: var(--grey-dark);
+    padding: 4px 6px;
+    border-radius: 5px;
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+    &.Success,
+    &.Fail {
+      opacity: 1;
+      cursor: pointer;
+      pointer-events: all;
+      &:hover {
+        color: var(--white);
+        background: var(--color);
+      }
+    }
+    &.Success {
+      color: var(--black);
+      background: var(--green);
+    }
+    &.Fail {
+      background: var(--red);
+    }
+  }
+}
