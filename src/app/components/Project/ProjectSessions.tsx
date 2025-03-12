@@ -31,6 +31,10 @@ const ProjectSessions: React.FC = () => {
         </Title>
       </ProjectHeadline>
 
+      <Button href={`${window.location.origin}/project/${id}`} full>
+        Run the test
+      </Button>
+
       {tasks.length > 0 && <TasksCollection projectId={id} tasks={tasks} locked />}
 
       <InputCopyText text={`${window.location.origin}/project/${id}`} message="Share the test with your team" />

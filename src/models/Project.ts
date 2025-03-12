@@ -9,7 +9,7 @@ export type ITask = {
   target: string;
 };
 
-interface IProject extends Document {
+export interface IProject extends Document {
   protoUrl: string;
   owner: string;
   name: string;
@@ -18,6 +18,10 @@ interface IProject extends Document {
   visit: Date | null;
   tasks?: ITask[];
 }
+
+export type IProjectData = Omit<IProject, keyof mongoose.Document> & {
+  _id: string;
+};
 
 const TaskSchema: Schema = new Schema({
   _id: { type: String, required: true },

@@ -8,6 +8,7 @@ export { default as GoBack } from './Buttons/GoBack/GoBack';
 export { default as GoBackWrapper } from './Buttons/GoBack/GoBackWrapper';
 export { default as PlayStop } from './Buttons/PlayStop/PlayStop';
 export { default as StartProjectButton } from './Buttons/StartProjectButton/StartProjectButton';
+export { default as SessionStopButton } from './Buttons/SessionStopButton/SessionStopButton';
 
 // Components (global)
 export { default as Main } from './Main/Main';
@@ -38,6 +39,7 @@ export { default as SearchForm } from './Forms/SearchForm/SearchForm';
 export { default as AddTaskForm } from './Forms/AddTaskForm/AddTaskForm';
 export { default as InputCopyText } from './Forms/InputCopyText/InputCopyText';
 export { default as EditProjectNameForm } from './Forms/EditProjectNameForm/EditProjectNameForm';
+export { default as WelcomSessionForm } from './Forms/WelcomSessionForm/WelcomSessionForm';
 
 // Typography
 export { default as TitleBox } from './Typography/TitleBox/TitleBox';
@@ -51,6 +53,7 @@ export { default as PrivateRoute } from './PrivateRoute/PrivateRoute';
 //Tasks section components
 export { default as TasksCollection } from './Tasks/TasksCollection/TasksCollection';
 export { default as TaskStatistic } from './Tasks/TaskStatistic/TaskStatistic';
+export { default as TasksPageContainer } from './Tasks/TasksPageContainer/TasksPageContainer';
 
 //Projects list section components
 export { default as ProjectsSection } from './Projects/ProjectsSection/ProjectsSection';
@@ -71,3 +74,7 @@ export { default as ProjectSkeleton } from './Project/ProjectSkeleton';
 //Session components
 export { default as SessionCollection } from './Sessions/SessionCollection/SessionCollection';
 export { default as SessionItem } from './Sessions/SessionItem/SessionItem';
+export { default as SessionWelcome } from './Sessions/SessionWelcome/SessionWelcome';
+export { default as SessionTaskDescription } from './Sessions/SessionTaskDescription/SessionTaskDescription';
+export { default as SessionRoom } from './Sessions/SessionRoom/SessionRoom';
+export { default as SessionTaskResult } from './Sessions/SessionTaskResult/SessionTaskResult';

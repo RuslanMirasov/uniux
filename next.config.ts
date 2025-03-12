@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 's3-alpha.figma.com' },
       { protocol: 'https', hostname: 'www.figma.com' },
+      { protocol: 'https', hostname: 'embed.figma.com' },
       { protocol: 'https', hostname: 'lh3.googleusercontent.com' },
       { protocol: 'https', hostname: 'firebasestorage.googleapis.com' },
     ],

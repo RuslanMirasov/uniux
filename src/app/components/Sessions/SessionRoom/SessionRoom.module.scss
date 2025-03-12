@@ -1,0 +1,12 @@
+.SessionRoom {
+  display: flex;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  z-index: 1;
+  padding: 50px;
+}

@@ -79,3 +79,22 @@
     z-index: 1;
   }
 }
+
+.DeviceLoading {
+  display: flex;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background: red;
+  z-index: 2;
+  overflow: hidden;
+  > * {
+    position: absolute;
+  }
+}

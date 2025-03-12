@@ -1,0 +1,20 @@
+.SessionTaskResult {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  flex-direction: column;
+  gap: 25px;
+
+  button,
+  a {
+    margin-top: auto;
+  }
+}
+
+.Title {
+  display: flex;
+  width: 100%;
+  gap: 14px;
+  align-items: center;
+  align-content: center;
+}

@@ -1,18 +1,38 @@
-import { Logo, Main, Sidebar, Device, Title } from '../../components';
+import { SessionWelcome, SessionRoom } from '../../components';
+import { getProjectById } from '@/lib/getProjectById';
+import { notFound } from 'next/navigation';
 
-const ProjectPage = async () => {
+interface Params {
+  id: string;
+}
+
+interface SearchParams {
+  task?: string;
+  status?: string;
+}
+
+interface Props {
+  params: Promise<Params>;
+  searchParams: Promise<SearchParams>;
+}
+
+const ProjectPage = async ({ params, searchParams }: Props) => {
+  const { id } = await params;
+  const { task, status } = await searchParams;
+  const project = await getProjectById(id);
+
+  if (!project) {
+    notFound();
+  }
+
+  if (!status || status !== 'start')
+    return <SessionWelcome project={project} task={task ? Number(task) : null} status={status || null} />;
+
   return (
-    <>
-      <Sidebar>
-        <Title tag="h1" size="h1">
-          Hello World
-        </Title>
-      </Sidebar>
-      <Main>
-        <Logo position="right" />
-        <Device />
-      </Main>
-    </>
+    <SessionRoom
+      prototype={project?.tasks ? project?.tasks[Number(task) - 1]?.protoUrl : null}
+      target={project?.tasks ? project?.tasks[Number(task) - 1]?.target : null}
+    />
   );
 };
 

@@ -1,0 +1,12 @@
+.WelcomeForm {
+  display: flex;
+  position: relative;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 25px;
+
+  button {
+    margin-top: auto;
+  }
+}

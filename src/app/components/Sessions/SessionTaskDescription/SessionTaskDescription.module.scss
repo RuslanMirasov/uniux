@@ -1,0 +1,15 @@
+.SessionTaskDescription {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  flex-direction: column;
+  gap: 25px;
+
+  h1 span {
+    color: #64748b;
+  }
+
+  button {
+    margin-top: auto;
+  }
+}
