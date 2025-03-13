@@ -42,7 +42,7 @@ const AvatarForm: React.FC<AvatarFormProps> = ({ id, email, name, image }) => {
 
     try {
       setIsLoading(true);
-      const { uploadAvatar } = await import('@/lib/uploadAvatar');
+      const { uploadAvatar } = await import('@/lib/avatarActions');
       await uploadAvatar(file, id);
       mutate();
     } finally {

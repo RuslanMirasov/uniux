@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
 import { useSessionParams } from '@/hooks/useSessionParams';
+import { useTestSession } from '@/hooks/useTestSession';
 import { getFileKey } from '@/lib/figma/getFileKey';
 import { Logo, SessionStopButton, Device, Camera } from '../../../components';
 import { useSearchParams } from 'next/navigation';
@@ -20,20 +21,22 @@ interface MouseEventData {
 const SessionRoom: React.FC<SessionRoomProps> = ({ prototype = null, target = null }) => {
   const searchParams = useSearchParams();
   const setSessionParams = useSessionParams();
+  const { updateTestSession, addNewClickToSession } = useTestSession();
   const [isTaskStarted, setIsTaskStarted] = useState(false);
   const [rec, setRec] = useState(false);
   const [stopRecord, setStopRecord] = useState(false);
   const [startTime, setStartTime] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [clicks, setClicks] = useState<IClick[]>([]);
 
   const saveResult = useCallback(
-    async (result: string) => {
+    (result: string) => {
+      if (result !== 'done' && result !== 'fail') return;
       setRec(false);
       setStopRecord(true);
+      updateTestSession({ status: result });
       setSessionParams(`${searchParams.get('task')}`, result);
     },
-    [searchParams, setSessionParams]
+    [searchParams, setSessionParams, updateTestSession]
   );
 
   const saveClick = useCallback(
@@ -46,24 +49,16 @@ const SessionRoom: React.FC<SessionRoomProps> = ({ prototype = null, target = nu
         y: Math.round(nearestScrollingFrameMousePosition.y),
         scroll: Math.round(nearestScrollingFrameOffset.y),
       };
-      setClicks(prev => [...prev, newClick]);
+      addNewClickToSession(newClick);
     },
-    [startTime]
+    [startTime, addNewClickToSession]
   );
-
-  useEffect(() => {
-    console.log(clicks);
-  }, [clicks]);
 
   useEffect(() => {
     const handleMessage = async (event: MessageEvent) => {
       if (!event.origin.includes('figma.com')) return;
 
-      if (event.data.type === 'MOUSE_PRESS_OR_RELEASE') {
-        saveClick(event.data.data);
-      }
-
-      if (event.data.type === 'PRESENTED_NODE_CHANGED') {
+      if (event.data.type === 'INITIAL_LOAD') {
         if (!isTaskStarted) {
           setIsTaskStarted(true);
           setIsLoading(false);
@@ -71,6 +66,15 @@ const SessionRoom: React.FC<SessionRoomProps> = ({ prototype = null, target = nu
           setStartTime(new Date().getTime());
           return;
         }
+      }
+
+      if (event.data.type === 'MOUSE_PRESS_OR_RELEASE') {
+        saveClick(event.data.data);
+      }
+
+      if (event.data.type === 'PRESENTED_NODE_CHANGED') {
+        if (!isTaskStarted) return;
+
         const iframe = document.querySelector('iframe');
         if (!iframe) return;
 

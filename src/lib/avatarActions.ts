@@ -1,31 +1,7 @@
 import { fetcher } from '@/lib/fetcher';
+import { loadFirebase } from '@/lib/firebase/loadFirebase';
+import { authenticateWithFirebase } from '@/lib/firebase/authenticateWithFirebase';
 import { optimizeImage } from './optimizeImage';
-
-interface FirebaseToken {
-  token: string;
-}
-
-const loadFirebase = async () => {
-  const { ref, uploadBytes, getDownloadURL, getMetadata, deleteObject } = await import('firebase/storage');
-  const { storage } = await import('@/lib/firebase');
-  return { storage, ref, uploadBytes, getDownloadURL, getMetadata, deleteObject };
-};
-
-const loadAuth = async () => {
-  const { getAuth, signInWithCustomToken } = await import('firebase/auth');
-  const { firebaseApp } = await import('@/lib/firebase');
-  return { getAuth, signInWithCustomToken, firebaseApp };
-};
-
-const authenticateWithFirebase = async (id: string) => {
-  const { getAuth, signInWithCustomToken, firebaseApp } = await loadAuth();
-  const auth = getAuth(firebaseApp);
-  const { token } = await fetcher<FirebaseToken>(`/api/auth/firebase?id=${id}`);
-  await signInWithCustomToken(auth, token);
-
-  if (!auth.currentUser) throw new Error('Firebase authentication failed');
-  return auth.currentUser ? auth : null;
-};
 
 export const uploadAvatar = async (file: File, id: string) => {
   const auth = await authenticateWithFirebase(id);
@@ -58,4 +34,13 @@ export const deleteAvatar = async (id: string) => {
   if (!auth) return;
 
   await deleteObject(storageRef);
+};
+
+export const avatarSignature = (name: string): string => {
+  return name
+    .split(' ')
+    .slice(0, 2)
+    .map(word => word[0])
+    .join('')
+    .toUpperCase();
 };

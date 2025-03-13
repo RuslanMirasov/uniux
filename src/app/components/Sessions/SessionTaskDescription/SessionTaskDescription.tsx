@@ -1,16 +1,29 @@
+'use client';
+import { useEffect } from 'react';
 import { Title, Text, Button } from '../../../components';
 import { useSessionParams } from '@/hooks/useSessionParams';
+import { useTestSession } from '@/hooks/useTestSession';
 import css from './SessionTaskDescription.module.scss';
 import type { ITask } from '@/models/Project';
 
 interface SessionTaskDescriptionProps {
+  projectId: string;
   taskNumber: number | null;
   task: ITask;
 }
 
-const SessionTaskDescription: React.FC<SessionTaskDescriptionProps> = ({ taskNumber, task }) => {
+const SessionTaskDescription: React.FC<SessionTaskDescriptionProps> = ({ projectId, taskNumber, task }) => {
   const setSessionParams = useSessionParams();
+  const { updateTestSession } = useTestSession();
   const { taskName, description } = task;
+
+  // Обновляем session при монтировании
+  useEffect(() => {
+    if (projectId && task) {
+      updateTestSession({ project: projectId, task, clicks: [] });
+    }
+  }, [projectId, task, updateTestSession]);
+
   return (
     <div className={css.SessionTaskDescription}>
       {taskNumber && taskName && (

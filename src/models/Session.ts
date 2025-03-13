@@ -1,17 +1,17 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-type IUser = {
+export type IUser = {
   name: string | null;
-  email: string;
+  email: string | null;
   image: string | null;
 };
 
-type ITask = {
-  _id: string;
+export type ITask = {
+  _id: string | null;
   device: 'browser' | 'app';
-  taskName: string;
-  protoUrl: string;
-  description: string;
+  taskName: string | null;
+  protoUrl: string | null;
+  description: string | null;
 };
 
 export type IClick = {
@@ -22,31 +22,33 @@ export type IClick = {
 };
 
 export interface ISession extends Document {
-  project: string;
-  status: 'done' | 'fail' | null;
+  project: string | null;
+  status: 'done' | 'fail';
   video: string | null;
   clicks: IClick[];
   user: IUser;
   task: ITask;
 }
 
+export type ISessionState = Omit<ISession, keyof Document>;
+
 const SessionSchema: Schema<ISession> = new Schema(
   {
-    project: { type: String, required: true },
-    status: { type: String, enum: ['done', 'fail'], default: null },
+    project: { type: String, default: null },
+    status: { type: String, enum: ['done', 'fail'], default: 'fail' },
     video: { type: String, default: null },
     clicks: { type: [{ time: Number, x: Number, y: Number, scroll: Number }], default: [] },
     user: {
       name: { type: String, default: null },
-      email: { type: String, required: true },
+      email: { type: String, default: null },
       image: { type: String, default: null },
     },
     task: {
-      _id: { type: String, required: true },
-      taskName: { type: String, required: true },
-      description: { type: String, required: true },
-      device: { type: String, enum: ['browser', 'app'], required: true },
-      protoUrl: { type: String, required: true },
+      _id: { type: String, default: null },
+      taskName: { type: String, default: null },
+      description: { type: String, default: null },
+      device: { type: String, enum: ['browser', 'app'], default: 'app' },
+      protoUrl: { type: String, default: null },
     },
   },
   {

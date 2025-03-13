@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { avatarSignature } from '@/lib/avatarSignature';
+import { avatarSignature } from '@/lib/avatarActions';
 import clsx from 'clsx';
 import css from './Avatar.module.scss';
 

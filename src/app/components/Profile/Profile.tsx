@@ -30,7 +30,7 @@ const Profile: React.FC = () => {
       subtitle: 'This action is irreversible, and all your data will be permanently lost.',
       btn: 'Yes',
       action: async () => {
-        const { deleteAvatar } = await import('@/lib/uploadAvatar');
+        const { deleteAvatar } = await import('@/lib/avatarActions');
         await deleteAvatar(id);
         await fetcher(`/api/auth/profile`, {
           method: 'DELETE',

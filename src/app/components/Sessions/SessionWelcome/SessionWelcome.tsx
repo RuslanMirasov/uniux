@@ -23,7 +23,7 @@ interface SessionWelcomeProps extends SearchParams {
 
 const SessionWelcome: React.FC<SessionWelcomeProps> = ({ project, task = null, status = null }) => {
   const [currentTask, setCurrentTask] = useState({});
-  const { name, image, tasks } = project;
+  const { _id, name, image, tasks } = project;
 
   useEffect(() => {
     if (!task || !tasks) return;
@@ -40,7 +40,9 @@ const SessionWelcome: React.FC<SessionWelcomeProps> = ({ project, task = null, s
         </div>
         <div className={css.Info}>
           {!status && <WelcomSessionForm />}
-          {status === 'info' && <SessionTaskDescription taskNumber={task} task={currentTask as ITask} />}
+          {status === 'info' && (
+            <SessionTaskDescription taskNumber={task} task={currentTask as ITask} projectId={_id} />
+          )}
           {(status === 'fail' || status === 'done') && (
             <SessionTaskResult taskNumber={task} limit={tasks?.length} status={status} />
           )}

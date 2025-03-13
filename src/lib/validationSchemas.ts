@@ -82,6 +82,7 @@ const yupFields = {
   taskName: Yup.string().required('Required field'),
   target: Yup.string().required('Target frame is field'),
   _id: Yup.string().required('ID is required'),
+  imageUrl: Yup.string().notRequired().nullable(),
 };
 
 const {
@@ -100,6 +101,7 @@ const {
   device,
   target,
   taskName,
+  imageUrl,
 } = yupFields;
 
 //registration form
@@ -149,4 +151,11 @@ export const CreateNewTaskValidationSchema = Yup.object({
   protoUrl,
   description,
   target,
+});
+
+// Task Session User form
+export const taskSessionUser = Yup.object({
+  name,
+  email,
+  imageUrl,
 });

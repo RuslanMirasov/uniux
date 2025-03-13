@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
-import admin from '@/lib/firebase-admin';
+import admin from '@/lib/firebase/firebase-admin';
 
 export async function GET(req: Request) {
   const session = await getServerSession();

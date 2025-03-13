@@ -18,7 +18,13 @@ const ProjectsCollection: React.FC = () => {
       {projects.map(({ _id, image, name, views, updatedAt }) => (
         <li key={_id} className={css.ProjectCard}>
           <Link href={`/project/${_id}/sessions`} className={css.Thumbnail}>
-            <ImageWithPreloader src={image} width="700" height="420" alt={name || 'uniux project poster'} />
+            <ImageWithPreloader
+              src={image}
+              width="700"
+              height="420"
+              alt={name || 'uniux project poster'}
+              priority={true}
+            />
           </Link>
           <div className={css.ProjectCardInfo}>
             <Title tag="h2" size="h6" auto>
