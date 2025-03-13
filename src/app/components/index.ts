@@ -23,6 +23,7 @@ export { default as Sidebar } from './Sidebar/Sidebar';
 export { default as Profile } from './Profile/Profile';
 export { default as Device } from './Device/Device';
 export { default as Accordeon } from './Accordeon/Accordeon';
+export { default as Camera } from './Camera/Camera';
 
 // Forms
 export { default as Input } from './Forms/Input/Input';

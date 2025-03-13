@@ -1,5 +1,3 @@
-// import imageCompression from 'browser-image-compression';
-
 export const optimizeImage = async (file: File): Promise<File> => {
   return new Promise((resolve, reject) => {
     const img = new Image();

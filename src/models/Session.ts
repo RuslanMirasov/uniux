@@ -14,22 +14,17 @@ type ITask = {
   description: string;
 };
 
-type IClick = {
-  timestamp: number;
+export type IClick = {
+  time: number;
   x: number;
   y: number;
-};
-
-type IScroll = {
-  timestamp: number;
-  scrollY: number;
+  scroll: number;
 };
 
 export interface ISession extends Document {
   project: string;
-  status: 'done' | 'fail' | 'start' | 'info' | null;
+  status: 'done' | 'fail' | null;
   video: string | null;
-  scroll: IScroll[];
   clicks: IClick[];
   user: IUser;
   task: ITask;
@@ -38,10 +33,9 @@ export interface ISession extends Document {
 const SessionSchema: Schema<ISession> = new Schema(
   {
     project: { type: String, required: true },
-    status: { type: String, enum: ['done', 'fail', 'start', 'info'], default: null },
+    status: { type: String, enum: ['done', 'fail'], default: null },
     video: { type: String, default: null },
-    scroll: { type: [{ timestamp: Number, scrollY: Number }], default: [] },
-    clicks: { type: [{ timestamp: Number, x: Number, y: Number }], default: [] },
+    clicks: { type: [{ time: Number, x: Number, y: Number, scroll: Number }], default: [] },
     user: {
       name: { type: String, default: null },
       email: { type: String, required: true },

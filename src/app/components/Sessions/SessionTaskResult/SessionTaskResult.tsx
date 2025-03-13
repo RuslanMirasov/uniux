@@ -19,14 +19,16 @@ const SessionTaskResult: React.FC<SessionTaskResultProps> = ({ taskNumber = null
 
   useEffect(() => {
     if (taskNumber === limit && !isTestFinished) {
-      setIsTestFinished(true);
-      openPopup({
-        type: 'success',
-        icon: 'success',
-        title: 'Congratulations',
-        subtitle:
-          ' The test is fully completed and the results have been successfully saved. Thank you for your time, your help is invaluable to us.',
-        btn: 'Ok',
+      requestAnimationFrame(() => {
+        setIsTestFinished(true);
+        openPopup({
+          type: 'success',
+          icon: 'success',
+          title: 'Congratulations',
+          subtitle:
+            'The test is fully completed and the results have been successfully saved. Thank you for your time, your help is invaluable to us.',
+          btn: 'Ok',
+        });
       });
     }
   }, [isTestFinished, limit, taskNumber, openPopup]);
