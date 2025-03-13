@@ -1,6 +1,6 @@
 import useLocalStorageState from 'use-local-storage-state';
 import { useCallback } from 'react';
-import { ISessionState, IClick } from '@/models/session';
+import { ISessionState, IClick } from '@/models/Session';
 
 const initTestSession: ISessionState = {
   project: null,
