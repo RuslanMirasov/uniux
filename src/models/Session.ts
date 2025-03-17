@@ -23,7 +23,7 @@ export type IClick = {
 
 export interface ISession extends Document {
   project: string | null;
-  status: 'done' | 'fail';
+  status: 'done' | 'fail' | null;
   video: string | null;
   clicks: IClick[];
   user: IUser;
@@ -35,7 +35,7 @@ export type ISessionState = Omit<ISession, keyof Document>;
 const SessionSchema: Schema<ISession> = new Schema(
   {
     project: { type: String, default: null },
-    status: { type: String, enum: ['done', 'fail'], default: 'fail' },
+    status: { type: String, enum: ['done', 'fail', null], default: null },
     video: { type: String, default: null },
     clicks: { type: [{ time: Number, x: Number, y: Number, scroll: Number }], default: [] },
     user: {

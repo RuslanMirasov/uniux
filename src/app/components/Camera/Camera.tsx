@@ -1,102 +1,101 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import { useTestSession } from '@/hooks/useTestSession';
 import css from './Camera.module.scss';
 
 interface CameraProps {
   rec?: boolean;
-  stop?: boolean;
 }
 
-const Camera: React.FC<CameraProps> = ({ rec = false, stop = false }) => {
+const Camera: React.FC<CameraProps> = ({ rec = false }) => {
+  const { setCameraVideo } = useTestSession();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const [videoURL, setVideoURL] = useState<string | null>(null);
+  const chunksRef = useRef<Blob[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const pathname = usePathname();
-  const chunks = useRef<Blob[]>([]);
 
-  useEffect(() => {
-    const startCamera = async () => {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: 'user' },
-        });
+  /* Включение камеры */
+  const startCamera = useCallback(async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: 'user',
+          width: 110,
+          height: 150,
+          frameRate: { min: 15, ideal: 20, max: 22 },
+        },
+        audio: false,
+      });
 
-        streamRef.current = stream;
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-        }
-      } catch {
-        setError('camera use is forbidden');
-      }
-    };
-
-    startCamera();
-
-    return () => {
-      stopCamera();
-    };
+      streamRef.current = stream;
+      if (videoRef.current) videoRef.current.srcObject = stream;
+    } catch {
+      setError('Camera use is forbidden');
+    }
   }, []);
 
-  useEffect(() => {
-    if (!error && rec) {
-      startRecording();
+  /* Остановка камеры */
+  const stopCamera = useCallback(() => {
+    if (mediaRecorderRef.current) {
+      mediaRecorderRef.current.stop();
+      mediaRecorderRef.current = null;
     }
-  }, [rec, error]);
-
-  useEffect(() => {
-    if (!error && stop) {
-      stopRecording();
-    }
-  }, [stop, error]);
-
-  useEffect(() => {
-    return () => {
-      stopCamera();
-    };
-  }, [pathname]);
-
-  useEffect(() => {
-    return () => {
-      if (videoURL) {
-        URL.revokeObjectURL(videoURL);
-      }
-    };
-  }, [videoURL]);
-
-  const stopCamera = () => {
     if (streamRef.current) {
       streamRef.current.getTracks().forEach(track => track.stop());
       streamRef.current = null;
     }
-  };
+    if (videoRef.current) {
+      videoRef.current.srcObject = null;
+    }
+  }, []);
 
-  const startRecording = () => {
+  /* Начать запись */
+  const startRecording = useCallback(() => {
     if (!streamRef.current) return;
 
-    chunks.current = [];
-    const recorder = new MediaRecorder(streamRef.current, { mimeType: 'video/webm' });
+    chunksRef.current = [];
+    const mimeType = 'video/webm; codecs=vp9';
+
+    const options = {
+      mimeType,
+      videoBitsPerSecond: 150000, // Максимальное сжатие (150 Кбит/с)
+    };
+
+    const recorder = new MediaRecorder(streamRef.current, options);
 
     recorder.ondataavailable = event => {
-      if (event.data.size > 0) {
-        chunks.current.push(event.data);
-      }
+      if (event.data.size > 0) chunksRef.current.push(event.data);
     };
 
     recorder.onstop = () => {
-      const blob = new Blob(chunks.current, { type: 'video/webm' });
-      setVideoURL(URL.createObjectURL(blob));
+      if (chunksRef.current.length === 0) return;
+
+      const blob = new Blob(chunksRef.current, { type: mimeType });
+      const file = new File([blob], `session_${Date.now()}.webm`, { type: mimeType });
+
+      setCameraVideo(file);
     };
 
     recorder.start();
     mediaRecorderRef.current = recorder;
-  };
+  }, [setCameraVideo]);
 
-  const stopRecording = () => {
-    mediaRecorderRef.current?.stop();
-  };
+  useEffect(() => {
+    if (rec) {
+      startRecording();
+    } else {
+      if (mediaRecorderRef.current?.state === 'recording') {
+        mediaRecorderRef.current.stop();
+        stopCamera();
+      }
+    }
+  }, [rec, startRecording, stopCamera]);
+
+  useEffect(() => {
+    startCamera();
+    return () => stopCamera();
+  }, [startCamera, stopCamera]);
 
   return (
     <div className={css.Camera}>

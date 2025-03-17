@@ -1,10 +1,11 @@
 import useLocalStorageState from 'use-local-storage-state';
-import { useCallback } from 'react';
+import { fetcher } from '@/lib/fetcher';
+import { useState, useEffect, useCallback } from 'react';
 import { ISessionState, IClick } from '@/models/Session';
 
 const initTestSession: ISessionState = {
   project: null,
-  status: 'fail',
+  status: null,
   video: null,
   clicks: [],
   user: { name: null, email: null, image: null },
@@ -12,6 +13,7 @@ const initTestSession: ISessionState = {
 };
 
 export const useTestSession = () => {
+  const [cameraVideo, setCameraVideo] = useState<File | Blob | null>(null);
   const [testSession, setTestSession] = useLocalStorageState<ISessionState>('testSession', {
     defaultValue: initTestSession,
   });
@@ -22,6 +24,38 @@ export const useTestSession = () => {
     },
     [setTestSession]
   );
+
+  const saveSessionData = useCallback(
+    async (file: File | Blob | null) => {
+      if (!file) return;
+
+      try {
+        const formData = new FormData();
+        formData.append('video', file);
+        formData.append('session', JSON.stringify(testSession));
+
+        const response = await fetcher<{ ok: boolean; message?: string }>('/api/sessions', {
+          method: 'POST',
+          data: formData,
+          isFormData: true,
+        });
+
+        console.log('✅ Video saved: ', response);
+      } catch (error) {
+        console.error('❌ Session save error:', error);
+      } finally {
+        updateTestSession({ status: null });
+        setCameraVideo(null);
+      }
+    },
+    [testSession, updateTestSession]
+  );
+
+  useEffect(() => {
+    if (cameraVideo) {
+      saveSessionData(cameraVideo);
+    }
+  }, [cameraVideo, saveSessionData]);
 
   const addNewClickToSession = useCallback(
     (newClick: IClick) => {
@@ -35,9 +69,12 @@ export const useTestSession = () => {
   }, [setTestSession]);
 
   return {
+    cameraVideo,
+    setCameraVideo,
     testSession,
     updateTestSession,
     clearTestSession,
     addNewClickToSession,
+    saveSessionData,
   };
 };

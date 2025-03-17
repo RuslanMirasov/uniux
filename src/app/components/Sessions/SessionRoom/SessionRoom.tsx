@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
-import { useSessionParams } from '@/hooks/useSessionParams';
+// import { useSessionParams } from '@/hooks/useSessionParams';
 import { useTestSession } from '@/hooks/useTestSession';
 import { getFileKey } from '@/lib/figma/getFileKey';
 import { Logo, SessionStopButton, Device, Camera } from '../../../components';
@@ -20,23 +20,20 @@ interface MouseEventData {
 
 const SessionRoom: React.FC<SessionRoomProps> = ({ prototype = null, target = null }) => {
   const searchParams = useSearchParams();
-  const setSessionParams = useSessionParams();
+  // const setSessionParams = useSessionParams();
   const { updateTestSession, addNewClickToSession } = useTestSession();
-  const [isTaskStarted, setIsTaskStarted] = useState(false);
   const [rec, setRec] = useState(false);
-  const [stopRecord, setStopRecord] = useState(false);
   const [startTime, setStartTime] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   const saveResult = useCallback(
     (result: string) => {
       if (result !== 'done' && result !== 'fail') return;
-      setRec(false);
-      setStopRecord(true);
       updateTestSession({ status: result });
-      setSessionParams(`${searchParams.get('task')}`, result);
+      setRec(false);
+      // setSessionParams(`${searchParams.get('task')}`, result);
     },
-    [searchParams, setSessionParams, updateTestSession]
+    [setRec, searchParams, updateTestSession]
   );
 
   const saveClick = useCallback(
@@ -59,13 +56,10 @@ const SessionRoom: React.FC<SessionRoomProps> = ({ prototype = null, target = nu
       if (!event.origin.includes('figma.com')) return;
 
       if (event.data.type === 'INITIAL_LOAD') {
-        if (!isTaskStarted) {
-          setIsTaskStarted(true);
-          setIsLoading(false);
-          setRec(false);
-          setStartTime(new Date().getTime());
-          return;
-        }
+        setIsLoading(false);
+        setStartTime(new Date().getTime());
+        setRec(true);
+        return;
       }
 
       if (event.data.type === 'MOUSE_PRESS_OR_RELEASE') {
@@ -73,7 +67,7 @@ const SessionRoom: React.FC<SessionRoomProps> = ({ prototype = null, target = nu
       }
 
       if (event.data.type === 'PRESENTED_NODE_CHANGED') {
-        if (!isTaskStarted) return;
+        if (!rec) return;
 
         const iframe = document.querySelector('iframe');
         if (!iframe) return;
@@ -103,16 +97,16 @@ const SessionRoom: React.FC<SessionRoomProps> = ({ prototype = null, target = nu
     return () => {
       window.removeEventListener('message', handleMessage);
     };
-  }, [isTaskStarted, searchParams, setSessionParams, target, saveClick, saveResult]);
+  }, [target, saveClick, saveResult, rec]);
 
   return (
     <>
       <Logo position="right" />
-      <Camera rec={rec} stop={stopRecord} />
+      <Camera rec={rec} />
       <div className={css.SessionRoom}>
         <Device url={prototype} loading={isLoading} />
       </div>
-      {isTaskStarted && <SessionStopButton onClick={() => saveResult('fail')} />}
+      {rec && <SessionStopButton onClick={() => saveResult('fail')} />}
     </>
   );
 };

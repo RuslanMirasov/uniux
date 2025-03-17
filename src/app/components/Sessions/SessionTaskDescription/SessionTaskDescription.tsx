@@ -31,7 +31,9 @@ const SessionTaskDescription: React.FC<SessionTaskDescriptionProps> = ({ project
           <span>{taskNumber >= 10 ? taskNumber : `0${taskNumber}`}.</span> {taskName}
         </Title>
       )}
-
+      <video width="110" height="150" autoPlay muted loop>
+        <source src="https://storage.googleapis.com/uniux-f0503.appspot.com/sessions/session_1742252752105.webm" />
+      </video>
       {description && <Text size="big">{description}</Text>}
       <Button type="button" full onClick={() => setSessionParams(`${taskNumber}`, 'start')}>
         To the task
